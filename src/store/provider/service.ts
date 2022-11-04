@@ -11,14 +11,10 @@ export const useProviderService = () => {
     value: "ENG",
   });
 
-  const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
-
   return {
     groceries,
     setGroceries,
     language,
     setLanguage,
-    isFormModalOpen,
-    setIsFormModalOpen,
   };
 };

@@ -1,11 +1,19 @@
 import { useContext } from "react";
 import { Context } from "src/store/provider";
 import { NProvider } from "src/typings";
+import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
+import { GROCERY_FORM } from "./utils";
 
 export const GroceryList = () => {
-  const { groceries, language, removeGrocery, addGrocery } =
-    useGroceriesService();
+  const {
+    groceries,
+    language,
+    removeGrocery,
+    isModalOpen,
+    toggleFormModal,
+    addGrocery,
+  } = useGroceriesService();
 
   return (
     <div>
@@ -30,7 +38,19 @@ export const GroceryList = () => {
           </div>
         )
       )}
-      <button {...{ onClick: () => addGrocery(1) }}>+</button>
+      <button {...{ onClick: toggleFormModal }}>+</button>
+      {isModalOpen && (
+        <CustomFormModal
+          {...{
+            initialValues: {},
+            isModalOpen,
+            title: "new",
+            toggle: toggleFormModal,
+            onClick: addGrocery,
+            form: GROCERY_FORM,
+          }}
+        />
+      )}
     </div>
   );
 };

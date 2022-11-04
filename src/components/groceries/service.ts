@@ -1,32 +1,44 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
+
+import { FormikValues } from "formik";
+
 import { Context } from "src/store/provider";
 import { NProvider } from "src/typings";
 
 import * as uuid from "uuid";
 
 export const useGroceriesService = () => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const toggleFormModal = () => setIsModalOpen(!isModalOpen);
+
   const props = useContext<NProvider.TContextApiProps | null>(Context);
 
   const removeGrocery = (id: string) =>
     props?.setGroceries((prev) => prev.filter((item) => item.id !== id));
 
-  const addGrocery = (index: number) => {
+  const addGrocery = (values: FormikValues) => {
+    console.log({ values });
     const newGrocery = {
       id: uuid.v4(),
-      name: "",
-      namePlaceholder: "Insert the name" + index + 1,
-      category: "Grocery,Vegetables",
-      price: "0.0" + index,
+      name: values["name"],
+      namePlaceholder: "Insert the name",
+      category: values["category"],
+      price: values["price"],
       currency: "PLN",
       isActive: true,
     };
 
     props?.setGroceries((prev) => [...prev, newGrocery]);
+
+    toggleFormModal();
   };
 
   return {
     ...props,
     removeGrocery,
     addGrocery,
+    toggleFormModal,
+    isModalOpen,
   };
 };

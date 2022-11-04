@@ -19,7 +19,5 @@ export declare namespace NProvider {
     setGroceries: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
     language: TLanguage;
     setLanguage: React.Dispatch<React.SetStateAction<TLanguage>>;
-    isFormModalOpen: B;
-    setIsFormModalOpen: React.Dispatch<React.SetStateAction<B>>;
   };
 }
