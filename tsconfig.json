@@ -6,6 +6,7 @@
       "dom.iterable",
       "esnext"
     ],
+    "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,6 +16,7 @@
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types", "src/typings"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
