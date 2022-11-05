@@ -1,9 +1,8 @@
-import { useContext } from "react";
-import { Context } from "src/store/provider";
-import { NProvider } from "src/typings";
 import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
 import { GROCERY_FORM } from "./utils";
+
+import * as C from "src/utils/constants";
 
 const GroceryList = () => {
   const {
@@ -17,34 +16,20 @@ const GroceryList = () => {
 
   return (
     <div>
-      {groceries?.map(
-        ({
-          category,
-          currency,
-          id,
-          isActive,
-          name,
-          namePlaceholder,
-          price,
-        }) => (
-          <div key={id}>
-            <h1>{name || namePlaceholder}</h1>
-            <p>{category}</p>
-            <span>{currency}</span>
-            <b>{price}</b>
-            <i>isActive: {!!isActive ? "YES" : "NO"}</i>
-            <h4>{language?.label}</h4>
-            <button {...{ onClick: () => removeGrocery(id) }}>-</button>
-          </div>
-        )
-      )}
-      <button {...{ onClick: toggleFormModal }}>+</button>
+      {groceries?.map(({ id }) => (
+        <div key={id}>
+          <button {...{ onClick: () => removeGrocery(id) }}>
+            Remove grocery
+          </button>
+        </div>
+      ))}
+      <button {...{ onClick: toggleFormModal }}>Add grocery</button>
       {isModalOpen && (
         <CustomFormModal
           {...{
             initialValues: {},
             isModalOpen,
-            title: "new",
+            title: C.GROCERY_MODAL_TITLE,
             toggle: toggleFormModal,
             onClick: addGrocery,
             form: GROCERY_FORM,
