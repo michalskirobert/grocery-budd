@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routers } from "./store/utils";
 import { Suspense } from "react";
 
+import "./assets/style/index.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
 const root = ReactDOM.createRoot(
