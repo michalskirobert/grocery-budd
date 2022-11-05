@@ -2,17 +2,11 @@ import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
 import { GROCERY_FORM } from "./utils";
 
-import * as C from "src/utils/constants";
+import * as C from "@utils/constants";
 
 const GroceryList = () => {
-  const {
-    groceries,
-    language,
-    removeGrocery,
-    isModalOpen,
-    toggleFormModal,
-    addGrocery,
-  } = useGroceriesService();
+  const { groceries, removeGrocery, isModalOpen, toggleFormModal, addGrocery } =
+    useGroceriesService();
 
   return (
     <div>

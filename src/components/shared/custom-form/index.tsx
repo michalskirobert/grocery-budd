@@ -4,7 +4,7 @@ import Select from "react-select";
 
 import { NShared } from "src/typings";
 
-import * as C from "src/utils/constants";
+import * as C from "@utils/constants";
 
 export const CustomForm = ({
   id,

@@ -20,9 +20,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
   },
+  "noFallthroughCasesInSwitch": true,
+  "types": [
+    "node"
+  ],
   "include": [
-    "src"
-  ]
+    "src",
+    "src/core/typings/index.d.ts"
+  ],
+  "extends": "./tsconfig-paths.json"
 }
