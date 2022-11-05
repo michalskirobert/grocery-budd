@@ -35,4 +35,9 @@ export declare namespace NShared {
     onClick: (values: FormikValues) => void;
     form: readonly { id: string; label: string; kind: string }[];
   };
+
+  type ICustomLoader = {
+    children: JSX;
+    isBlocking: B;
+  };
 }
