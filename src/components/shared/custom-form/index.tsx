@@ -23,7 +23,7 @@ export const CustomForm = ({
             {...{
               id,
               name: id,
-              type: C.TEXT,
+              type: C.INPUT_TEXT_TYPE,
               values: values[id],
               onChange: handleChange,
             }}
@@ -38,7 +38,7 @@ export const CustomForm = ({
             {...{
               id,
               name: id,
-              type: C.NUMBER,
+              type: C.INPUT_NUMBER_TYPE,
               values: values[id],
               onChange: handleChange,
             }}

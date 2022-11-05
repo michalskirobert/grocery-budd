@@ -5,7 +5,7 @@ import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
 import { GROCERY_FORM } from "./utils";
 
-export const GroceryList = () => {
+const GroceryList = () => {
   const {
     groceries,
     language,
@@ -54,3 +54,5 @@ export const GroceryList = () => {
     </div>
   );
 };
+
+export default GroceryList;

@@ -20,4 +20,10 @@ export declare namespace NProvider {
     language: TLanguage;
     setLanguage: React.Dispatch<React.SetStateAction<TLanguage>>;
   };
+
+  type TRoutes = readonly {
+    path: string;
+    Children: React.LazyExoticComponent<() => JSX.Element>;
+    index?: boolean;
+  }[];
 }

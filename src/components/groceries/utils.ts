@@ -1,6 +1,8 @@
+import { NShared } from "src/typings/shared";
+
 import * as C from "src/utils/constants";
 
-export const GROCERY_FORM: { id: string; label: string; kind: string }[] = [
+export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
   {
     id: C.NAME,
     label: C.NAME,

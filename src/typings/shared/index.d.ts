@@ -33,6 +33,6 @@ export declare namespace NShared {
     isModalOpen: B;
     title: S;
     onClick: (values: FormikValues) => void;
-    form: any[];
+    form: readonly { id: string; label: string; kind: string }[];
   };
 }
