@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NProvider } from "src/typings";
+import { NProvider } from "@namespace/index";
 import { initialGroceryHelper } from "./utils";
 
 export const useProviderService = () => {

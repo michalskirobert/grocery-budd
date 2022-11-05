@@ -1,6 +1,6 @@
 import React from "react";
 
-import { NProvider } from "src/typings/index";
+import { NProvider } from "@namespace/index";
 import { useProviderService } from "./service";
 
 export const Context = React.createContext<NProvider.TContextApiProps | null>(

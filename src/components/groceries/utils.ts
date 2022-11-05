@@ -1,6 +1,6 @@
-import { NShared } from "src/typings/shared";
+import { NShared } from "@namespace/shared";
 
-import * as C from "src/utils/constants";
+import * as C from "@utils/constants";
 
 export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
   {

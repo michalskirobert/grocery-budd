@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Context } from "src/store/provider";
+import { Context } from "@store/provider";
 
 export const useHomePageService = () => {
   const props = useContext(Context);

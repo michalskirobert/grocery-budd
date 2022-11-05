@@ -2,7 +2,7 @@ import { Input, Label } from "reactstrap";
 
 import Select from "react-select";
 
-import { NShared } from "src/typings";
+import { NShared } from "@namespace/index";
 
 import * as C from "@utils/constants";
 

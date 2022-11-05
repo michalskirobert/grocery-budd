@@ -1,5 +1,4 @@
-import React from "react";
-import { initialGroceryHelper } from "src/store/provider/utils";
+import { initialGroceryHelper } from "@store/provider/utils";
 
 export const GroceryList = () => {
   return (

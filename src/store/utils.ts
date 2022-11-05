@@ -1,8 +1,8 @@
 import { lazy } from "react";
-import { NProvider } from "src/typings";
+import { NProvider } from "@namespace/index";
 
-const HomePage = lazy(() => import("src/components/home-page"));
-const Groceries = lazy(() => import("src/components/groceries"));
+const HomePage = lazy(() => import("@components/home-page"));
+const Groceries = lazy(() => import("@components/groceries"));
 
 export const menu = [];
 

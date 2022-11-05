@@ -2,8 +2,8 @@ import { useState, useContext } from "react";
 
 import { FormikValues } from "formik";
 
-import { Context } from "src/store/provider";
-import { NProvider } from "src/typings";
+import { Context } from "@store/provider";
+import { NProvider } from "@namespace/index";
 
 import * as uuid from "uuid";
 

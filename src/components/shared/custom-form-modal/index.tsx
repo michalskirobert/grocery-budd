@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { CustomForm } from "../custom-form";
 
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
-import { NShared } from "src/typings";
+import { NShared } from "@namespace/index";
 
 export const CustomFormModal = ({
   toggle,
