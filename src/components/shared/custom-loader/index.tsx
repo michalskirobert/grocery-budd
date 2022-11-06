@@ -1,18 +1,7 @@
-import BlockUi from "block-ui";
+import * as S from "./styles";
 
-import { NShared } from "@namespace/shared";
+export const CustomLoader = ({ isLoading = true }) => {
+  if (isLoading) return <S.LoaderContainer>Loading</S.LoaderContainer>;
 
-export const CustomLoader = ({
-  children,
-  isBlocking,
-}: NShared.ICustomLoader) => (
-  <BlockUi
-    {...{
-      tag: "div",
-      blocking: isBlocking,
-      loader: <div>Loader</div>,
-    }}
-  >
-    {children}
-  </BlockUi>
-);
+  return null;
+};

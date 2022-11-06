@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routers } from "./store/utils";
 import { Suspense } from "react";
 
+import { CustomLoader } from "@components/shared";
+
 import "./assets/style/index.scss";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -20,7 +22,7 @@ root.render(
         <BrowserRouter>
           {routers.map(({ path, Children, index }) => {
             return (
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<CustomLoader />}>
                 <Routes>
                   <Route {...{ path, element: <Children />, index }} />
                 </Routes>
