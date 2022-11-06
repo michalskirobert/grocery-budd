@@ -11,7 +11,6 @@ export const CustomFormModal = ({
   isModalOpen,
   title,
   form,
-  options,
   onClick,
 }: NShared.ICustomFormModal) => (
   <Formik {...{ initialValues, onSubmit: (values) => onClick(values) }}>
@@ -19,7 +18,7 @@ export const CustomFormModal = ({
       <Modal isOpen={isModalOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>{title}</ModalHeader>
         <ModalBody>
-          {form.map(({ id, label, kind }) => (
+          {form.map(({ id, label, kind, options }) => (
             <CustomForm
               {...{
                 id,

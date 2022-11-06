@@ -33,7 +33,7 @@ export declare namespace NShared {
     id: string;
     label: string;
     kind: string;
-    options?: TOptions[];
+    options?: NProvider.TOptions[];
   };
 
   type ICustomFormModal = {
@@ -41,7 +41,6 @@ export declare namespace NShared {
     initialValues: FormikValues;
     isModalOpen: B;
     title: S;
-    options?: NProvider.TOptions[];
     onClick: (values: FormikValues) => void;
     form: readonly TForm[];
   };

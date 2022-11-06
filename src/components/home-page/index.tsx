@@ -1,23 +1,38 @@
+import { CustomFormModal } from "@components/shared";
 import { Button, Col, Row } from "reactstrap";
+import { useHomePageService } from "./service";
 import * as S from "./styles";
+import { FORM } from "./utils";
 
 const HomePage = () => {
-  const temporary = [
-    { color: "red", title: "xxxx" },
-    { color: "blue", title: "xxxx" },
-    { color: "green", title: "xxxx" },
-    { color: "yellow", title: "xxxx" },
-  ];
+  const { isModalOpen, toggleModal, boxes, createNewBox, removeBox } =
+    useHomePageService();
+
   return (
     <S.Container>
       <Row>
-        {temporary.map(({ color, title }) => (
+        {boxes.map(({ color, name, id, budgetValue }) => (
           <Col>
-            <S.Box {...{ color }}>{title}</S.Box>
+            <S.Box {...{ color }}>
+              {name} / {budgetValue}
+            </S.Box>
+            <Button onClick={() => removeBox(id)}>Remove</Button>
           </Col>
         ))}
-        <Col>{temporary?.length < 4 && <S.Add>+</S.Add>}</Col>
+        <Col>
+          {boxes?.length < 4 && <S.Add {...{ onClick: toggleModal }}>+</S.Add>}
+        </Col>
       </Row>
+      <CustomFormModal
+        {...{
+          form: FORM,
+          initialValues: {},
+          isModalOpen: isModalOpen,
+          onClick: createNewBox,
+          title: "Budget",
+          toggle: toggleModal,
+        }}
+      />
     </S.Container>
   );
 };

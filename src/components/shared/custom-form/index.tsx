@@ -54,7 +54,7 @@ export const CustomForm = ({
             {...{
               id,
               options,
-              onChange: (e: any) => setFieldValue(id, e.currentTarget.value),
+              onChange: (e: any) => setFieldValue(id, e),
             }}
           />
         </>

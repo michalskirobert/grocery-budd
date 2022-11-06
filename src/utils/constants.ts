@@ -20,3 +20,5 @@ export const GROCERY_MODAL_TITLE = "New Grocery";
 
 //Homepage
 export const CURRENCY = "currency";
+export const BUDGET = "budget";
+export const COLOR = "color";

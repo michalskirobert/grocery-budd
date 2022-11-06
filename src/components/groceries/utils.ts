@@ -12,6 +12,11 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
     id: C.CATEGORY,
     label: C.CATEGORY,
     kind: C.INPUT_TYPES.INPUT_SELECT,
+    options: [
+      { label: "help", value: "me" },
+      { label: "ie wiem", value: "right" },
+      { label: "true", value: "coś  tam" },
+    ],
   },
   {
     id: C.PRICE,
