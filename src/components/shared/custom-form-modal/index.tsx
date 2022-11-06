@@ -11,6 +11,7 @@ export const CustomFormModal = ({
   isModalOpen,
   title,
   form,
+  options,
   onClick,
 }: NShared.ICustomFormModal) => (
   <Formik {...{ initialValues, onSubmit: (values) => onClick(values) }}>
@@ -25,6 +26,7 @@ export const CustomFormModal = ({
                 label,
                 kind,
                 values,
+                options,
                 handleChange,
                 setFieldValue,
               }}

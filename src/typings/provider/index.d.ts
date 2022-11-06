@@ -9,16 +9,16 @@ export declare namespace NProvider {
     Children: JSX;
   };
 
-  type TLanguage = {
-    value: S;
+  type TOptions = {
     label: S;
+    value: S;
   };
 
   type TContextApiProps = {
     groceries: Record<string, any>[];
     setGroceries: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
-    language: TLanguage;
-    setLanguage: React.Dispatch<React.SetStateAction<TLanguage>>;
+    language: TOptions;
+    setLanguage: React.Dispatch<React.SetStateAction<TOptions>>;
   };
 
   type TRoutes = readonly {

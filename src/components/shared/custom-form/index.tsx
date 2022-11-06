@@ -11,6 +11,7 @@ export const CustomForm = ({
   label,
   kind,
   values,
+  options,
   handleChange,
   setFieldValue,
 }: NShared.iCustomForm) => {
@@ -52,10 +53,7 @@ export const CustomForm = ({
           <Select
             {...{
               id,
-              options: [
-                { label: "Grocery", value: "Groceries" },
-                { label: "idk", value: "idk" },
-              ],
+              options,
               onChange: (e: any) => setFieldValue(id, e.currentTarget.value),
             }}
           />

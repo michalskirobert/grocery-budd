@@ -6,7 +6,7 @@ export const useProviderService = () => {
   const [groceries, setGroceries] =
     useState<Record<string, any>[]>(initialGroceryHelper);
 
-  const [language, setLanguage] = useState<NProvider.TLanguage>({
+  const [language, setLanguage] = useState<NProvider.TOptions>({
     label: "English",
     value: "ENG",
   });

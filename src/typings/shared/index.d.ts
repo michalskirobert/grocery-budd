@@ -1,4 +1,5 @@
 import { FormikValues } from "formik";
+import { NProvider } from "..";
 
 export declare namespace NShared {
   type S = string;
@@ -12,6 +13,7 @@ export declare namespace NShared {
     kind: S;
     label: S;
     values: FormikValues;
+    options?: NProvider.TOptions[];
     handleChange: {
       (e: React.ChangeEvent<any>): void;
       <T = string | React.ChangeEvent<any>>(
@@ -27,13 +29,21 @@ export declare namespace NShared {
     ) => void;
   };
 
+  type TForm = {
+    id: string;
+    label: string;
+    kind: string;
+    options?: TOptions[];
+  };
+
   type ICustomFormModal = {
     toggle: () => void;
     initialValues: FormikValues;
     isModalOpen: B;
     title: S;
+    options?: NProvider.TOptions[];
     onClick: (values: FormikValues) => void;
-    form: readonly { id: string; label: string; kind: string }[];
+    form: readonly TForm[];
   };
 
   type ICustomLoader = {
