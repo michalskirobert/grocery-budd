@@ -1,5 +1,5 @@
 import { CustomForm } from "@components/shared";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { useLoginService } from "./service";
@@ -16,7 +16,7 @@ export const LoginPage = () => {
       }}
     >
       {({ values, handleSubmit, handleChange, setFieldValue }) => (
-        <>
+        <Form onSubmit={handleSubmit}>
           {FORM.map(({ id, kind, label, options }) => (
             <CustomForm
               {...{
@@ -30,11 +30,9 @@ export const LoginPage = () => {
               }}
             />
           ))}
-          <Button type="submit" onClick={() => handleSubmit()}>
-            Sign in
-          </Button>
+          <Button type="submit">Sign in</Button>
           if you have no account, <Link {...{ to: "/sign-up" }}>Sign-up</Link>
-        </>
+        </Form>
       )}
     </Formik>
   );

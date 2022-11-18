@@ -17,6 +17,7 @@ export const FORM: NShared.TForm[] = [
       isRequired: E.Required.Yes,
       requiredMessage: "Required",
       min: 5,
+      minMessage: "Musi zawierać przynajmniej 5 znaków",
     },
   },
 ];

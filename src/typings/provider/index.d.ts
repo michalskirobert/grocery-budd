@@ -20,6 +20,7 @@ export declare namespace NProvider {
     language: TOptions;
     setLanguage: React.Dispatch<React.SetStateAction<TOptions>>;
     userData: any;
+    setUserData: React.Dispatch<any>;
   };
 
   type TRoutes = readonly {

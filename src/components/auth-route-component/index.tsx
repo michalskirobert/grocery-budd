@@ -14,8 +14,6 @@ export const AuthPage = ({ children }) => {
       setIsLoading(false);
       return;
     } else {
-      console.log({ user });
-      alert("WELCOME");
       setIsLoading(false);
     }
   });
