@@ -1,7 +1,7 @@
 import { NProvider } from "@namespace/provider";
 import { Context } from "@store/provider";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "src/firebase";
 
@@ -19,14 +19,21 @@ export const useLoginService = () => {
 
   const signIn = async ({ email, password }: ISignInData) => {
     try {
+      props?.setIsGlobalLoading(true);
       const resp = await signInWithEmailAndPassword(auth, email, password);
       props?.setUserData(resp.user);
-      toast.success("Właśnie się zalogowałeś, witaj!" + resp?.user?.email);
+      props?.setIsGlobalLoading(false);
       navigate("/");
+      toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
-      toast.error("Nie prawidłowe hasło lub email");
+      props?.setIsGlobalLoading(false);
+      toast.error("Password or email is incorrect");
     }
   };
+
+  useEffect(() => {
+    props?.logout();
+  }, []);
 
   return { signIn };
 };

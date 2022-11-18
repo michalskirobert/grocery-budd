@@ -4,25 +4,25 @@ import { auth } from "src/firebase";
 import { onAuthStateChanged } from "@firebase/auth";
 
 export const AuthPage = ({ children }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [checkingIsLogged, setCheckingIsLogged] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
   const AuthCheck = onAuthStateChanged(auth, (user) => {
     if (!user) {
       navigate("/sign-in");
-      setIsLoading(false);
+      setCheckingIsLogged(false);
       return;
     } else {
-      setIsLoading(false);
+      setCheckingIsLogged(false);
     }
   });
 
   useEffect(() => {
-    AuthCheck();
+    if (!checkingIsLogged) AuthCheck();
   }, [auth]);
 
-  if (isLoading) return <div>Loading....</div>;
+  if (checkingIsLogged) return <div>Loading....</div>;
 
   return <>{children}</>;
 };

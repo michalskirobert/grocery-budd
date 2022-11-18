@@ -10,7 +10,7 @@ export const useProviderService = () => {
   const [userData, setUserData] = useState<any>({ isLogged: false });
   const [groceries, setGroceries] =
     useState<Record<string, any>[]>(initialGroceryHelper);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
 
   const [language, setLanguage] = useState<NProvider.TOptions>({
     label: "English",
@@ -24,11 +24,11 @@ export const useProviderService = () => {
 
   const logout = async () => {
     try {
-      setIsLoading(true);
+      setIsGlobalLoading(true);
       await signOut(auth);
-      setIsLoading(false);
+      setIsGlobalLoading(false);
     } catch (error) {
-      setIsLoading(false);
+      setIsGlobalLoading(false);
       toast.error("Nie można wylogować użytkownika");
     }
   };
@@ -45,5 +45,7 @@ export const useProviderService = () => {
     userData,
     setUserData,
     logout,
+    isGlobalLoading,
+    setIsGlobalLoading,
   };
 };

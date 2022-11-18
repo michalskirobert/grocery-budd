@@ -28,15 +28,15 @@ root.render(
         <BrowserRouter>
           <S.Container>
             <AuthPage>
-              {routers.map(({ path, Children, index }) => {
-                return (
-                  <Suspense key={path} fallback={<CustomLoader />}>
-                    <Routes>
+              <Suspense fallback={<CustomLoader />}>
+                <Routes>
+                  {routers.map(({ path, Children, index }) => {
+                    return (
                       <Route {...{ path, element: <Children />, index }} />
-                    </Routes>
-                  </Suspense>
-                );
-              })}
+                    );
+                  })}
+                </Routes>
+              </Suspense>
               <ToastContainer {...{ theme: "colored" }} />
             </AuthPage>
           </S.Container>

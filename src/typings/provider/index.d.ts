@@ -22,6 +22,8 @@ export declare namespace NProvider {
     userData: any;
     setUserData: React.Dispatch<any>;
     logout: () => Promise<void>;
+    setIsGlobalLoading: (isLoading: B) => void;
+    isGlobalLoading: B;
   };
 
   type TRoutes = readonly {
