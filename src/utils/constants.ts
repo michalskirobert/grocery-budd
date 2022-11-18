@@ -1,9 +1,13 @@
+import { NShared } from "@namespace/shared";
+
 //INPUTS
-export const INPUT_TYPES = {
+export const INPUT_TYPES: Record<string, NShared.TFormKinds> = {
   INPUT_TEXT: "input-text",
   INPUT_CHECKBOX: "input-checkbox",
   INPUT_NUMBER: "input-number",
   INPUT_SELECT: "input-select",
+  INPUT_PASSWORD: "input-password",
+  INPUT_EMAIL: "input-email",
 };
 
 export const INPUT_TEXT_TYPE = "text";
@@ -22,3 +26,6 @@ export const GROCERY_MODAL_TITLE = "New Grocery";
 export const CURRENCY = "currency";
 export const BUDGET = "budget";
 export const COLOR = "color";
+
+//Reducer
+export const SET_USER = "SET_USER";

@@ -1,18 +1,20 @@
 import { CustomFormModal } from "@components/shared";
 import { Button, Col, Row } from "reactstrap";
 import { useHomePageService } from "./service";
-import * as S from "./styles";
 import { FORM } from "./utils";
 
+import * as S from "./styles";
+
 const HomePage = () => {
-  const { isModalOpen, toggleModal, boxes, createNewBox, removeBox } =
+  const { isModalOpen, toggleModal, boxes, createNewBox, removeBox, userData } =
     useHomePageService();
 
   return (
     <S.Container>
+      <h1>{userData?.nickname}</h1>
       <Row>
-        {boxes.map(({ color, name, id, budgetValue }) => (
-          <Col>
+        {boxes?.map(({ color, name, id, budgetValue }) => (
+          <Col key={id}>
             <S.Box {...{ color }}>
               {name} / {budgetValue}
             </S.Box>

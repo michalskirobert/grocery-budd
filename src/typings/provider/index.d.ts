@@ -19,6 +19,7 @@ export declare namespace NProvider {
     setGroceries: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
     language: TOptions;
     setLanguage: React.Dispatch<React.SetStateAction<TOptions>>;
+    userData: any;
   };
 
   type TRoutes = readonly {

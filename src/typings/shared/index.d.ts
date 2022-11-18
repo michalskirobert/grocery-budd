@@ -29,11 +29,29 @@ export declare namespace NShared {
     ) => void;
   };
 
-  type TForm = {
+  type TFormKinds =
+    | "input-text"
+    | "input-checkbox"
+    | "input-number"
+    | "input-select"
+    | "input-password"
+    | "input-email";
+
+  type TFormValidations = {
+    isRequired: 10 | 20;
+    requiredMessage: S;
+    min?: N;
+    minMessage?: S;
+    max?: N;
+    maxMessage?: S;
+  };
+
+  type TForm = readonly {
     id: string;
     label: string;
-    kind: string;
+    kind: TFormKinds;
     options?: NProvider.TOptions[];
+    validations: TFormValidations;
   };
 
   type ICustomFormModal = {

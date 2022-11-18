@@ -20,6 +20,7 @@ export const CustomFormModal = ({
         <ModalBody>
           {form.map(({ id, label, kind, options }) => (
             <CustomForm
+              key={id}
               {...{
                 id,
                 label,

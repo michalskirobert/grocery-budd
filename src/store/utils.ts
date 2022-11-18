@@ -2,7 +2,8 @@ import { lazy } from "react";
 import { NProvider } from "@namespace/index";
 
 const HomePage = lazy(() => import("@components/home-page"));
-const Groceries = lazy(() => import("@components/groceries"));
+const Groceries = lazy(() => import("@components/groceries-page"));
+const LoginPage = lazy(() => import("@components/login-page"));
 
 export const menu = [];
 
@@ -34,7 +35,7 @@ export const routers: NProvider.TRoutes = [
   },
   {
     path: "/sign-in",
-    Children: Groceries,
+    Children: LoginPage,
     index: false,
   },
   {

@@ -18,7 +18,6 @@ export const useGroceriesService = () => {
     props?.setGroceries((prev) => prev.filter((item) => item.id !== id));
 
   const addGrocery = (values: FormikValues) => {
-    console.log({ values });
     const newGrocery = {
       id: uuid.v4(),
       name: values["name"],
