@@ -21,6 +21,7 @@ export declare namespace NProvider {
     setLanguage: React.Dispatch<React.SetStateAction<TOptions>>;
     userData: any;
     setUserData: React.Dispatch<any>;
+    logout: () => Promise<void>;
   };
 
   type TRoutes = readonly {

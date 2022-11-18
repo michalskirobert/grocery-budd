@@ -15,6 +15,7 @@ export const Provider = ({ Children }: NProvider.TProviderProps) => {
     setLanguage,
     userData,
     setUserData,
+    logout,
   } = useProviderService();
 
   return (
@@ -26,6 +27,7 @@ export const Provider = ({ Children }: NProvider.TProviderProps) => {
         setLanguage,
         userData,
         setUserData,
+        logout,
       }}
     >
       {Children}

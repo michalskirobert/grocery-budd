@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "src/firebase";
 
+import { toast } from "react-toastify";
+
 interface ISignInData {
   email: string;
   password: string;
@@ -19,9 +21,10 @@ export const useLoginService = () => {
     try {
       const resp = await signInWithEmailAndPassword(auth, email, password);
       props?.setUserData(resp.user);
+      toast.success("Właśnie się zalogowałeś, witaj!" + resp?.user?.email);
       navigate("/");
     } catch (error) {
-      alert("WRONG KURWA");
+      toast.error("Nie prawidłowe hasło lub email");
     }
   };
 
