@@ -8,18 +8,19 @@ export const AuthPage = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const AuthCheck = onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      navigate("/sign-in");
-      setCheckingIsLogged(false);
-      return;
-    } else {
-      setCheckingIsLogged(false);
-    }
-  });
+  const AuthCheck = () =>
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/sign-in");
+        setCheckingIsLogged(false);
+        return;
+      } else {
+        setCheckingIsLogged(false);
+      }
+    });
 
   useEffect(() => {
-    if (!checkingIsLogged) AuthCheck();
+    AuthCheck();
   }, [auth]);
 
   if (checkingIsLogged) return <div>Loading....</div>;

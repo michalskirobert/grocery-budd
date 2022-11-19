@@ -16,23 +16,25 @@ export const LoginPage = () => {
       }}
     >
       {({ values, handleSubmit, handleChange, setFieldValue }) => (
-        <Form onSubmit={handleSubmit}>
-          {FORM.map(({ id, kind, label, options }) => (
-            <CustomForm
-              {...{
-                id,
-                kind,
-                label,
-                options,
-                handleChange,
-                setFieldValue,
-                values,
-              }}
-            />
-          ))}
-          <Button type="submit">Sign in</Button>
-          if you have no account, <Link {...{ to: "/sign-up" }}>Sign-up</Link>
-        </Form>
+        <>
+          <Form onSubmit={handleSubmit}>
+            {FORM.map(({ id, kind, label, options }) => (
+              <CustomForm
+                {...{
+                  id,
+                  kind,
+                  label,
+                  options,
+                  handleChange,
+                  setFieldValue,
+                  values,
+                }}
+              />
+            ))}
+            <Button type="submit">Sign in</Button>
+          </Form>
+          if you have no account, <Link {...{ to: "/" }}>Sign-up</Link>
+        </>
       )}
     </Formik>
   );

@@ -18,6 +18,8 @@ export const Provider = ({ Children }: NProvider.TProviderProps) => {
     logout,
     isGlobalLoading,
     setIsGlobalLoading,
+    setUser,
+    user,
   } = useProviderService();
 
   return (
@@ -32,6 +34,8 @@ export const Provider = ({ Children }: NProvider.TProviderProps) => {
         logout,
         isGlobalLoading,
         setIsGlobalLoading,
+        setUser,
+        user,
       }}
     >
       {Children}

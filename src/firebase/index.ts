@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "@firebase/firestore";
-import { getAuth, onAuthStateChanged } from "@firebase/auth";
+import { getAuth } from "@firebase/auth";
 
 import { fireAuth } from "./auth";
 

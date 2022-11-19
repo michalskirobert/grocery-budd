@@ -21,9 +21,9 @@ export const useLoginService = () => {
     try {
       props?.setIsGlobalLoading(true);
       const resp = await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
       props?.setUserData(resp.user);
       props?.setIsGlobalLoading(false);
-      navigate("/");
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
       props?.setIsGlobalLoading(false);

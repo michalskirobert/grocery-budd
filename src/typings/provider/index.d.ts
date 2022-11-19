@@ -24,6 +24,8 @@ export declare namespace NProvider {
     logout: () => Promise<void>;
     setIsGlobalLoading: (isLoading: B) => void;
     isGlobalLoading: B;
+    user;
+    setUser;
   };
 
   type TRoutes = readonly {

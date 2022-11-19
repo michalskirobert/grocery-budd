@@ -7,6 +7,7 @@ import { signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 
 export const useProviderService = () => {
+  const [user, setUser] = useState(null);
   const [userData, setUserData] = useState<any>({ isLogged: false });
   const [groceries, setGroceries] =
     useState<Record<string, any>[]>(initialGroceryHelper);
@@ -18,7 +19,7 @@ export const useProviderService = () => {
   });
 
   const getUserData = async () => {
-    const resp = await getCollection("Ur6EhS4Uoydioz0Umsd0uNcOTF42");
+    const resp = await getCollection(userData);
     resp.docs.forEach((doc) => console.log(doc.data()));
   };
 
@@ -26,6 +27,8 @@ export const useProviderService = () => {
     try {
       setIsGlobalLoading(true);
       await signOut(auth);
+      setUser(null);
+      setUserData(null);
       setIsGlobalLoading(false);
     } catch (error) {
       setIsGlobalLoading(false);
@@ -47,5 +50,7 @@ export const useProviderService = () => {
     logout,
     isGlobalLoading,
     setIsGlobalLoading,
+    user,
+    setUser,
   };
 };
