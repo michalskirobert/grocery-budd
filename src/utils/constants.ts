@@ -18,6 +18,7 @@ export const CATEGORY = "category";
 export const PRICE = "price";
 export const AGE = "age";
 export const NAME = "name";
+export const TITLE = "title";
 
 //GROCERY
 export const GROCERY_MODAL_TITLE = "New Grocery";

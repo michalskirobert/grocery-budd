@@ -5,7 +5,7 @@ import * as E from "@utils/enums";
 
 export const FORM: NShared.ICustomFormModal["form"] = [
   {
-    id: C.NAME,
+    id: C.TITLE,
     kind: C.INPUT_TYPES.INPUT_TEXT,
     label: C.NAME,
     validations: { isRequired: E.Required.No, requiredMessage: "" },

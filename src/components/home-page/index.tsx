@@ -13,10 +13,10 @@ const HomePage = () => {
     <S.Container>
       <h1>{userData?.nickname}</h1>
       <Row>
-        {boxes?.map(({ color, name, id, budgetValue }) => (
+        {boxes?.map(({ color, title, id, budgetValue }) => (
           <Col key={id}>
             <S.Box {...{ color }}>
-              {name} / {budgetValue}
+              {title} / {budgetValue}
             </S.Box>
             <Button onClick={() => removeBox(id)}>Remove</Button>
           </Col>

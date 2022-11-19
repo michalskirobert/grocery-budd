@@ -1,3 +1,5 @@
+import React from "react";
+
 export declare namespace NProvider {
   type S = string;
   type N = number;
@@ -19,13 +21,13 @@ export declare namespace NProvider {
     setGroceries: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
     language: TOptions;
     setLanguage: React.Dispatch<React.SetStateAction<TOptions>>;
-    userData: any;
+    userData: any & User;
     setUserData: React.Dispatch<any>;
     logout: () => Promise<void>;
     setIsGlobalLoading: (isLoading: B) => void;
     isGlobalLoading: B;
-    user;
-    setUser;
+    user: User | null;
+    setUser: React.Dispatch<User | null>;
   };
 
   type TRoutes = readonly {

@@ -22,7 +22,7 @@ export const useLoginService = () => {
       props?.setIsGlobalLoading(true);
       const resp = await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
-      props?.setUserData(resp.user);
+      props?.setUser(resp.user);
       props?.setIsGlobalLoading(false);
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
@@ -32,7 +32,7 @@ export const useLoginService = () => {
   };
 
   useEffect(() => {
-    props?.logout();
+    props?.logout(); // eslint-disable-next-line
   }, []);
 
   return { signIn };
