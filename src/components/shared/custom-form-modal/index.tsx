@@ -13,7 +13,13 @@ export const CustomFormModal = ({
   form,
   onClick,
 }: NShared.ICustomFormModal) => (
-  <Formik {...{ initialValues, onSubmit: (values) => onClick(values) }}>
+  <Formik
+    {...{
+      initialValues,
+      onSubmit: (values) => onClick(values),
+      enableReinitialize: true,
+    }}
+  >
     {({ values, handleSubmit, handleChange, setFieldValue }) => (
       <Modal isOpen={isModalOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>{title}</ModalHeader>

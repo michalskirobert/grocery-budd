@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { NProvider } from "@namespace/index";
 import { initialGroceryHelper } from "./utils";
 import { auth, getCollection } from "src/firebase";
@@ -18,16 +18,22 @@ export const useProviderService = () => {
     value: "ENG",
   });
 
-  const getUserData = async () => {
+  console.log({ userData });
+
+  const getInitApp = async () => {
     if (!user?.uid) return;
 
+    let boxes: any[] = [];
+    let userData: any = {};
+
     const resp = await getCollection(user.uid);
-    resp.docs.forEach(
-      (doc) => (
-        setUserData({ ...user, ...doc.data() }),
-        console.log({ userData: doc.data() })
-      )
-    );
+    const data = await getCollection(`${user.uid}/data/budgets`);
+
+    resp.docs.forEach((doc) => (userData = doc.data()));
+
+    data.docs.forEach((doc) => boxes.push({ id: doc.id, ...doc.data() }));
+
+    setUserData({ ...userData, boxes });
   };
 
   const logout = async () => {
@@ -44,7 +50,7 @@ export const useProviderService = () => {
   };
 
   useEffect(() => {
-    getUserData(); // eslint-disable-next-line
+    getInitApp(); // eslint-disable-next-line
   }, [user?.uid]);
 
   return {

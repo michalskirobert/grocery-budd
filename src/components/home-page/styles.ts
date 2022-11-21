@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const Box = styled.div<{ color: string }>`
+export const Box = styled.div<{ color: string; backgroundColor: string }>`
   display: flex;
   width: 150px;
   height: 150px;
   margin: 30px;
-  background-color: ${({ color }) => color};
-  color: white;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  color: ${({ color }) => color};
   align-items: center;
   justify-content: center;
   over-flow: hidden;

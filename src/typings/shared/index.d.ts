@@ -35,7 +35,8 @@ export declare namespace NShared {
     | "input-number"
     | "input-select"
     | "input-password"
-    | "input-email";
+    | "input-email"
+    | "input-color";
 
   type TFormValidations = {
     isRequired: 10 | 20;

@@ -17,8 +17,14 @@ export const FORM: NShared.ICustomFormModal["form"] = [
     validations: { isRequired: E.Required.No, requiredMessage: "" },
   },
   {
+    id: C.BACKGROUND_COLOR,
+    kind: C.INPUT_TYPES.INPUT_COLOR,
+    label: C.BACKGROUND_COLOR,
+    validations: { isRequired: E.Required.No, requiredMessage: "" },
+  },
+  {
     id: C.COLOR,
-    kind: C.INPUT_TYPES.INPUT_TEXT,
+    kind: C.INPUT_TYPES.INPUT_COLOR,
     label: C.COLOR,
     validations: { isRequired: E.Required.No, requiredMessage: "" },
   },

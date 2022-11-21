@@ -88,6 +88,20 @@ export const CustomForm = ({
           />
         </>
       );
+    case C.INPUT_TYPES.INPUT_COLOR:
+      return (
+        <>
+          <Label {...{ id }}>{label}</Label>
+          <Input
+            {...{
+              name: id,
+              type: "color",
+              value: values[id],
+              onChange: handleChange,
+            }}
+          />
+        </>
+      );
   }
 
   return <div></div>;

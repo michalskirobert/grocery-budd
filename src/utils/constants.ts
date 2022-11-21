@@ -8,6 +8,7 @@ export const INPUT_TYPES: Record<string, NShared.TFormKinds> = {
   INPUT_SELECT: "input-select",
   INPUT_PASSWORD: "input-password",
   INPUT_EMAIL: "input-email",
+  INPUT_COLOR: "input-color",
 };
 
 export const INPUT_TEXT_TYPE = "text";
@@ -26,6 +27,8 @@ export const GROCERY_MODAL_TITLE = "New Grocery";
 //Homepage
 export const CURRENCY = "currency";
 export const BUDGET = "budget";
+export const BACKGROUND_COLOR_LABEL = "background color";
+export const BACKGROUND_COLOR = "backgroundColor";
 export const COLOR = "color";
 
 //Reducer

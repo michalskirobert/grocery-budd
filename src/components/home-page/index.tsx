@@ -6,19 +6,31 @@ import { FORM } from "./utils";
 import * as S from "./styles";
 
 const HomePage = () => {
-  const { isModalOpen, toggleModal, boxes, createNewBox, removeBox, userData } =
-    useHomePageService();
+  const {
+    isModalOpen,
+    toggleModal,
+    boxes,
+    createNewBox,
+    removeBox,
+    userData,
+    updateBox,
+    toggleEditModal,
+    isEditModalOpen,
+    formikValues,
+    openEditModal,
+  } = useHomePageService();
 
   return (
     <S.Container>
       <h1>{userData?.nickname}</h1>
       <Row>
-        {boxes?.map(({ color, title, id, budgetValue }) => (
+        {boxes?.map(({ color, backgroundColor, title, id, budgetValue }) => (
           <Col key={id}>
-            <S.Box {...{ color }}>
+            <S.Box {...{ color, backgroundColor }}>
               {title} / {budgetValue}
             </S.Box>
             <Button onClick={() => removeBox(id)}>Remove</Button>
+            <Button onClick={() => openEditModal(id)}>Edit box</Button>
           </Col>
         ))}
         <Col>
@@ -33,6 +45,16 @@ const HomePage = () => {
           onClick: createNewBox,
           title: "Budget",
           toggle: toggleModal,
+        }}
+      />
+      <CustomFormModal
+        {...{
+          form: FORM,
+          initialValues: formikValues,
+          isModalOpen: isEditModalOpen,
+          onClick: updateBox,
+          title: "Edit modal",
+          toggle: toggleEditModal,
         }}
       />
     </S.Container>
