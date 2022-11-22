@@ -9,6 +9,11 @@ export const INPUT_TYPES: Record<string, NShared.TFormKinds> = {
   INPUT_PASSWORD: "input-password",
   INPUT_EMAIL: "input-email",
   INPUT_COLOR: "input-color",
+  INPUT_SWITCH: "input-switch",
+  INPUT_RADIO_BUTTON: "input-radio-button",
+  INPUT_MULTIPLE_CHECKBOXES: "input-multiple-checkboxes",
+  INPUT_SINGLE_CHECKBOX: "input-single-checkbox",
+  INPUT_GROUP_FIELDS: "input-group-fields",
 };
 
 export const INPUT_TEXT_TYPE = "text";
@@ -16,7 +21,12 @@ export const INPUT_NUMBER_TYPE = "number";
 
 // GROCERY FORM FIELDS
 export const CATEGORY = "category";
-export const PRICE = "price";
+export const SHOP_NAME_LABEL = "Shop name";
+export const SHOP_NAME = "shopName";
+export const PRICE = "Price";
+export const VALUE = "value";
+export const PIN_UP_LABEL = "Pin";
+export const PIN_UP = "isPinned";
 export const AGE = "age";
 export const NAME = "name";
 export const TITLE = "title";

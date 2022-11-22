@@ -1,37 +1,60 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 import { FormikValues } from "formik";
 
 import { Context } from "@store/provider";
 import { NProvider } from "@namespace/index";
 
-import * as uuid from "uuid";
+import { addDocument, deleteDocument, getCollection } from "src/firebase";
+import { toast } from "react-toastify";
+import { useParams, Params } from "react-router";
 
 export const useGroceriesService = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const toggleFormModal = () => setIsModalOpen(!isModalOpen);
+  const { groceryId } = useParams<Params>();
 
   const props = useContext<NProvider.TContextApiProps | null>(Context);
 
-  const removeGrocery = (id: string) =>
-    props?.setGroceries((prev) => prev.filter((item) => item.id !== id));
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [groceries, setGroceries] = useState<any>([]);
 
-  const addGrocery = (values: FormikValues) => {
-    const newGrocery = {
-      id: uuid.v4(),
-      name: values["name"],
-      namePlaceholder: "Insert the name",
-      category: values["category"],
-      price: values["price"],
-      currency: "PLN",
-      isActive: true,
-    };
+  const groceryDbPath = `${props?.user?.uid}/data/budgets/${groceryId}/groceries`;
 
-    props?.setGroceries((prev) => [...prev, newGrocery]);
+  const toggleFormModal = () => setIsModalOpen(!isModalOpen);
 
-    toggleFormModal();
+  const getGroceries = async () => {
+    if (!props?.user?.uid) return;
+
+    try {
+      const resp = await getCollection(groceryDbPath);
+      setGroceries(resp.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+    } catch (error) {
+      toast.error("invalid collection");
+    }
   };
+
+  const addGrocery = async (values: FormikValues) => {
+    try {
+      await addDocument(groceryDbPath, values);
+      setGroceries((prev) => [...prev, values]);
+      toast.success("Added!!");
+      toggleFormModal();
+    } catch (error) {
+      toast.error("Invalid collection");
+    }
+  };
+
+  const removeGrocery = async (id: string) => {
+    try {
+      await deleteDocument(`${groceryDbPath}/${id}`);
+      setGroceries((prev) => prev.filter((item) => item.id !== id));
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getGroceries();
+
+    return () => setGroceries([]);
+  }, [props?.user]);
 
   return {
     ...props,
@@ -39,5 +62,7 @@ export const useGroceriesService = () => {
     addGrocery,
     toggleFormModal,
     isModalOpen,
+    groceries,
+    groceryId,
   };
 };

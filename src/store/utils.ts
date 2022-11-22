@@ -15,12 +15,12 @@ export const routers: NProvider.TRoutes = [
     index: true,
   },
   {
-    path: "/groceries",
+    path: "/groceries/:groceryId",
     Children: Groceries,
     index: false,
   },
   {
-    path: "/grocery/:name/:id",
+    path: "/groceries/:groceryId/:groceryChildId",
     Children: Groceries,
     index: false,
   },

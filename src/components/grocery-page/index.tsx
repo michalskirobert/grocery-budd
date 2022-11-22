@@ -1,4 +1,5 @@
 import { initialGroceryHelper } from "@store/provider/utils";
+import { Link } from "react-router-dom";
 
 export const GroceryList = () => {
   return (
@@ -13,13 +14,15 @@ export const GroceryList = () => {
           namePlaceholder,
           price,
         }) => (
-          <div key={id}>
-            <h1>{name || namePlaceholder}</h1>
-            <p>{category}</p>
-            <span>{currency}</span>
-            <b>{price}</b>
-            <i>isActive: {isActive}</i>
-          </div>
+          <button>
+            <div key={id}>
+              <h1>{name || namePlaceholder}</h1>
+              <p>{category}</p>
+              <span>{currency}</span>
+              <b>{price}</b>
+              <i>isActive: {isActive}</i>
+            </div>
+          </button>
         )
       )}
     </div>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { CustomFormModal } from "@components/shared";
 import { Button, Col, Row } from "reactstrap";
 import { useHomePageService } from "./service";
@@ -26,11 +28,13 @@ const HomePage = () => {
       <Row>
         {boxes?.map(({ color, backgroundColor, title, id, budgetValue }) => (
           <Col key={id}>
-            <S.Box {...{ color, backgroundColor }}>
-              {title} / {budgetValue}
-            </S.Box>
-            <Button onClick={() => removeBox(id)}>Remove</Button>
-            <Button onClick={() => openEditModal(id)}>Edit box</Button>
+            <Link {...{ to: `/groceries/${id}` }}>
+              <S.Box {...{ color, backgroundColor }}>
+                {title} / {budgetValue}
+              </S.Box>
+              <Button onClick={() => removeBox(id)}>Remove</Button>
+              <Button onClick={() => openEditModal(id)}>Edit box</Button>
+            </Link>
           </Col>
         ))}
         <Col>

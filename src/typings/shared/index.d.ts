@@ -16,17 +16,15 @@ export declare namespace NShared {
     options?: NProvider.TOptions[];
     handleChange: {
       (e: React.ChangeEvent<any>): void;
-      <T = string | React.ChangeEvent<any>>(
+      <T = S | React.ChangeEvent<any>>(
         field: T
       ): T extends React.ChangeEvent<any>
         ? void
-        : (e: string | React.ChangeEvent<any>) => void;
+        : (e: S | React.ChangeEvent<any>) => void;
     };
-    setFieldValue: (
-      field: string,
-      value: any,
-      shouldValidate?: boolean | undefined
-    ) => void;
+    setFieldValue: (field: S, value: any, shouldValidate?: B) => void;
+    isDisabled?: B;
+    initialValue?: TForm["initialValue"];
   };
 
   type TFormKinds =
@@ -36,7 +34,12 @@ export declare namespace NShared {
     | "input-select"
     | "input-password"
     | "input-email"
-    | "input-color";
+    | "input-color"
+    | "input-switch"
+    | "input-radio-button"
+    | "input-multiple-checkboxes"
+    | "input-single-checkbox"
+    | "input-group-fields";
 
   type TFormValidations = {
     isRequired: 10 | 20;
@@ -51,8 +54,11 @@ export declare namespace NShared {
     id: string;
     label: string;
     kind: TFormKinds;
-    options?: NProvider.TOptions[];
     validations: TFormValidations;
+    placeholder?: S;
+    initialValue?: S | { label: S; value: S } | B;
+    options?: NProvider.TOptions[];
+    isPositionAddable?: B;
   };
 
   type ICustomFormModal = {
@@ -67,5 +73,19 @@ export declare namespace NShared {
   type ICustomLoader = {
     children: JSX;
     isBlocking: B;
+  };
+
+  type IInputSwitch = {
+    id: S;
+    value: B;
+    onChange: (
+      checked: B,
+      event:
+        | MouseEvent
+        | React.SyntheticEvent<MouseEvent | KeyboardEvent, Event>,
+      id: S
+    ) => void;
+    label: S;
+    isDisabled?: B;
   };
 }

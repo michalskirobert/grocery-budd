@@ -53,7 +53,7 @@ export const useHomePageService = () => {
         `${contextValues?.user.uid}/data/budgets/${values.id}`,
         body
       );
-      console.log(body, box, boxes);
+
       toast.success("Pomyślnie zedytowana");
       setBoxes((prev) =>
         prev.filter((item) => item.id !== values.id).concat(body)

@@ -18,8 +18,6 @@ export const useProviderService = () => {
     value: "ENG",
   });
 
-  console.log({ userData });
-
   const getInitApp = async () => {
     if (!user?.uid) return;
 

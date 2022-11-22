@@ -3,6 +3,7 @@ import { Input, Label } from "reactstrap";
 import Select from "react-select";
 
 import { NShared } from "@namespace/index";
+import { InputSwitch } from "./switch";
 
 import * as C from "@utils/constants";
 
@@ -14,7 +15,11 @@ export const CustomForm = ({
   options,
   handleChange,
   setFieldValue,
+  initialValue,
+  isDisabled,
 }: NShared.iCustomForm) => {
+  const value = initialValue || values[id];
+
   switch (kind) {
     case C.INPUT_TYPES.INPUT_TEXT:
       return (
@@ -25,7 +30,7 @@ export const CustomForm = ({
               id,
               name: id,
               type: C.INPUT_TEXT_TYPE,
-              value: values[id],
+              value,
               onChange: handleChange,
             }}
           />
@@ -40,7 +45,7 @@ export const CustomForm = ({
               id,
               name: id,
               type: C.INPUT_NUMBER_TYPE,
-              value: values[id],
+              value,
               onChange: handleChange,
             }}
           />
@@ -68,7 +73,7 @@ export const CustomForm = ({
             {...{
               name: id,
               type: "password",
-              value: values[id],
+              value,
               onChange: handleChange,
             }}
           />
@@ -82,7 +87,7 @@ export const CustomForm = ({
             {...{
               name: id,
               type: "email",
-              value: values[id],
+              value,
               onChange: handleChange,
             }}
           />
@@ -96,13 +101,39 @@ export const CustomForm = ({
             {...{
               name: id,
               type: "color",
-              value: values[id],
+              value,
               onChange: handleChange,
             }}
           />
         </>
       );
+    case C.INPUT_TYPES.INPUT_COLOR:
+      return (
+        <>
+          <Label {...{ id }}>{label}</Label>
+          <Input
+            {...{
+              name: id,
+              type: "color",
+              value,
+              onChange: handleChange,
+            }}
+          />
+        </>
+      );
+    case C.INPUT_TYPES.INPUT_SWITCH:
+      return (
+        <InputSwitch
+          {...{
+            label,
+            id,
+            onChange: (e) => setFieldValue(id, e),
+            value,
+            isDisabled,
+          }}
+        />
+      );
   }
 
-  return <div></div>;
+  return null;
 };
