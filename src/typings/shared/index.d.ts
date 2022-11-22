@@ -44,7 +44,8 @@ export declare namespace NShared {
     | "input-radio-button"
     | "input-multiple-checkboxes"
     | "input-single-checkbox"
-    | "input-group-fields";
+    | "input-group-fields"
+    | "captcha";
 
   type TFormValidations = {
     isRequired: 10 | 20;

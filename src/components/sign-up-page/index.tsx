@@ -1,4 +1,5 @@
 import { CustomForm } from "@components/shared";
+import { CustomCaptcha } from "@components/shared/custom-captcha";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
@@ -11,7 +12,12 @@ export const LoginPage = () => {
   return (
     <Formik
       {...{
-        initialValues: { email: "", password: "" },
+        initialValues: {
+          email: "",
+          password: "",
+          confirmPassword: "",
+          captcha: false,
+        },
         onSubmit: (values) => signIn(values),
       }}
     >
@@ -32,9 +38,10 @@ export const LoginPage = () => {
                 }}
               />
             ))}
-            <Button type="submit">Sign in</Button>
+            <Button type="submit">Sign up</Button>
+            <CustomCaptcha />
           </Form>
-          if you have no account, <Link {...{ to: "/sign-up" }}>Sign-up</Link>
+          if you have an account, <Link {...{ to: "/sign-in" }}>Sign-in</Link>
         </>
       )}
     </Formik>

@@ -5,6 +5,7 @@ const HomePage = lazy(() => import("@components/home-page"));
 const Groceries = lazy(() => import("@components/groceries-page"));
 const LoginPage = lazy(() => import("@components/login-page"));
 const PageNotFound = lazy(() => import("@components/page-not-found"));
+const SignUpPage = lazy(() => import("@components/sign-up-page"));
 
 export const menu = [];
 
@@ -41,7 +42,7 @@ export const routers: NProvider.TRoutes = [
   },
   {
     path: "/sign-up",
-    Children: Groceries,
+    Children: SignUpPage,
     index: false,
   },
   {
