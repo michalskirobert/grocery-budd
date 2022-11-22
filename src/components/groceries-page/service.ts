@@ -16,6 +16,7 @@ export const useGroceriesService = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [groceries, setGroceries] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const groceryDbPath = `${props?.user?.uid}/data/budgets/${groceryId}/groceries`;
 
@@ -25,15 +26,19 @@ export const useGroceriesService = () => {
     if (!props?.user?.uid) return;
 
     try {
+      setIsLoading(true);
       const resp = await getCollection(groceryDbPath);
       setGroceries(resp.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
     } catch (error) {
       toast.error("invalid collection");
     }
+
+    setIsLoading(false);
   };
 
   const addGrocery = async (values: FormikValues) => {
     try {
+      setIsLoading(true);
       await addDocument(groceryDbPath, values);
       setGroceries((prev) => [...prev, values]);
       toast.success("Added!!");
@@ -41,13 +46,21 @@ export const useGroceriesService = () => {
     } catch (error) {
       toast.error("Invalid collection");
     }
+
+    setIsLoading(false);
   };
 
   const removeGrocery = async (id: string) => {
     try {
+      setIsLoading(true);
       await deleteDocument(`${groceryDbPath}/${id}`);
       setGroceries((prev) => prev.filter((item) => item.id !== id));
-    } catch (error) {}
+      toast.success("Deleted!");
+    } catch (error) {
+      toast.error("Invalid collection");
+    }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -64,5 +77,6 @@ export const useGroceriesService = () => {
     isModalOpen,
     groceries,
     groceryId,
+    isLoading,
   };
 };

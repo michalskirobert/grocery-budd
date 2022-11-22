@@ -15,7 +15,7 @@ export const LoginPage = () => {
         onSubmit: (values) => signIn(values),
       }}
     >
-      {({ values, handleSubmit, handleChange, setFieldValue }) => (
+      {({ values, handleSubmit, handleChange, setFieldValue, errors }) => (
         <>
           <Form onSubmit={handleSubmit}>
             {FORM.map(({ id, kind, label, options }) => (
@@ -28,6 +28,7 @@ export const LoginPage = () => {
                   handleChange,
                   setFieldValue,
                   values,
+                  errors,
                 }}
               />
             ))}

@@ -12,6 +12,7 @@ import { CustomLoader } from "@components/shared";
 import "./assets/style/index.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-toastify/dist/ReactToastify.css";
+import "react-block-ui/style.css";
 
 import { AuthPage } from "@components/auth-route-component";
 

@@ -4,6 +4,7 @@ import { CustomForm } from "../custom-form";
 
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
 import { NShared } from "@namespace/index";
+import { CustomBlockLoader } from "../custom-block-loader";
 
 export const CustomFormModal = ({
   toggle,
@@ -12,6 +13,7 @@ export const CustomFormModal = ({
   title,
   form,
   onClick,
+  isLoading = false,
 }: NShared.ICustomFormModal) => (
   <Formik
     {...{
@@ -20,27 +22,43 @@ export const CustomFormModal = ({
       enableReinitialize: true,
     }}
   >
-    {({ values, handleSubmit, handleChange, setFieldValue }) => (
+    {({
+      values,
+      handleSubmit,
+      handleChange,
+      setFieldValue,
+      isValid,
+      errors,
+    }) => (
       <Modal isOpen={isModalOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>{title}</ModalHeader>
-        <ModalBody>
-          {form.map(({ id, label, kind, options }) => (
-            <CustomForm
-              key={id}
-              {...{
-                id,
-                label,
-                kind,
-                values,
-                options,
-                handleChange,
-                setFieldValue,
-              }}
-            />
-          ))}
-        </ModalBody>
+        <CustomBlockLoader {...{ isBlocking: isLoading }}>
+          <ModalBody>
+            {form.map(({ id, label, kind, options }) => (
+              <CustomForm
+                key={id}
+                {...{
+                  id,
+                  label,
+                  kind,
+                  values,
+                  options,
+                  handleChange,
+                  setFieldValue,
+                  errors,
+                }}
+              />
+            ))}
+          </ModalBody>
+        </CustomBlockLoader>
         <ModalFooter>
-          <Button {...{ color: "primary", onClick: () => handleSubmit() }}>
+          <Button
+            {...{
+              color: "primary",
+              onClick: () => handleSubmit(),
+              disabled: isLoading || !isValid,
+            }}
+          >
             Save
           </Button>
           <Button color="secondary" onClick={toggle}>

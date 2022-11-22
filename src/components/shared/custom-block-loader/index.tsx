@@ -1,4 +1,4 @@
-import BlockUi from "block-ui";
+import BlockUi from "react-block-ui";
 
 import { NShared } from "@namespace/shared";
 
@@ -10,7 +10,7 @@ export const CustomBlockLoader = ({
     {...{
       tag: "div",
       blocking: isBlocking,
-      loader: <div>Loader</div>,
+      loader: <div>... Loading</div>,
     }}
   >
     {children}

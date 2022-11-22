@@ -13,6 +13,7 @@ const GroceryList = () => {
     toggleFormModal,
     addGrocery,
     groceryId,
+    isLoading,
   } = useGroceriesService();
 
   return (
@@ -29,7 +30,7 @@ const GroceryList = () => {
             <button {...{ onClick: () => removeGrocery(id) }}>
               Remove grocery
             </button>
-            <Link {...{ to: `grocery/${groceryId}/${id}` }}>Edit grocery </Link>
+            <Link {...{ to: id }}>Edit grocery </Link>
           </div>
         )
       )}
@@ -43,6 +44,7 @@ const GroceryList = () => {
             toggle: toggleFormModal,
             onClick: addGrocery,
             form: GROCERY_FORM,
+            isLoading,
           }}
         />
       )}

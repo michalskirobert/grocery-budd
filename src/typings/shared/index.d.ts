@@ -1,4 +1,4 @@
-import { FormikValues } from "formik";
+import { FormikErrors, FormikValues } from "formik";
 import { NProvider } from "..";
 
 export declare namespace NShared {
@@ -8,7 +8,7 @@ export declare namespace NShared {
   type B = boolean;
   type JSX = JSX.Element;
 
-  type iCustomForm = {
+  type TCustomForm = {
     id: S;
     kind: S;
     label: S;
@@ -25,7 +25,12 @@ export declare namespace NShared {
     setFieldValue: (field: S, value: any, shouldValidate?: B) => void;
     isDisabled?: B;
     initialValue?: TForm["initialValue"];
+    errors: FormikErrors<FormikValues>;
   };
+
+  type TCustomFormRenderFormProps = {
+    value: any;
+  } & TCustomForm;
 
   type TFormKinds =
     | "input-text"
@@ -68,6 +73,7 @@ export declare namespace NShared {
     title: S;
     onClick: (values: FormikValues) => void;
     form: readonly TForm[];
+    isLoading?: B;
   };
 
   type ICustomLoader = {
@@ -87,5 +93,9 @@ export declare namespace NShared {
     ) => void;
     label: S;
     isDisabled?: B;
+  };
+
+  export type TCustomFormFeedbackProps = {
+    error: FormikErrors;
   };
 }
