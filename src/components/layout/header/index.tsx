@@ -1,16 +1,9 @@
 import { MENU_HELPER } from "@store/utils";
-import React, { useState } from "react";
-import {
-  Navbar,
-  Container,
-  Offcanvas,
-  Nav,
-  NavDropdown,
-  Form,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Container, Offcanvas, Nav } from "react-bootstrap";
 
-export const Navigation = () => {
+import Select from "react-select";
+
+export const Menu = () => {
   return (
     <div>
       <Navbar bg="light" expand={false} className="mb-3" fixed="top">
@@ -32,30 +25,13 @@ export const Navigation = () => {
                 {MENU_HELPER.map(({ path, title }) => (
                   <Nav.Link href={path}>{title}</Nav.Link>
                 ))}
-
-                <NavDropdown
-                  title="Dropdown"
-                  id={`offcanvasNavbarDropdown-expand`}
-                >
-                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">
-                    Another action
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Something else here
-                  </NavDropdown.Item>
-                </NavDropdown>
               </Nav>
-              <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
-              </Form>
+              <Select
+                {...{
+                  options: [{ label: "English", value: "Eng" }],
+                  value: { label: "English", value: "Eng" },
+                }}
+              />
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>

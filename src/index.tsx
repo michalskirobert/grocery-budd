@@ -6,6 +6,7 @@ import { Provider } from "./store/provider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routers } from "./store/utils";
 import { ToastContainer } from "react-toastify";
+import { Menu } from "@components/layout/header";
 
 import { CustomLoader } from "@components/shared";
 
@@ -18,7 +19,6 @@ import "react-block-ui/style.css";
 import { AuthPage } from "@components/auth-route-component";
 
 import * as S from "./styles";
-import { Navigation } from "@components/layout/header";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -29,7 +29,7 @@ root.render(
     {...{
       Children: (
         <BrowserRouter>
-          <Navigation />
+          <Menu />
           <S.Container>
             <AuthPage>
               <Suspense fallback={<CustomLoader />}>

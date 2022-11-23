@@ -65,6 +65,18 @@ export const MENU_HELPER: readonly {
     isVisited: false,
   },
   {
+    path: "/analyse",
+    title: "Analyse",
+    isPopUp: false,
+    isVisited: false,
+  },
+  {
+    path: "/favourites",
+    title: "Favourites",
+    isPopUp: false,
+    isVisited: false,
+  },
+  {
     path: "/settings",
     title: "Settings",
     isPopUp: false,
