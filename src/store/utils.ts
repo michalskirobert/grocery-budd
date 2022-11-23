@@ -51,3 +51,41 @@ export const routers: NProvider.TRoutes = [
     index: false,
   },
 ];
+
+export const MENU_HELPER: readonly {
+  title: string;
+  path: string;
+  isPopUp: boolean;
+  isVisited: boolean;
+}[] = [
+  {
+    path: "/",
+    title: "Homepage",
+    isPopUp: false,
+    isVisited: false,
+  },
+  {
+    path: "/groceries/:groceryId",
+    title: "Groceries",
+    isPopUp: false,
+    isVisited: false,
+  },
+  {
+    path: "/settings",
+    title: "Settings",
+    isPopUp: false,
+    isVisited: false,
+  },
+  {
+    path: "/sign-in",
+    title: "Sign-in",
+    isPopUp: false,
+    isVisited: false,
+  },
+  {
+    path: "/sign-up",
+    title: "Sign-up",
+    isPopUp: false,
+    isVisited: false,
+  },
+];

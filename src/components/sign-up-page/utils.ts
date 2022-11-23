@@ -21,7 +21,7 @@ export const FORM: NShared.TForm[] = [
     },
   },
   {
-    id: "confirm-password",
+    id: "confirmPassword",
     kind: "input-password",
     label: "Confirm password",
     validations: {

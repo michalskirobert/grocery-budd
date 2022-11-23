@@ -21,7 +21,7 @@
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^8.3.4",
     "@types/yup": "0.29.13",
-    "bootstrap": "^5.2.2",
+    "bootstrap": "^5.2.3",
     "craco": "0.0.3",
     "firebase": "^9.13.0",
     "formik": "^2.2.9",

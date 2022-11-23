@@ -11,12 +11,14 @@ import { CustomLoader } from "@components/shared";
 
 import "./assets/style/index.scss";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-block-ui/style.css";
 
 import { AuthPage } from "@components/auth-route-component";
 
 import * as S from "./styles";
+import { Navigation } from "@components/layout/header";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -30,6 +32,7 @@ root.render(
           <S.Container>
             <AuthPage>
               <Suspense fallback={<CustomLoader />}>
+                <Navigation />
                 <Routes>
                   {routers.map(({ path, Children, index }) => {
                     return (

@@ -1,33 +1,53 @@
 import { NProvider } from "@namespace/provider";
 import { Context } from "@store/provider";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { auth } from "src/firebase";
+import { addDocument, auth } from "src/firebase";
 
 import { toast } from "react-toastify";
 
-interface ISignInData {
+interface ISignUpData {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
-export const useLoginService = () => {
+const createDataBase = async (userId: string) => {
+  try {
+    const body = {
+      userType: 0,
+    };
+
+    await addDocument(userId, body);
+  } catch (error) {
+    toast.error("User cannot be created");
+  }
+};
+
+export const useSignUpService = () => {
   const navigate = useNavigate();
 
   const props = useContext<NProvider.TContextApiProps | null>(Context);
 
-  const signIn = async ({ email, password }: ISignInData) => {
+  const signUp = async ({ email, password, confirmPassword }: ISignUpData) => {
+    if (password !== confirmPassword) {
+      toast.error("Passwords needs to be same!");
+      return;
+    }
+
     try {
       props?.setIsGlobalLoading(true);
-      const resp = await signInWithEmailAndPassword(auth, email, password);
+      const resp = await createUserWithEmailAndPassword(auth, email, password);
+      await createDataBase(resp.user.uid);
+
       navigate("/");
       props?.setUser(resp.user);
       props?.setIsGlobalLoading(false);
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
       props?.setIsGlobalLoading(false);
-      toast.error("Password or email is incorrect");
+      toast.error("Cannot create a new user");
     }
   };
 
@@ -35,5 +55,5 @@ export const useLoginService = () => {
     props?.logout(); // eslint-disable-next-line
   }, []);
 
-  return { signIn };
+  return { signUp };
 };

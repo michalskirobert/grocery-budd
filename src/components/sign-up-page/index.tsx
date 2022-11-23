@@ -3,11 +3,11 @@ import { CustomCaptcha } from "@components/shared/custom-captcha";
 import { Form, Formik } from "formik";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
-import { useLoginService } from "./service";
+import { useSignUpService } from "./service";
 import { FORM } from "./utils";
 
 export const LoginPage = () => {
-  const { signIn } = useLoginService();
+  const { signUp } = useSignUpService();
 
   return (
     <Formik
@@ -18,7 +18,7 @@ export const LoginPage = () => {
           confirmPassword: "",
           captcha: false,
         },
-        onSubmit: (values) => signIn(values),
+        onSubmit: (values) => signUp(values),
       }}
     >
       {({ values, handleSubmit, handleChange, setFieldValue, errors }) => (
