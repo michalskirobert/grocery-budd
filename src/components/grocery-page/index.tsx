@@ -1,7 +1,7 @@
 import { initialGroceryHelper } from "@store/provider/utils";
 import { Link } from "react-router-dom";
 
-export const GroceryList = () => {
+export const GroceryPage = () => {
   return (
     <div>
       {initialGroceryHelper.map(
@@ -28,3 +28,5 @@ export const GroceryList = () => {
     </div>
   );
 };
+
+export default GroceryPage;

@@ -12,7 +12,6 @@ const GroceryList = () => {
     isModalOpen,
     toggleFormModal,
     addGrocery,
-    groceryId,
     isLoading,
   } = useGroceriesService();
 
@@ -30,7 +29,7 @@ const GroceryList = () => {
             <button {...{ onClick: () => removeGrocery(id) }}>
               Remove grocery
             </button>
-            <Link {...{ to: id }}>Edit grocery </Link>
+            <Link {...{ to: id }}>Edit grocery</Link>
           </div>
         )
       )}
