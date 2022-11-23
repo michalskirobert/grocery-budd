@@ -1,18 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "@store/provider";
 import { NProvider } from "@namespace/provider";
-import {
-  addDocument,
-  deleteDocument,
-  setDocument,
-  updateDocument,
-} from "src/firebase";
-
-import * as uuid from "uuid/v4";
-
-import * as C from "@utils/constants";
+import { addDocument, deleteDocument, updateDocument } from "src/firebase";
 import { toast } from "react-toastify";
 import { FormikValues } from "formik";
+
+import * as C from "@utils/constants";
 
 export const useHomePageService = () => {
   const contextValues = useContext<NProvider.TContextApiProps | null>(Context);
