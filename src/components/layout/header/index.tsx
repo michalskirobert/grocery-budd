@@ -1,34 +1,64 @@
 import { MENU_HELPER } from "@store/utils";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import {
-  Collapse,
-  Nav,
-  NavbarBrand,
-  NavbarToggler,
-  NavItem,
   Navbar,
-} from "reactstrap";
+  Container,
+  Offcanvas,
+  Nav,
+  NavDropdown,
+  Form,
+  Button,
+} from "react-bootstrap";
 
 export const Navigation = () => {
-  const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
-  const toggle = () => setIsNavOpen(!isNavOpen);
   return (
     <div>
-      <Navbar color="faded" light>
-        <NavbarBrand href="/" className="me-auto">
-          Grocery budd
-        </NavbarBrand>
-        <NavbarToggler onClick={toggle} className="me-2" />
-        <Collapse isOpen={isNavOpen} navbar>
-          <Nav navbar>
-            {MENU_HELPER.map(({ path, title }) => (
-              <NavItem>
-                <NavLink {...{ to: path }}>{title}</NavLink>
-              </NavItem>
-            ))}
-          </Nav>
-        </Collapse>
+      <Navbar bg="light" expand={false} className="mb-3" fixed="top">
+        <Container fluid>
+          <Navbar.Brand href="/">Grocery budd</Navbar.Brand>
+          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand`} />
+          <Navbar.Offcanvas
+            id={`offcanvasNavbar-expand`}
+            aria-labelledby={`offcanvasNavbarLabel-expand`}
+            placement="end"
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
+                Menu
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3">
+                {MENU_HELPER.map(({ path, title }) => (
+                  <Nav.Link href={path}>{title}</Nav.Link>
+                ))}
+
+                <NavDropdown
+                  title="Dropdown"
+                  id={`offcanvasNavbarDropdown-expand`}
+                >
+                  <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    Another action
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item href="#action5">
+                    Something else here
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+              <Form className="d-flex">
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-success">Search</Button>
+              </Form>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
       </Navbar>
     </div>
   );

@@ -29,10 +29,10 @@ root.render(
     {...{
       Children: (
         <BrowserRouter>
+          <Navigation />
           <S.Container>
             <AuthPage>
               <Suspense fallback={<CustomLoader />}>
-                <Navigation />
                 <Routes>
                   {routers.map(({ path, Children, index }) => {
                     return (

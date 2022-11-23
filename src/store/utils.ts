@@ -65,12 +65,6 @@ export const MENU_HELPER: readonly {
     isVisited: false,
   },
   {
-    path: "/groceries/:groceryId",
-    title: "Groceries",
-    isPopUp: false,
-    isVisited: false,
-  },
-  {
     path: "/settings",
     title: "Settings",
     isPopUp: false,
