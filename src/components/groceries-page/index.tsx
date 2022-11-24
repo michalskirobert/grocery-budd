@@ -2,6 +2,7 @@ import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
 import { GROCERY_FORM } from "./utils";
 import { Link } from "react-router-dom";
+import { StarFill } from "react-bootstrap-icons";
 
 import * as C from "@utils/constants";
 
@@ -17,22 +18,21 @@ const GroceryList = () => {
 
   return (
     <div>
-      {groceries?.map(
-        ({ id, name, category, isActive, shopName, value, isPinned }) => (
+      {groceries
+        ?.sort((a) => (!a?.isPinned ? 1 : -1))
+        .map(({ id, name, category, shopName, value, isPinned }) => (
           <div key={id}>
-            {name}
-            {category.label}
-            {shopName.label}
-            {value}
-            {isPinned}
-            {isActive}
+            {!!isPinned ? <StarFill /> : null}
+            <p> {name}</p>
+            <p> {category.label}</p>
+            <p> {shopName.label}</p>
+            <p>{value}</p>
             <button {...{ onClick: () => removeGrocery(id) }}>
               Remove grocery
             </button>
             <Link {...{ to: id }}>Edit grocery</Link>
           </div>
-        )
-      )}
+        ))}
       <button {...{ onClick: toggleFormModal }}>Add grocery</button>
       {isModalOpen && (
         <CustomFormModal

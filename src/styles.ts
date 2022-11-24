@@ -5,4 +5,5 @@ export const Container = styled.section`
   max-width: 1200px;
   padding: 15px;
   min-height: 100vh;
+  padding-top: 100px;
 `;

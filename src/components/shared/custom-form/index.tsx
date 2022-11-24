@@ -17,6 +17,8 @@ export const CustomForm = ({
 }: NShared.TCustomForm) => {
   const value = initialValue || values[id];
 
+  console.log({ errors, values });
+
   return (
     <>
       <RenderForm

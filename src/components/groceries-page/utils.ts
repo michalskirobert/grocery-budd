@@ -8,7 +8,7 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
     id: C.NAME,
     label: C.NAME,
     kind: C.INPUT_TYPES.INPUT_TEXT,
-    validations: { isRequired: E.Required.Yes, requiredMessage: "" },
+    validations: { isRequired: E.Required.Yes, requiredMessage: "required" },
   },
   {
     id: C.CATEGORY,
@@ -19,7 +19,7 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
       { label: "ie wiem", value: "right" },
       { label: "true", value: "coś  tam" },
     ],
-    validations: { isRequired: E.Required.Yes, requiredMessage: "" },
+    validations: { isRequired: E.Required.Yes, requiredMessage: "required" },
   },
   {
     id: C.SHOP_NAME,
@@ -35,7 +35,7 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
     id: C.VALUE,
     label: C.PRICE,
     kind: C.INPUT_TYPES.INPUT_NUMBER,
-    validations: { isRequired: E.Required.Yes, requiredMessage: "" },
+    validations: { isRequired: E.Required.Yes, requiredMessage: "required" },
   },
   {
     id: C.PIN_UP,
