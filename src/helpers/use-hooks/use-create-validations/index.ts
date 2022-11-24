@@ -6,6 +6,7 @@ import { useConvertArrayToObject } from "../use-convert-array-to-object";
 import * as C from "@utils/constants";
 import * as E from "@utils/enums";
 import * as yup from "yup";
+import { ObjectShape, OptionalObjectSchema, TypeOfShape } from "yup/lib/object";
 
 export const useCreateValidations = ({
   form,
@@ -14,9 +15,7 @@ export const useCreateValidations = ({
 }) => {
   const setRequirment = (
     validation: NShared.TForm["validations"],
-    control?:
-      | yup.StringSchema<string | undefined, AnyObject, string | undefined>
-      | yup.NumberSchema<number | undefined, AnyObject, number | undefined>
+    control?: Record<string, any>
   ) => {
     const { isRequired, requiredMessage, max, maxMessage, min, minMessage } =
       validation;
@@ -34,8 +33,12 @@ export const useCreateValidations = ({
       case C.INPUT_TYPES.INPUT_TEXT:
       case C.INPUT_TYPES.INPUT_PASSWORD:
         return yup.string();
+      case C.INPUT_TYPES.INPUT_EMAIL:
+        return yup.string().email("Needs to be an e-mail");
       case C.INPUT_TYPES.INPUT_NUMBER:
         return yup.number();
+      case C.INPUT_TYPES.INPUT_SELECT:
+        return yup.object();
       default:
         return yup.string();
     }
@@ -55,11 +58,6 @@ export const useCreateValidations = ({
     };
 
     return mergedSchema;
-  });
-
-  console.log({
-    check: yup.object().shape({ name: yup.string().required("true") }),
-    diff: yup.object().shape({ ...useConvertArrayToObject(parsedForm) }),
   });
 
   return {
