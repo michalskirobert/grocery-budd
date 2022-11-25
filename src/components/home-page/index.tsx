@@ -14,7 +14,6 @@ const HomePage = () => {
     boxes,
     createNewBox,
     removeBox,
-    userData,
     updateBox,
     toggleEditModal,
     isEditModalOpen,
@@ -24,7 +23,6 @@ const HomePage = () => {
 
   return (
     <S.Container>
-      <h1>{userData?.nickname}</h1>
       <Row>
         {boxes?.map(({ color, backgroundColor, title, id, budgetValue }) => (
           <Col key={id}>
@@ -38,7 +36,9 @@ const HomePage = () => {
           </Col>
         ))}
         <Col>
-          {boxes?.length < 4 && <S.Add {...{ onClick: toggleModal }}>+</S.Add>}
+          {(boxes ?? [])?.length < 4 && (
+            <S.Add {...{ onClick: toggleModal }}>+</S.Add>
+          )}
         </Col>
       </Row>
       <CustomFormModal

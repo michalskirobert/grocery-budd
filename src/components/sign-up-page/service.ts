@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { addDocument, auth } from "src/firebase";
 
 import { toast } from "react-toastify";
+import { setIsLoading, setUser } from "@store/actions";
 
 interface ISignUpData {
   email: string;
@@ -37,16 +38,16 @@ export const useSignUpService = () => {
     }
 
     try {
-      props?.setIsGlobalLoading(true);
+      props?.dispatch(setIsLoading(true));
       const resp = await createUserWithEmailAndPassword(auth, email, password);
       await createDataBase(resp.user.uid);
 
       navigate("/");
-      props?.setUser(resp.user);
-      props?.setIsGlobalLoading(false);
+      props?.dispatch(setUser(resp.user));
+      props?.dispatch(setIsLoading(false));
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
-      props?.setIsGlobalLoading(false);
+      props?.dispatch(setIsLoading(false));
       toast.error("Cannot create a new user");
     }
   };

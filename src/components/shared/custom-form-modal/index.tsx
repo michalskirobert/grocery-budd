@@ -18,8 +18,6 @@ export const CustomFormModal = ({
 }: NShared.ICustomFormModal) => {
   const { validationSchema } = useCreateValidations({ form });
 
-  console.log({ validationSchema });
-
   return (
     <Formik
       {...{

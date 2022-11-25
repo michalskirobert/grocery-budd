@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 import { auth } from "src/firebase";
 
 import { toast } from "react-toastify";
+import { setIsLoading, setUser } from "@store/actions";
 
 interface ISignInData {
   email: string;
@@ -19,14 +20,14 @@ export const useLoginService = () => {
 
   const signIn = async ({ email, password }: ISignInData) => {
     try {
-      props?.setIsGlobalLoading(true);
+      props?.dispatch(setIsLoading(true));
       const resp = await signInWithEmailAndPassword(auth, email, password);
+      props?.dispatch(setUser(resp.user));
+      props?.dispatch(setIsLoading(false));
       navigate("/");
-      props?.setUser(resp.user);
-      props?.setIsGlobalLoading(false);
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
-      props?.setIsGlobalLoading(false);
+      props?.dispatch(setIsLoading(false));
       toast.error("Password or email is incorrect");
     }
   };

@@ -8,34 +8,17 @@ export const Context = React.createContext<NProvider.TContextApiProps | null>(
 );
 
 export const Provider = ({ Children }: NProvider.TProviderProps) => {
-  const {
-    groceries,
-    setGroceries,
-    language,
-    setLanguage,
-    userData,
-    setUserData,
-    logout,
-    isGlobalLoading,
-    setIsGlobalLoading,
-    setUser,
-    user,
-  } = useProviderService();
+  const { groceries, setGroceries, logout, dispatch, state } =
+    useProviderService();
 
   return (
     <Context.Provider
       value={{
         groceries,
         setGroceries,
-        language,
-        setLanguage,
-        userData,
-        setUserData,
         logout,
-        isGlobalLoading,
-        setIsGlobalLoading,
-        setUser,
-        user,
+        dispatch,
+        state,
       }}
     >
       {Children}

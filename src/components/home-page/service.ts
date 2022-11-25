@@ -6,18 +6,20 @@ import { toast } from "react-toastify";
 import { FormikValues } from "formik";
 
 import * as C from "@utils/constants";
+import { setBoxes } from "@store/actions";
 
 export const useHomePageService = () => {
   const contextValues = useContext<NProvider.TContextApiProps | null>(Context);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-  const [boxes, setBoxes] = useState<any[]>([]);
+
+  const budgetCollection = `users/${contextValues?.state.user?.uid}/budgets`;
 
   const [formikValues, setFormikValues] = useState<FormikValues>({});
 
   const createNewBox = async (values: FormikValues) => {
-    if (!contextValues?.user?.uid) return;
+    if (!contextValues?.state.user?.uid) return;
 
     try {
       const body = {
@@ -27,9 +29,11 @@ export const useHomePageService = () => {
         currency: values.currency,
       };
 
-      await addDocument(`${contextValues?.user?.uid}/data/budgets`, body);
+      await addDocument(budgetCollection, body);
 
-      setBoxes((prev) => [...prev, body]);
+      contextValues.dispatch(
+        setBoxes([...contextValues.state.user.boxes, body])
+      );
 
       toggleModal();
       toast.success("Zapisano");
@@ -38,14 +42,13 @@ export const useHomePageService = () => {
 
   const updateBox = async (values: FormikValues) => {
     try {
-      const box = boxes?.find(({ uid }) => uid === values.id);
+      const box = contextValues?.state.user.boxes?.find(
+        ({ id }) => id === values.id
+      );
 
       const body = { ...box, ...values };
 
-      await updateDocument(
-        `${contextValues?.user.uid}/data/budgets/${values.id}`,
-        body
-      );
+      await updateDocument(`${budgetCollection}/${values.id}`, body);
 
       toast.success("Pomyślnie zedytowana");
       setBoxes((prev) =>
@@ -62,18 +65,22 @@ export const useHomePageService = () => {
   const openEditModal = (id: string) => {
     setFormikValues({});
 
-    const formikValues = boxes.find((box) => box.id === id);
+    const formikValues = contextValues?.state.user.boxes.find(
+      (box) => box.id === id
+    );
 
-    setFormikValues(formikValues);
+    setFormikValues(formikValues as FormikValues);
 
     toggleEditModal();
   };
 
   const removeBox = async (id: string) => {
     try {
-      const filteredBoxes = boxes.filter((box) => box.id !== id);
-      await deleteDocument(`${contextValues?.user.uid}/data/budgets/${id}`);
-      setBoxes(filteredBoxes);
+      const filteredBoxes = contextValues?.state.user.boxes.filter(
+        (box) => box.id !== id
+      );
+      await deleteDocument(`${budgetCollection}/${id}`);
+      contextValues?.dispatch(setBoxes(filteredBoxes));
       toast.success("usunięto");
     } catch (error) {
       toast.error("wystąpił błąd ;)");
@@ -82,17 +89,13 @@ export const useHomePageService = () => {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  useEffect(() => {
-    setBoxes(contextValues?.userData?.boxes || []);
-  }, [contextValues?.userData?.boxes]);
-
   return {
     ...contextValues,
     toggleModal,
     isModalOpen,
     createNewBox,
     removeBox,
-    boxes,
+    boxes: contextValues?.state.user.boxes,
     updateBox,
     toggleEditModal,
     isEditModalOpen,

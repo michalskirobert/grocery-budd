@@ -18,12 +18,12 @@ export const useGroceriesService = () => {
   const [groceries, setGroceries] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const groceryDbPath = `${props?.user?.uid}/data/budgets/${groceryId}/groceries`;
+  const groceryDbPath = `users/${props?.state.user?.uid}/budgets/${groceryId}/groceries`;
 
   const toggleFormModal = () => setIsModalOpen(!isModalOpen);
 
   const getGroceries = async () => {
-    if (!props?.user?.uid) return;
+    if (!props?.state.user?.uid) return;
 
     try {
       setIsLoading(true);
@@ -39,8 +39,9 @@ export const useGroceriesService = () => {
   const addGrocery = async (values: FormikValues) => {
     try {
       setIsLoading(true);
+      console.log("problem with async");
       await addDocument(groceryDbPath, values);
-      setGroceries((prev) => [...prev, values]);
+      console.log({ values });
       toast.success("Added!!");
       toggleFormModal();
     } catch (error) {
@@ -67,7 +68,7 @@ export const useGroceriesService = () => {
     getGroceries();
 
     return () => setGroceries([]);
-  }, [props?.user]);
+  }, [props?.state.user?.boxes]);
 
   return {
     ...props,

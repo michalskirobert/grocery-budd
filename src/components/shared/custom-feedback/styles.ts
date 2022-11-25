@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const CustomFeedback = styled.div`
-  color: #800002;
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
+  color: #dc3545;
+  display: block;
+  font-size: 80%;
+  margin-top: 0.25 rem;
+  text-align: left;
   width: 100%;
-  font-size: 0.8rem;
-  margin-top: 5px;
 `;

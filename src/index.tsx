@@ -36,7 +36,10 @@ root.render(
                 <Routes>
                   {routers.map(({ path, Children, index }) => {
                     return (
-                      <Route {...{ path, element: <Children />, index }} />
+                      <Route
+                        key={path}
+                        {...{ path, element: <Children />, index }}
+                      />
                     );
                   })}
                 </Routes>

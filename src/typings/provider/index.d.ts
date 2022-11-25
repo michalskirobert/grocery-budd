@@ -1,3 +1,4 @@
+import { NReducer } from "@namespace/reducer";
 import React from "react";
 
 export declare namespace NProvider {
@@ -19,15 +20,9 @@ export declare namespace NProvider {
   type TContextApiProps = {
     groceries: Record<string, any>[];
     setGroceries: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
-    language: TOptions;
-    setLanguage: React.Dispatch<React.SetStateAction<TOptions>>;
-    userData: any & User;
-    setUserData: React.Dispatch<any>;
     logout: () => Promise<void>;
-    setIsGlobalLoading: (isLoading: B) => void;
-    isGlobalLoading: B;
-    user: User | null;
-    setUser: React.Dispatch<User | null>;
+    state: NReducer.TState;
+    dispatch: React.Dispatch<NReducer.TAcion>;
   };
 
   type TRoutes = readonly {

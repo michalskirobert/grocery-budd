@@ -16,8 +16,7 @@ export const CustomForm = ({
   errors,
 }: NShared.TCustomForm) => {
   const value = initialValue || values[id];
-
-  console.log({ errors, values });
+  const error = errors[id];
 
   return (
     <>
@@ -36,7 +35,7 @@ export const CustomForm = ({
           value,
         }}
       />
-      <CustomFormFeedback {...{ error: errors[id] }} />
+      <CustomFormFeedback {...{ error }} />
     </>
   );
 };

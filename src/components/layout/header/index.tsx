@@ -23,7 +23,9 @@ export const Menu = () => {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 {MENU_HELPER.map(({ path, title }) => (
-                  <Nav.Link href={path}>{title}</Nav.Link>
+                  <Nav.Link key={path} href={path}>
+                    {title}
+                  </Nav.Link>
                 ))}
               </Nav>
               <Select

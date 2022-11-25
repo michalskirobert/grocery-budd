@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "@firebase/auth";
 import { Context } from "@store/provider";
 import { NProvider } from "@namespace/provider";
 import { useLocation } from "react-router";
+import { setUser } from "@store/actions";
 
 export const AuthPage = ({ children }) => {
   const [checkingIsLogged, setCheckingIsLogged] = useState<boolean>(true);
@@ -26,7 +27,7 @@ export const AuthPage = ({ children }) => {
         setCheckingIsLogged(false);
         return;
       }
-      props?.setUser(user);
+      props?.dispatch(setUser(user));
       setCheckingIsLogged(false);
     });
 

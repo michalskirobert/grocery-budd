@@ -8,6 +8,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
+  getDoc,
 } from "@firebase/firestore";
 import { getAuth } from "@firebase/auth";
 
@@ -33,3 +34,5 @@ export const updateDocument = async (id: string, body: any) =>
 
 export const deleteDocument = async (id: string) =>
   await deleteDoc(doc(db, id));
+
+export const getDocument = async (id: string) => await getDoc(doc(db, id));

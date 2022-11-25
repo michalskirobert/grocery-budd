@@ -1,45 +1,67 @@
-import { useEffect, useId, useState } from "react";
+import { Reducer, useEffect, useReducer, useState } from "react";
 import { NProvider } from "@namespace/index";
 import { initialGroceryHelper } from "./utils";
-import { auth, getCollection } from "src/firebase";
-import { signOut, User } from "firebase/auth";
+import { auth, getCollection, getDocument } from "src/firebase";
+import { signOut } from "firebase/auth";
 
 import { toast } from "react-toastify";
+import { initialState, reducer } from "@store/reducer";
+import { NReducer } from "@namespace/reducer";
+import {
+  setBoxes,
+  setConfigApp,
+  setInitialState,
+  setUser,
+} from "@store/actions";
 
 export const useProviderService = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const [userData, setUserData] = useState<any>(null);
   const [groceries, setGroceries] =
     useState<Record<string, any>[]>(initialGroceryHelper);
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
 
   const [language, setLanguage] = useState<NProvider.TOptions>({
     label: "English",
-    value: "ENG",
+    value: "eng",
   });
 
+  const [state, dispatch] = useReducer<Reducer<any, NReducer.TAcion>>(
+    reducer,
+    initialState
+  );
+
+  const userDataPaths = {
+    user: `users/${state?.user?.uid}`,
+    budgets: `users/${state?.user?.uid}/budgets`,
+    appConfig: `languages/${language.value}`,
+  };
+
   const getInitApp = async () => {
-    if (!user?.uid) return;
+    if (!state.user?.uid) return;
 
     let boxes: any[] = [];
-    let userData: any = {};
 
-    const resp = await getCollection(user.uid);
-    const data = await getCollection(`${user.uid}/data/budgets`);
+    try {
+      const userProperties = await getDocument(userDataPaths.user);
+      const budgets = await getCollection(userDataPaths.budgets);
+      const appConfig = await getDocument(userDataPaths.appConfig);
 
-    resp.docs.forEach((doc) => (userData = doc.data()));
+      budgets.docs.forEach((doc) => boxes.push({ id: doc.id, ...doc.data() }));
 
-    data.docs.forEach((doc) => boxes.push({ id: doc.id, ...doc.data() }));
-
-    setUserData({ ...userData, boxes });
+      dispatch(setUser(userProperties.data()));
+      dispatch(setBoxes(boxes));
+      dispatch(setConfigApp(appConfig.data()));
+    } catch (error) {
+      toast.error("error");
+    }
   };
+
+  console.log({ state });
 
   const logout = async () => {
     try {
       setIsGlobalLoading(true);
       await signOut(auth);
-      setUser(null);
-      setUserData(null);
+      dispatch(setInitialState());
       setIsGlobalLoading(false);
     } catch (error) {
       setIsGlobalLoading(false);
@@ -49,19 +71,17 @@ export const useProviderService = () => {
 
   useEffect(() => {
     getInitApp(); // eslint-disable-next-line
-  }, [user?.uid]);
+  }, [state]);
 
   return {
     groceries,
     setGroceries,
     language,
     setLanguage,
-    userData,
-    setUserData,
     logout,
     isGlobalLoading,
     setIsGlobalLoading,
-    user,
-    setUser,
+    dispatch,
+    state,
   };
 };
