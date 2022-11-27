@@ -26,6 +26,10 @@ export declare namespace NShared {
     isDisabled?: B;
     initialValue?: TForm["initialValue"];
     errors: FormikErrors<FormikValues>;
+    internalLabel?: S;
+    row?: B;
+    check?: B;
+    inline?: B;
   };
 
   type TCustomFormRenderFormProps = {
@@ -65,6 +69,10 @@ export declare namespace NShared {
     initialValue?: S | { label: S; value: S } | B;
     options?: NProvider.TOptions[];
     isPositionAddable?: B;
+    internalLabel?: S;
+    row?: B;
+    check?: B;
+    inline?: B;
   };
 
   type ICustomFormModal = {

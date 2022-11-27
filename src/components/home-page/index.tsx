@@ -30,9 +30,9 @@ const HomePage = () => {
               <S.Box {...{ color, backgroundColor }}>
                 {title} / {budgetValue}
               </S.Box>
-              <Button onClick={() => removeBox(id)}>Remove</Button>
-              <Button onClick={() => openEditModal(id)}>Edit box</Button>
             </Link>
+            <Button onClick={() => removeBox(id)}>Remove</Button>
+            <Button onClick={() => openEditModal(id)}>Edit box</Button>
           </Col>
         ))}
         <Col>

@@ -25,3 +25,11 @@ export const setConfigApp = (payload: any) => ({
   type: C.SET_CONFIG_APP,
   payload,
 });
+
+export const addNewGrocery = (
+  grocery: NReducer.TAddGrocery["payload"]["grocery"],
+  groceryId?: NReducer.TAddGrocery["payload"]["groceryId"]
+) => ({
+  type: C.ADD_NEW_GROCERY,
+  payload: { boxId: groceryId, grocery },
+});

@@ -1,6 +1,5 @@
 import { NShared } from "@namespace/shared";
 
-import * as C from "@utils/constants";
 import * as S from "./styles";
 
 export const InputSwitch = ({
@@ -15,13 +14,13 @@ export const InputSwitch = ({
     <S.CustomSwitch
       {...{
         id,
-        checked: value,
+        checked: !!value,
         onChange,
         className: "mr-2 mb-2",
         uncheckedIcon: <S.CustomLabel {...{ is_yes: true }}>No</S.CustomLabel>,
         checkedIcon: <S.CustomLabel {...{ is_yes: false }}>Yes</S.CustomLabel>,
         is_yes: value,
-        isDisabled,
+        disabled: isDisabled,
       }}
     />
   </S.SwitchContainer>

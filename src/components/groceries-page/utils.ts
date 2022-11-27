@@ -39,7 +39,8 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
   },
   {
     id: C.PIN_UP,
-    label: C.PIN_UP_LABEL,
+    label: "",
+    internalLabel: C.PIN_UP_LABEL,
     kind: C.INPUT_TYPES.INPUT_SWITCH,
     initialValue: false,
     validations: { isRequired: E.Required.No, requiredMessage: "" },

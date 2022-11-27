@@ -23,6 +23,15 @@ export const FORM: NShared.ICustomFormModal["form"] = [
     },
   },
   {
+    id: C.RANDOM_COLOR,
+    kind: C.INPUT_TYPES.INPUT_SINGLE_CHECKBOX,
+    label: "",
+    internalLabel: C.RANDOM_COLOR,
+    validations: { isRequired: E.Required.No, requiredMessage: "" },
+    check: true,
+    inline: true,
+  },
+  {
     id: C.BACKGROUND_COLOR,
     kind: C.INPUT_TYPES.INPUT_COLOR,
     label: C.BACKGROUND_COLOR,

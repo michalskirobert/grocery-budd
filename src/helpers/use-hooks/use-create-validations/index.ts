@@ -2,11 +2,14 @@ import { NShared } from "@namespace/shared";
 import { AnyObject } from "yup/lib/types";
 
 import { useConvertArrayToObject } from "../use-convert-array-to-object";
+import { ObjectShape, OptionalObjectSchema, TypeOfShape } from "yup/lib/object";
+import { StringSchema } from "yup";
+import { NumberSchema } from "yup";
+import { BooleanSchema } from "yup";
 
 import * as C from "@utils/constants";
 import * as E from "@utils/enums";
 import * as yup from "yup";
-import { ObjectShape, OptionalObjectSchema, TypeOfShape } from "yup/lib/object";
 
 export const useCreateValidations = ({
   form,
@@ -15,7 +18,7 @@ export const useCreateValidations = ({
 }) => {
   const setRequirment = (
     validation: NShared.TForm["validations"],
-    control?: Record<string, any>
+    control?: any
   ) => {
     const { isRequired, requiredMessage, max, maxMessage, min, minMessage } =
       validation;
@@ -32,6 +35,7 @@ export const useCreateValidations = ({
     switch (kind) {
       case C.INPUT_TYPES.INPUT_TEXT:
       case C.INPUT_TYPES.INPUT_PASSWORD:
+      case C.INPUT_TYPES.INPUT_COLOR:
         return yup.string();
       case C.INPUT_TYPES.INPUT_EMAIL:
         return yup.string().email("Needs to be an e-mail");
@@ -39,6 +43,8 @@ export const useCreateValidations = ({
         return yup.number();
       case C.INPUT_TYPES.INPUT_SELECT:
         return yup.object();
+      case C.INPUT_TYPES.INPUT_SWITCH:
+        return yup.bool();
       default:
         return yup.string();
     }

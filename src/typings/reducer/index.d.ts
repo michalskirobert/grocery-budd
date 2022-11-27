@@ -18,9 +18,23 @@ export declare namespace NReducer {
     payload: B;
   };
 
+  type TAddGrocery = {
+    type: S;
+    payload: { groceryId: S; grocery: any };
+  };
+
+  type TGrocery = {
+    id: S;
+    name: S;
+    category: NProvider.TOptions;
+    shopName: NProvider.TOptions;
+    value: N;
+    isPinned: B;
+  };
+
   type TBox = {
     id: S;
-    groceries: [];
+    groceries: TGrocery[];
     budget: N;
     currency: { label: S; value: S };
     color: S;
@@ -41,5 +55,5 @@ export declare namespace NReducer {
     };
   };
 
-  type TAcion = TSetUser | TSetLoading;
+  type TAcion = TSetUser | TSetLoading | TAddGrocery;
 }

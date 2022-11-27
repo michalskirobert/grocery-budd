@@ -24,15 +24,42 @@ export const useProviderService = () => {
     value: "eng",
   });
 
-  const [state, dispatch] = useReducer<Reducer<any, NReducer.TAcion>>(
-    reducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer<
+    Reducer<NReducer.TState, NReducer.TAcion>
+  >(reducer, initialState);
 
   const userDataPaths = {
     user: `users/${state?.user?.uid}`,
     budgets: `users/${state?.user?.uid}/budgets`,
     appConfig: `languages/${language.value}`,
+  };
+
+  const getGroceries = async () => {
+    let groceries: NReducer.TBox[] = [];
+
+    state.user.boxes.forEach(async ({ id }) => {
+      if (!id) return;
+
+      const resp = await getCollection(
+        `${userDataPaths.budgets}/${id}/groceries`
+      );
+
+      const groceryCollection = resp.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      console.log({
+        id,
+        resp: resp.docs,
+        groceryCollection,
+        groceryCollection2: groceryCollection[id],
+      });
+
+      groceries.push(...groceryCollection[id]);
+    });
+
+    return groceries;
   };
 
   const getInitApp = async () => {
@@ -45,7 +72,9 @@ export const useProviderService = () => {
       const budgets = await getCollection(userDataPaths.budgets);
       const appConfig = await getDocument(userDataPaths.appConfig);
 
-      budgets.docs.forEach((doc) => boxes.push({ id: doc.id, ...doc.data() }));
+      budgets.docs.forEach(async (doc) =>
+        boxes.push({ id: doc.id, ...doc.data(), groceries: [] })
+      );
 
       dispatch(setUser(userProperties.data()));
       dispatch(setBoxes(boxes));
@@ -54,8 +83,6 @@ export const useProviderService = () => {
       toast.error("error");
     }
   };
-
-  console.log({ state });
 
   const logout = async () => {
     try {
@@ -72,6 +99,12 @@ export const useProviderService = () => {
   useEffect(() => {
     getInitApp(); // eslint-disable-next-line
   }, [state]);
+
+  useEffect(() => {
+    if (!state?.user?.boxes.length) return;
+
+    getGroceries();
+  }, [state?.user?.boxes]);
 
   return {
     groceries,

@@ -2,7 +2,14 @@ import { Formik } from "formik";
 
 import { CustomForm } from "../custom-form";
 
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Form,
+} from "reactstrap";
 import { NShared } from "@namespace/index";
 import { CustomBlockLoader } from "../custom-block-loader";
 import { useCreateValidations } from "@helpers/use-hooks";
@@ -41,21 +48,24 @@ export const CustomFormModal = ({
           <ModalHeader toggle={toggle}>{title}</ModalHeader>
           <CustomBlockLoader {...{ isBlocking: isLoading }}>
             <ModalBody>
-              {form.map(({ id, label, kind, options }) => (
-                <CustomForm
-                  key={id}
-                  {...{
-                    id,
-                    label,
-                    kind,
-                    values,
-                    options,
-                    handleChange,
-                    setFieldValue,
-                    errors,
-                  }}
-                />
-              ))}
+              <Form>
+                {form.map(({ id, label, kind, options, internalLabel }) => (
+                  <CustomForm
+                    key={id}
+                    {...{
+                      id,
+                      label,
+                      kind,
+                      values,
+                      options,
+                      handleChange,
+                      setFieldValue,
+                      errors,
+                      internalLabel,
+                    }}
+                  />
+                ))}
+              </Form>
             </ModalBody>
           </CustomBlockLoader>
           <ModalFooter>
