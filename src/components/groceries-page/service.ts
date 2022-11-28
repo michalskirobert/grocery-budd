@@ -8,7 +8,7 @@ import { NProvider } from "@namespace/index";
 import { addDocument, deleteDocument, getCollection } from "src/firebase";
 import { toast } from "react-toastify";
 import { useParams, Params } from "react-router";
-import { addNewGrocery } from "@store/actions";
+import { addNewGrocery, deleteGrocery, setGroceries } from "@store/actions";
 
 export const useGroceriesService = () => {
   const { boxId } = useParams<Params>();
@@ -20,17 +20,36 @@ export const useGroceriesService = () => {
 
   const groceryDbPath = `users/${props?.state.user?.uid}/budgets/${boxId}/groceries`;
 
-  const groceries = props?.state?.user?.boxes?.find(
-    (box) => box.id === boxId
-  )?.groceries;
-
   const toggleFormModal = () => setIsModalOpen(!isModalOpen);
 
-  const addGrocery = async (values: FormikValues) => {
+  const getGroceries = async () => {
+    if (!boxId) return;
+
     try {
       setIsLoading(true);
-      await addDocument(groceryDbPath, values);
-      props?.dispatch(addNewGrocery(values, boxId));
+      const resp = await getCollection(groceryDbPath);
+      props?.dispatch(
+        setGroceries(
+          resp.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+          boxId
+        )
+      );
+    } catch (error) {
+      toast.error("error");
+    }
+
+    setIsLoading(false);
+  };
+
+  console.log({ state: props?.state.user.groceries });
+
+  const addGrocery = async (values: FormikValues) => {
+    if (!boxId) return;
+
+    try {
+      setIsLoading(true);
+      const resp = await addDocument(groceryDbPath, values);
+      props?.dispatch(addNewGrocery({ ...values, id: resp.id }, boxId));
       toast.success("Added!!");
       toggleFormModal();
     } catch (error) {
@@ -44,6 +63,7 @@ export const useGroceriesService = () => {
     try {
       setIsLoading(true);
       await deleteDocument(`${groceryDbPath}/${id}`);
+      props?.dispatch(deleteGrocery(String(boxId), id));
       toast.success("Deleted!");
     } catch (error) {
       toast.error("Invalid collection");
@@ -52,13 +72,17 @@ export const useGroceriesService = () => {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+    getGroceries();
+  }, [boxId]);
+
   return {
     ...props,
     removeGrocery,
     addGrocery,
     toggleFormModal,
     isModalOpen,
-    groceries,
     isLoading,
+    boxId,
   };
 };

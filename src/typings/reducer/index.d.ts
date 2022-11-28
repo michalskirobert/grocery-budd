@@ -34,7 +34,6 @@ export declare namespace NReducer {
 
   type TBox = {
     id: S;
-    groceries: TGrocery[];
     budget: N;
     currency: { label: S; value: S };
     color: S;
@@ -43,7 +42,14 @@ export declare namespace NReducer {
     budgetValue: N;
   };
 
-  type TUser = { uid: S; boxes: TBox[]; language: S; userType: N; isFitri: B };
+  type TUser = {
+    uid: S;
+    boxes: TBox[];
+    groceries: { [x]: TGrocery[] };
+    language: S;
+    userType: N;
+    isFitri: B;
+  };
 
   type TState = {
     user: TUser;

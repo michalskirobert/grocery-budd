@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Context } from "@store/provider";
 import { NProvider } from "@namespace/provider";
 import { addDocument, deleteDocument, updateDocument } from "src/firebase";
@@ -22,14 +22,16 @@ export const useHomePageService = () => {
     if (!contextValues?.state.user?.uid) return;
 
     try {
-      const body = {
+      const request = {
         ...values,
         budgetValue: `${values[C.CURRENCY]?.value}${values.budget}`,
         budget: values.budget,
         currency: values.currency,
       };
 
-      await addDocument(budgetCollection, body);
+      const resp = await addDocument(budgetCollection, request);
+
+      const body = { ...request, id: resp.id };
 
       contextValues.dispatch(
         setBoxes([...contextValues.state.user.boxes, body])

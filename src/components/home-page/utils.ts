@@ -32,7 +32,7 @@ export const FORM: NShared.ICustomFormModal["form"] = [
     inline: true,
   },
   {
-    id: C.BACKGROUND_COLOR,
+    id: C.BACKGROUND_COLOR_PROP,
     kind: C.INPUT_TYPES.INPUT_COLOR,
     label: C.BACKGROUND_COLOR,
     validations: { isRequired: E.Required.No, requiredMessage: "" },

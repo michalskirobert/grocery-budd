@@ -34,34 +34,6 @@ export const useProviderService = () => {
     appConfig: `languages/${language.value}`,
   };
 
-  const getGroceries = async () => {
-    let groceries: NReducer.TBox[] = [];
-
-    state.user.boxes.forEach(async ({ id }) => {
-      if (!id) return;
-
-      const resp = await getCollection(
-        `${userDataPaths.budgets}/${id}/groceries`
-      );
-
-      const groceryCollection = resp.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      console.log({
-        id,
-        resp: resp.docs,
-        groceryCollection,
-        groceryCollection2: groceryCollection[id],
-      });
-
-      groceries.push(...groceryCollection[id]);
-    });
-
-    return groceries;
-  };
-
   const getInitApp = async () => {
     if (!state.user?.uid) return;
 
@@ -98,13 +70,7 @@ export const useProviderService = () => {
 
   useEffect(() => {
     getInitApp(); // eslint-disable-next-line
-  }, [state]);
-
-  useEffect(() => {
-    if (!state?.user?.boxes.length) return;
-
-    getGroceries();
-  }, [state?.user?.boxes]);
+  }, [state.user.uid]);
 
   return {
     groceries,

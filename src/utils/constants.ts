@@ -38,6 +38,7 @@ export const GROCERY_MODAL_TITLE = "New Grocery";
 export const CURRENCY = "currency";
 export const BUDGET = "budget";
 export const BACKGROUND_COLOR = "background color";
+export const BACKGROUND_COLOR_PROP = "backgroundColor";
 export const COLOR = "color";
 export const RANDOM_COLOR = "Random color";
 
@@ -50,3 +51,5 @@ export const SET_LOADING = "SET_LOADING";
 export const SET_INITIAL_STATE = "SET_INITIAL_STATE";
 export const SET_CONFIG_APP = "SET_CONFIG_APP";
 export const ADD_NEW_GROCERY = "ADD_NEW_GROCERY";
+export const DELETE_GROCERY = "DELETE_GROCERY";
+export const SET_GROCERIES = "SET_GROCERIES";

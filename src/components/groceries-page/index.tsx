@@ -8,17 +8,18 @@ import * as C from "@utils/constants";
 
 const GroceryList = () => {
   const {
-    groceries,
     removeGrocery,
     isModalOpen,
     toggleFormModal,
     addGrocery,
     isLoading,
+    state,
+    boxId,
   } = useGroceriesService();
 
   return (
     <div>
-      {groceries
+      {state?.user.groceries[String(boxId)]
         ?.sort((a) => (!a?.isPinned ? 1 : -1))
         .map(({ id, name, category, shopName, value, isPinned }) => (
           <div key={id}>
