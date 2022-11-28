@@ -5,6 +5,8 @@ import { Button, Col, Row } from "reactstrap";
 import { useHomePageService } from "./service";
 import { FORM } from "./utils";
 
+import { Pencil, Trash } from "react-bootstrap-icons";
+
 import * as S from "./styles";
 
 const HomePage = () => {
@@ -25,14 +27,18 @@ const HomePage = () => {
     <S.Container>
       <Row>
         {boxes?.map(({ color, backgroundColor, title, id, budgetValue }) => (
-          <Col key={id}>
+          <Col key={id} style={{ position: "relative" }}>
             <Link {...{ to: `/groceries/${id}` }}>
               <S.Box {...{ color, backgroundColor }}>
                 {title} / {budgetValue}
               </S.Box>
             </Link>
-            <Button onClick={() => removeBox(id)}>Remove</Button>
-            <Button onClick={() => openEditModal(id)}>Edit box</Button>
+            <S.RemoveBtn {...{ color, onClick: () => removeBox(id) }}>
+              <Trash />
+            </S.RemoveBtn>
+            <S.EditBtn {...{ color, onClick: () => openEditModal(id) }}>
+              <Pencil />
+            </S.EditBtn>
           </Col>
         ))}
         <Col>
