@@ -4,9 +4,10 @@ import { NProvider } from "@namespace/provider";
 import { addDocument, deleteDocument, updateDocument } from "src/firebase";
 import { toast } from "react-toastify";
 import { FormikValues } from "formik";
+import { setBoxes } from "@store/actions";
+import { NReducer } from "@namespace/reducer";
 
 import * as C from "@utils/constants";
-import { setBoxes } from "@store/actions";
 
 export const useHomePageService = () => {
   const contextValues = useContext<NProvider.TContextApiProps | null>(Context);
@@ -48,13 +49,17 @@ export const useHomePageService = () => {
         ({ id }) => id === values.id
       );
 
-      const body = { ...box, ...values };
+      const body = { ...box, ...values } as NReducer.TBox;
 
       await updateDocument(`${budgetCollection}/${values.id}`, body);
 
       toast.success("Pomyślnie zedytowana");
-      setBoxes((prev) =>
-        prev.filter((item) => item.id !== values.id).concat(body)
+      contextValues?.dispatch(
+        setBoxes(
+          contextValues.state.user.boxes
+            .filter((box) => box.id !== values.id)
+            .concat(body)
+        )
       );
       toggleEditModal();
     } catch (error) {
