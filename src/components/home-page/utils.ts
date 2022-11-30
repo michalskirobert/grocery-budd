@@ -20,6 +20,10 @@ export const FORM: NShared.ICustomFormModal["form"] = [
     validations: {
       isRequired: E.Required.Yes,
       requiredMessage: "Pole jest wymagane",
+      min: 1,
+      minMessage: "at least 1",
+      max: 99999999,
+      maxMessage: "It cannot be more than 9999999",
     },
   },
   {

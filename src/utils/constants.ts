@@ -53,3 +53,13 @@ export const SET_CONFIG_APP = "SET_CONFIG_APP";
 export const ADD_NEW_GROCERY = "ADD_NEW_GROCERY";
 export const DELETE_GROCERY = "DELETE_GROCERY";
 export const SET_GROCERIES = "SET_GROCERIES";
+
+//COLORS
+
+export const COLOR_BASE = {
+  BLUE: "#FF70A6",
+  PINK: "70D6FF",
+  SALMON: "70D6FF",
+  ORNAGE: "70D6FF",
+  YELLOW: "#E9FF70",
+};

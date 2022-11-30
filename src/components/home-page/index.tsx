@@ -24,13 +24,15 @@ const HomePage = () => {
   } = useHomePageService();
 
   return (
-    <S.Container>
+    <>
       <Row>
         {boxes?.map(({ color, backgroundColor, title, id, budgetValue }) => (
           <Col key={id} style={{ position: "relative" }}>
             <Link {...{ to: `/groceries/${id}` }}>
               <S.Box {...{ color, backgroundColor }}>
-                {title} / {budgetValue}
+                <S.Title>{title}</S.Title>
+                <S.Line {...{ color }} />
+                <S.Budget>{budgetValue}</S.Budget>
               </S.Box>
             </Link>
             <S.RemoveBtn {...{ color, onClick: () => removeBox(id) }}>
@@ -41,22 +43,24 @@ const HomePage = () => {
             </S.EditBtn>
           </Col>
         ))}
-        <Col>
-          {(boxes ?? [])?.length < 4 && (
-            <S.Add {...{ onClick: toggleModal }}>+</S.Add>
-          )}
-        </Col>
       </Row>
-      <CustomFormModal
-        {...{
-          form: FORM,
-          initialValues: {},
-          isModalOpen: isModalOpen,
-          onClick: createNewBox,
-          title: "Budget",
-          toggle: toggleModal,
-        }}
-      />
+      <Row>
+        {(boxes ?? [])?.length < 4 && (
+          <S.Add {...{ onClick: toggleModal }}>+</S.Add>
+        )}
+      </Row>
+      {isModalOpen && (
+        <CustomFormModal
+          {...{
+            form: FORM,
+            initialValues: {},
+            isModalOpen: isModalOpen,
+            onClick: createNewBox,
+            title: "Budget",
+            toggle: toggleModal,
+          }}
+        />
+      )}
       <CustomFormModal
         {...{
           form: FORM,
@@ -67,7 +71,7 @@ const HomePage = () => {
           toggle: toggleEditModal,
         }}
       />
-    </S.Container>
+    </>
   );
 };
 

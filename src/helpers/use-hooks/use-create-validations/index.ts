@@ -1,11 +1,6 @@
 import { NShared } from "@namespace/shared";
-import { AnyObject } from "yup/lib/types";
 
 import { useConvertArrayToObject } from "../use-convert-array-to-object";
-import { ObjectShape, OptionalObjectSchema, TypeOfShape } from "yup/lib/object";
-import { StringSchema } from "yup";
-import { NumberSchema } from "yup";
-import { BooleanSchema } from "yup";
 
 import * as C from "@utils/constants";
 import * as E from "@utils/enums";
@@ -20,13 +15,11 @@ export const useCreateValidations = ({
     validation: NShared.TForm["validations"],
     control?: any
   ) => {
-    const { isRequired, requiredMessage, max, maxMessage, min, minMessage } =
-      validation;
+    const { isRequired, requiredMessage } = validation;
 
-    if (isRequired === E.Required.Yes)
+    if (isRequired === E.Required.Yes) {
       return control?.required(requiredMessage);
-    else if (!!max) control?.max(Number(min), minMessage);
-    else if (!!min) control?.min(Number(max), maxMessage);
+    }
 
     return control?.notRequired();
   };
@@ -53,7 +46,15 @@ export const useCreateValidations = ({
   const setValidationSchemaForm = (
     kind: string,
     validations: NShared.TFormValidations
-  ) => setRequirment(validations, setValidationKind(kind));
+  ) => {
+    const { max, maxMessage, min, minMessage } = validations;
+    let valid = setRequirment(validations, setValidationKind(kind));
+
+    if (!!max) valid = valid?.max(Number(max), maxMessage);
+    if (!!min) valid = valid?.min(Number(min), minMessage);
+
+    return valid;
+  };
 
   let mergedSchema: Record<string, any> = {};
 

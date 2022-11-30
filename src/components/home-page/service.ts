@@ -8,6 +8,7 @@ import { setBoxes } from "@store/actions";
 import { NReducer } from "@namespace/reducer";
 
 import * as C from "@utils/constants";
+import { generateRandomColor } from "@helpers/useful-functions";
 
 export const useHomePageService = () => {
   const contextValues = useContext<NProvider.TContextApiProps | null>(Context);
@@ -23,11 +24,12 @@ export const useHomePageService = () => {
     if (!contextValues?.state.user?.uid) return;
 
     try {
-      const request = {
+      const request: Partial<NReducer.TBox> = {
         ...values,
-        budgetValue: `${values[C.CURRENCY]?.value}${values.budget}`,
         budget: values.budget,
         currency: values.currency,
+        backgroundColor: values?.backgroundColor || generateRandomColor(),
+        color: values?.color || generateRandomColor(),
       };
 
       const resp = await addDocument(budgetCollection, request);
@@ -53,7 +55,10 @@ export const useHomePageService = () => {
 
       await updateDocument(`${budgetCollection}/${values.id}`, body);
 
-      toast.success("Pomyślnie zedytowana");
+      toast.success("Pomyślnie zedytowana", {
+        style: { color: C.COLOR_BASE.SALMON, background: C.COLOR_BASE.YELLOW },
+      });
+
       contextValues?.dispatch(
         setBoxes(
           contextValues.state.user.boxes
