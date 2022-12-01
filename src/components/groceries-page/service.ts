@@ -41,8 +41,6 @@ export const useGroceriesService = () => {
     setIsLoading(false);
   };
 
-  console.log({ state: props?.state.user.groceries });
-
   const addGrocery = async (values: FormikValues) => {
     if (!boxId) return;
 

@@ -57,9 +57,10 @@ export const SET_GROCERIES = "SET_GROCERIES";
 //COLORS
 
 export const COLOR_BASE = {
-  BLUE: "#FF70A6",
-  PINK: "70D6FF",
-  SALMON: "70D6FF",
-  ORNAGE: "70D6FF",
+  BLUE: "#25CED1",
+  PINK: "#FF70A6",
+  SALMON: "#FF9770",
+  ORNAGE: "#FFD670",
   YELLOW: "#E9FF70",
+  GREY: "#4B4B4B",
 };
