@@ -1,9 +1,12 @@
+import { NReducer } from "@namespace/reducer";
 import { NShared } from "@namespace/shared";
 
 import * as C from "@utils/constants";
 import * as E from "@utils/enums";
 
-export const FORM: NShared.ICustomFormModal["form"] = [
+export const setForm = (
+  configApp?: NReducer.TState["configApp"]
+): NShared.ICustomFormModal["form"] => [
   {
     id: C.TITLE,
     kind: C.INPUT_TYPES.INPUT_TEXT,
@@ -51,7 +54,7 @@ export const FORM: NShared.ICustomFormModal["form"] = [
     id: C.CURRENCY,
     kind: C.INPUT_TYPES.INPUT_SELECT,
     label: C.CURRENCY,
-    options: [{ label: "euro", value: "€" }],
+    options: configApp?.currencies || [],
     validations: {
       isRequired: E.Required.Yes,
       requiredMessage: "Pole jest wymagane",

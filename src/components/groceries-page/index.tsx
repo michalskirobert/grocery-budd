@@ -1,6 +1,6 @@
 import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
-import { GROCERY_FORM } from "./utils";
+import { setGroceryForm } from "./utils";
 import { CustomNav } from "@components/shared/custom-nav";
 import { CustomCard } from "@components/shared/custom-card";
 import { Row } from "reactstrap";
@@ -69,7 +69,7 @@ const GroceryList = () => {
             title: C.GROCERY_MODAL_TITLE,
             toggle: toggleFormModal,
             onClick: addGrocery,
-            form: GROCERY_FORM,
+            form: setGroceryForm(state?.configApp),
             isLoading,
           }}
         />

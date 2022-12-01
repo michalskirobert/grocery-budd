@@ -1,9 +1,12 @@
+import { NReducer } from "@namespace/reducer";
 import { NShared } from "@namespace/shared";
 
 import * as C from "@utils/constants";
 import * as E from "@utils/enums";
 
-export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
+export const setGroceryForm = (
+  configApp?: NReducer.TState["configApp"]
+): NShared.ICustomFormModal["form"] => [
   {
     id: C.NAME,
     label: C.NAME,
@@ -14,11 +17,7 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
     id: C.CATEGORY,
     label: C.CATEGORY,
     kind: C.INPUT_TYPES.INPUT_SELECT,
-    options: [
-      { label: "help", value: "me" },
-      { label: "ie wiem", value: "right" },
-      { label: "true", value: "coś  tam" },
-    ],
+    options: configApp?.categories,
     validations: { isRequired: E.Required.Yes, requiredMessage: "required" },
   },
   {
@@ -28,7 +27,7 @@ export const GROCERY_FORM: NShared.ICustomFormModal["form"] = [
     isPositionAddable: true,
     placeholder: "Choose your shop",
     initialValue: { label: "", value: "" },
-    options: [{ label: "Media expert", value: "media expert" }],
+    options: configApp?.shops,
     validations: { isRequired: E.Required.No, requiredMessage: "" },
   },
   {

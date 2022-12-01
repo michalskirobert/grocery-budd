@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
 import { CustomFormModal } from "@components/shared";
-import { Button, Col, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import { useHomePageService } from "./service";
-import { FORM } from "./utils";
+import { setForm } from "./utils";
 
 import { Pencil, Trash } from "react-bootstrap-icons";
 
@@ -21,6 +21,7 @@ const HomePage = () => {
     isEditModalOpen,
     formikValues,
     openEditModal,
+    state,
   } = useHomePageService();
 
   return (
@@ -52,7 +53,7 @@ const HomePage = () => {
       {isModalOpen && (
         <CustomFormModal
           {...{
-            form: FORM,
+            form: setForm(state?.configApp),
             initialValues: {},
             isModalOpen: isModalOpen,
             onClick: createNewBox,
@@ -63,7 +64,7 @@ const HomePage = () => {
       )}
       <CustomFormModal
         {...{
-          form: FORM,
+          form: setForm(state?.configApp),
           initialValues: formikValues,
           isModalOpen: isEditModalOpen,
           onClick: updateBox,
