@@ -43,12 +43,15 @@ export declare namespace NReducer {
   };
 
   type TUser = {
-    uid: S;
+    uid: S | null;
     boxes: TBox[];
     groceries: { [x]: TGrocery[] };
-    language: S;
+    language: NProvider.TOptions;
     userType: N;
     isFitri: B;
+    email: S;
+    profilePicture?: S;
+    accessToken?: S | null;
   };
 
   type TState = {
@@ -58,6 +61,7 @@ export declare namespace NReducer {
       categories: NProvider.TOptions[];
       shops: NProvider.TOptions[];
       currencies: NProvider.TOptions[];
+      languages: NProvider.TOptions[];
     };
   };
 

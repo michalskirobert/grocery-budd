@@ -11,6 +11,7 @@ import {
   setBoxes,
   setConfigApp,
   setInitialState,
+  setIsLoading,
   setUser,
 } from "@store/actions";
 
@@ -58,14 +59,14 @@ export const useProviderService = () => {
 
   const logout = async () => {
     try {
-      setIsGlobalLoading(true);
+      dispatch(setIsLoading(true));
       await signOut(auth);
       dispatch(setInitialState());
-      setIsGlobalLoading(false);
     } catch (error) {
-      setIsGlobalLoading(false);
       toast.error("Nie można wylogować użytkownika");
     }
+
+    dispatch(setIsLoading(false));
   };
 
   useEffect(() => {

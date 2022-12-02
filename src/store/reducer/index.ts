@@ -27,13 +27,17 @@ export const initialState: NReducer.TState = {
         },
       ],
     },
-    language: "eng",
+    language: { label: "English", value: "eng" },
     userType: 0,
     isFitri: false,
-    uid: "",
+    email: "Sign-in",
+    accessToken: null,
+    uid: null,
+    profilePicture:
+      "https://firebasestorage.googleapis.com/v0/b/grocery-budd.appspot.com/o/users%2Fpublic%2FprofilePicture%2Fanonymous.png?alt=media&token=e52c401a-9d48-45e2-bec3-cd7a209db698",
   },
   isLoading: false,
-  configApp: { categories: [], currencies: [], shops: [] },
+  configApp: { categories: [], currencies: [], shops: [], languages: [] },
 };
 
 export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {

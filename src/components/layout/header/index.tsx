@@ -1,10 +1,14 @@
-import { MENU_HELPER } from "@store/utils";
 import { Navbar, Container, Offcanvas, Nav } from "react-bootstrap";
 
 import Select from "react-select";
+import { useHeaderService } from "./service";
+import { setNav } from "./utils";
+
+import * as S from "./styles";
 
 export const Menu = () => {
-  return (
+  const { configApp, user } = useHeaderService();
+  return !!user ? (
     <div>
       <Navbar bg="light" expand={false} className="mb-3" fixed="top">
         <Container fluid>
@@ -17,21 +21,23 @@ export const Menu = () => {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand`}>
-                Menu
+                <S.Avatar src={`${user?.profilePicture}`} />
+                {user?.email}
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                {MENU_HELPER.map(({ path, title }) => (
-                  <Nav.Link key={path} href={path}>
+                {setNav(!!user?.accessToken).map(({ path, title }) => (
+                  <Nav.Link key={title} href={path}>
                     {title}
                   </Nav.Link>
                 ))}
               </Nav>
               <Select
                 {...{
-                  options: [{ label: "English", value: "Eng" }],
-                  value: { label: "English", value: "Eng" },
+                  options: configApp?.languages || [],
+                  value: user?.language || configApp?.languages[0],
+                  onChange: (option) => console.log(option),
                 }}
               />
             </Offcanvas.Body>
@@ -39,5 +45,5 @@ export const Menu = () => {
         </Container>
       </Navbar>
     </div>
-  );
+  ) : null;
 };
