@@ -111,6 +111,14 @@ export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {
           },
         },
       };
+    case C.CHANGE_LANGUAGE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          language: action.payload,
+        },
+      };
 
     default:
       return initialState;

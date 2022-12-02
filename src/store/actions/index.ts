@@ -1,3 +1,4 @@
+import { NProvider } from "@namespace/provider";
 import { NReducer } from "@namespace/reducer";
 
 import * as C from "@utils/constants";
@@ -42,4 +43,9 @@ export const deleteGrocery = (boxId: string, groceryId: string) => ({
 export const setGroceries = (groceries: any, boxId: string) => ({
   type: C.SET_GROCERIES,
   payload: { groceries, boxId },
+});
+
+export const setLanguage = (payload: NProvider.TOptions) => ({
+  type: C.CHANGE_LANGUAGE,
+  payload,
 });

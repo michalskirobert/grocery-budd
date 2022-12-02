@@ -5,9 +5,11 @@ import { useHeaderService } from "./service";
 import { setNav } from "./utils";
 
 import * as S from "./styles";
+import { NProvider } from "@namespace/provider";
 
 export const Menu = () => {
-  const { configApp, user } = useHeaderService();
+  const { configApp, user, changeLanguage } = useHeaderService();
+
   return !!user ? (
     <div>
       <Navbar bg="light" expand={false} className="mb-3" fixed="top">
@@ -36,8 +38,9 @@ export const Menu = () => {
               <Select
                 {...{
                   options: configApp?.languages || [],
-                  value: user?.language || configApp?.languages[0],
-                  onChange: (option) => console.log(option),
+                  value: user?.language,
+                  onChange: (option) =>
+                    changeLanguage(option as NProvider.TOptions),
                 }}
               />
             </Offcanvas.Body>

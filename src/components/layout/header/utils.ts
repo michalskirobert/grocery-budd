@@ -58,7 +58,6 @@ const LOGGED_USER_MENU: TMenu = [
 ];
 
 export const setNav = (isLogged: boolean): TMenu => {
-  console.log({ isLogged });
   if (isLogged) {
     return [...BASE_URL, ...LOGGED_USER_MENU];
   }
