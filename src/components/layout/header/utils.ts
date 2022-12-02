@@ -58,9 +58,15 @@ const LOGGED_USER_MENU: TMenu = [
 ];
 
 export const setNav = (isLogged: boolean): TMenu => {
+  let menu: TMenu = [];
+
   if (isLogged) {
-    return [...BASE_URL, ...LOGGED_USER_MENU];
+    menu = [...BASE_URL, ...LOGGED_USER_MENU];
+  } else {
+    menu = [...BASE_URL, ...NOT_LOGGED_USER_MENU];
   }
 
-  return [...BASE_URL, ...NOT_LOGGED_USER_MENU];
+  return Array.from(
+    new Map(menu.map((item) => [item["title"], item])).values()
+  );
 };
