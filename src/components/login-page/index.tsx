@@ -5,6 +5,8 @@ import { Button } from "reactstrap";
 import { useLoginService } from "./service";
 import { FORM } from "./utils";
 
+import * as S from "./styles";
+
 export const LoginPage = () => {
   const { signIn } = useLoginService();
 
@@ -16,8 +18,8 @@ export const LoginPage = () => {
       }}
     >
       {({ values, handleSubmit, handleChange, setFieldValue, errors }) => (
-        <>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+          <S.Container>
             {FORM.map(({ id, kind, label, options }) => (
               <CustomForm
                 {...{
@@ -32,10 +34,13 @@ export const LoginPage = () => {
                 }}
               />
             ))}
-            <Button type="submit">Sign in</Button>
-          </Form>
-          if you have no account, <Link {...{ to: "/sign-up" }}>Sign-up</Link>
-        </>
+            <Button {...{ color: "primary", type: "submit" }}>Sign in</Button>
+            <S.InformationContainer>
+              <S.text>If you have no account</S.text>
+              <Link {...{ to: "/sign-up" }}>Sign-up</Link>
+            </S.InformationContainer>
+          </S.Container>
+        </Form>
       )}
     </Formik>
   );

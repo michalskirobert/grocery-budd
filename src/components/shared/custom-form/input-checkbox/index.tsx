@@ -7,6 +7,7 @@ export const InputSingleCheckbox = ({
   handleChange,
   internalLabel,
   check,
+  invalid,
 }) => (
   <>
     <Label {...{ check }}>{internalLabel}</Label>
@@ -15,6 +16,7 @@ export const InputSingleCheckbox = ({
         name: id,
         type: "checkbox",
         value,
+        invalid,
         onChange: handleChange,
       }}
     />

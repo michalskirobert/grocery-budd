@@ -42,6 +42,7 @@ export const CustomForm = ({
             value,
             internalLabel,
             check,
+            error,
           }}
         />
       </Col>

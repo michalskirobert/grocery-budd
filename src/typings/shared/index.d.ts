@@ -34,6 +34,7 @@ export declare namespace NShared {
 
   type TCustomFormRenderFormProps = {
     value: any;
+    error?: S | S[] | FormikErrors<any> | FormikErrors<any>[];
   } & TCustomForm;
 
   type TFormKinds =

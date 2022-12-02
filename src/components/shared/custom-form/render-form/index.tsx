@@ -18,6 +18,7 @@ export const RenderForm = ({
   options,
   internalLabel,
   check,
+  error,
 }: NShared.TCustomFormRenderFormProps) => {
   switch (kind) {
     case C.INPUT_TYPES.INPUT_TEXT:
@@ -28,6 +29,7 @@ export const RenderForm = ({
             name: id,
             type: C.INPUT_TEXT_TYPE,
             value,
+            invalid: !!error,
             onChange: handleChange,
           }}
         />
@@ -40,6 +42,7 @@ export const RenderForm = ({
             name: id,
             type: C.INPUT_NUMBER_TYPE,
             value,
+            invalid: !!error,
             onChange: handleChange,
           }}
         />
@@ -51,6 +54,7 @@ export const RenderForm = ({
             id,
             options,
             value: options?.find(({ value }) => value === value[id]),
+            "aria-invalid": !!error,
             onChange: (e: any) => setFieldValue(id, e),
           }}
         />
@@ -62,6 +66,7 @@ export const RenderForm = ({
             name: id,
             type: "password",
             value,
+            invalid: !!error,
             onChange: handleChange,
           }}
         />
@@ -73,6 +78,7 @@ export const RenderForm = ({
             name: id,
             type: "email",
             value,
+            invalid: !!error,
             onChange: handleChange,
           }}
         />
@@ -84,6 +90,7 @@ export const RenderForm = ({
             name: id,
             type: "color",
             value,
+            invalid: !!error,
             onChange: handleChange,
           }}
         />
@@ -95,6 +102,7 @@ export const RenderForm = ({
             name: id,
             type: "color",
             value,
+            invalid: !!error,
             onChange: handleChange,
           }}
         />
@@ -114,7 +122,14 @@ export const RenderForm = ({
     case C.INPUT_TYPES.INPUT_SINGLE_CHECKBOX:
       return (
         <InputSingleCheckbox
-          {...{ id, handleChange, internalLabel, value, check }}
+          {...{
+            id,
+            handleChange,
+            internalLabel,
+            value,
+            check,
+            invalid: !!error,
+          }}
         />
       );
 
