@@ -30,6 +30,8 @@ export const useHomePageService = () => {
         currency: values.currency,
         backgroundColor: values?.backgroundColor || generateRandomColor(),
         color: values?.color || generateRandomColor(),
+        lastModifiedDate: new Date(),
+        createdDate: new Date(),
       };
 
       const resp = await addDocument(budgetCollection, request);
@@ -51,7 +53,11 @@ export const useHomePageService = () => {
         ({ id }) => id === values.id
       );
 
-      const body = { ...box, ...values } as NReducer.TBox;
+      const body = {
+        ...box,
+        ...values,
+        lastModifiedDate: new Date(),
+      } as NReducer.TBox;
 
       await updateDocument(`${budgetCollection}/${values.id}`, body);
 

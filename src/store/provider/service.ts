@@ -41,6 +41,7 @@ export const useProviderService = () => {
     let boxes: any[] = [];
 
     try {
+      dispatch(setIsLoading(true));
       const userProperties = await getDocument(userDataPaths.user);
       const budgets = await getCollection(userDataPaths.budgets);
       const appConfig = await getDocument(userDataPaths.appConfig);
@@ -55,7 +56,10 @@ export const useProviderService = () => {
     } catch (error) {
       toast.error("error");
     }
+    dispatch(setIsLoading(false));
   };
+
+  console.log(state);
 
   const logout = async () => {
     try {

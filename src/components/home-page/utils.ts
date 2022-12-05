@@ -61,3 +61,16 @@ export const setForm = (
     },
   },
 ];
+
+export const checkCurrency = (currency: string, value: number) => {
+  switch (currency) {
+    case "zł":
+      return `${value}zł`;
+    case "€":
+      return `€${value}`;
+    case "$":
+      return `$${value}`;
+    default:
+      return String(value);
+  }
+};

@@ -40,6 +40,8 @@ export declare namespace NReducer {
     backgroundColor: S;
     title: S;
     budgetValue: N;
+    lastModifiedDate: Date;
+    createdDate: Date;
   };
 
   type TUser = {

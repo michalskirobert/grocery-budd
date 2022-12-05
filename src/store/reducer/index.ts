@@ -13,6 +13,8 @@ export const initialState: NReducer.TState = {
         backgroundColor: "",
         budgetValue: 0,
         title: "",
+        createdDate: new Date(),
+        lastModifiedDate: new Date(),
       },
     ],
     groceries: {
@@ -118,6 +120,12 @@ export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {
           ...state.user,
           language: action.payload,
         },
+      };
+
+    case C.SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
 
     default:

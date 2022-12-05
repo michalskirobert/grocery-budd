@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { CustomFormModal } from "@components/shared";
+import { CustomBlockLoader, CustomFormModal } from "@components/shared";
 import { Col, Row } from "reactstrap";
 import { useHomePageService } from "./service";
-import { setForm } from "./utils";
+import { checkCurrency, setForm } from "./utils";
 
 import { Pencil, Trash } from "react-bootstrap-icons";
 
@@ -25,25 +25,32 @@ const HomePage = () => {
   } = useHomePageService();
 
   return (
-    <>
+    <CustomBlockLoader isBlocking={!!state?.isLoading}>
       <Row>
-        {boxes?.map(({ color, backgroundColor, title, id, budgetValue }) => (
-          <Col key={id} style={{ position: "relative" }}>
-            <Link {...{ to: `/groceries/${id}` }}>
-              <S.Box {...{ color, backgroundColor }}>
-                <S.Title>{title}</S.Title>
-                <S.Line {...{ color }} />
-                <S.Budget>{budgetValue}</S.Budget>
-              </S.Box>
-            </Link>
-            <S.RemoveBtn {...{ color, onClick: () => removeBox(id) }}>
-              <Trash />
-            </S.RemoveBtn>
-            <S.EditBtn {...{ color, onClick: () => openEditModal(id) }}>
-              <Pencil />
-            </S.EditBtn>
-          </Col>
-        ))}
+        {boxes
+          ?.sort((a, b) => {
+            return (
+              new Date(b.createdDate).getTime() -
+              new Date(a.createdDate).getTime()
+            );
+          })
+          .map(({ color, backgroundColor, title, id, budget, currency }) => (
+            <Col key={id} style={{ position: "relative" }}>
+              <Link {...{ to: `/groceries/${id}` }}>
+                <S.Box {...{ color, backgroundColor }}>
+                  <S.Title>{title}</S.Title>
+                  <S.Line {...{ color }} />
+                  <S.Budget>{checkCurrency(currency.value, budget)}</S.Budget>
+                </S.Box>
+              </Link>
+              <S.RemoveBtn {...{ color, onClick: () => removeBox(id) }}>
+                <Trash />
+              </S.RemoveBtn>
+              <S.EditBtn {...{ color, onClick: () => openEditModal(id) }}>
+                <Pencil />
+              </S.EditBtn>
+            </Col>
+          ))}
       </Row>
       <Row>
         {(boxes ?? [])?.length < 4 && (
@@ -72,7 +79,7 @@ const HomePage = () => {
           toggle: toggleEditModal,
         }}
       />
-    </>
+    </CustomBlockLoader>
   );
 };
 

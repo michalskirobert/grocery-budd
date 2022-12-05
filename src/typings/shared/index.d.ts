@@ -87,7 +87,7 @@ export declare namespace NShared {
   };
 
   type ICustomLoader = {
-    children: JSX;
+    children: any;
     isBlocking: B;
   };
 
