@@ -59,8 +59,6 @@ export const useProviderService = () => {
     dispatch(setIsLoading(false));
   };
 
-  console.log(state);
-
   const logout = async () => {
     try {
       dispatch(setIsLoading(true));

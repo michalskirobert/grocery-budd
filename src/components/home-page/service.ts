@@ -6,9 +6,9 @@ import { toast } from "react-toastify";
 import { FormikValues } from "formik";
 import { setBoxes } from "@store/actions";
 import { NReducer } from "@namespace/reducer";
+import { generateRandomColor } from "@helpers/useful-functions";
 
 import * as C from "@utils/constants";
-import { generateRandomColor } from "@helpers/useful-functions";
 
 export const useHomePageService = () => {
   const contextValues = useContext<NProvider.TContextApiProps | null>(Context);
@@ -26,7 +26,6 @@ export const useHomePageService = () => {
     try {
       const request: Partial<NReducer.TBox> = {
         ...values,
-        randomColor: false,
         budget: values.budget,
         currency: values.currency,
         backgroundColor: !!values?.randomColor
@@ -35,6 +34,7 @@ export const useHomePageService = () => {
         color: !!values?.randomColor ? generateRandomColor() : values?.color,
         lastModifiedDate: new Date(),
         createdDate: new Date(),
+        randomColor: false,
       };
 
       const resp = await addDocument(budgetCollection, request);
@@ -59,6 +59,10 @@ export const useHomePageService = () => {
       const body = {
         ...box,
         ...values,
+        backgroundColor: !!values?.randomColor
+          ? generateRandomColor()
+          : values?.backgroundColor,
+        color: !!values?.randomColor ? generateRandomColor() : values?.color,
         lastModifiedDate: new Date(),
       } as NReducer.TBox;
 

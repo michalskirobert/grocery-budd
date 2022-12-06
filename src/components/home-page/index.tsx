@@ -74,16 +74,18 @@ const HomePage = () => {
           }}
         />
       )}
-      <CustomFormModal
-        {...{
-          form: setForm(state?.configApp),
-          initialValues: formikValues,
-          isModalOpen: isEditModalOpen,
-          onClick: updateBox,
-          title: "Edit modal",
-          toggle: toggleEditModal,
-        }}
-      />
+      {isEditModalOpen && (
+        <CustomFormModal
+          {...{
+            form: setForm(state?.configApp),
+            initialValues: { ...formikValues, randomColor: false },
+            isModalOpen: isEditModalOpen,
+            onClick: updateBox,
+            title: "Edit modal",
+            toggle: toggleEditModal,
+          }}
+        />
+      )}
     </CustomBlockLoader>
   );
 };

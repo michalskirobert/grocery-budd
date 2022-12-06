@@ -1,12 +1,12 @@
-import { Col, FormGroup, Input, Label } from "reactstrap";
+import { Input } from "reactstrap";
 
 import Select, { SingleValue } from "react-select";
 
 import { NProvider, NShared } from "@namespace/index";
+import { InputSingleCheckbox } from "../input-checkbox";
 import { InputSwitch } from "./../switch";
 
 import * as C from "@utils/constants";
-import { InputSingleCheckbox } from "../input-checkbox";
 
 export const RenderForm = ({
   kind,
@@ -55,7 +55,7 @@ export const RenderForm = ({
           {...{
             id,
             options,
-            value: options?.find(({ value }) => value === value[id]),
+            value,
             styles: {
               control: (prov) => ({
                 ...prov,
