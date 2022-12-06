@@ -13,6 +13,7 @@ export const initialState: NReducer.TState = {
         backgroundColor: "",
         budgetValue: 0,
         title: "",
+        randomColor: false,
         createdDate: new Date(),
         lastModifiedDate: new Date(),
       },

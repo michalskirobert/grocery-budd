@@ -26,10 +26,13 @@ export const useHomePageService = () => {
     try {
       const request: Partial<NReducer.TBox> = {
         ...values,
+        randomColor: false,
         budget: values.budget,
         currency: values.currency,
-        backgroundColor: values?.backgroundColor || generateRandomColor(),
-        color: values?.color || generateRandomColor(),
+        backgroundColor: !!values?.randomColor
+          ? generateRandomColor()
+          : values?.backgroundColor,
+        color: !!values?.randomColor ? generateRandomColor() : values?.color,
         lastModifiedDate: new Date(),
         createdDate: new Date(),
       };

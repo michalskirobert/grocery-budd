@@ -7,6 +7,7 @@ import { checkCurrency, setForm } from "./utils";
 
 import { Pencil, Trash } from "react-bootstrap-icons";
 
+import * as C from "@utils/constants";
 import * as S from "./styles";
 
 const HomePage = () => {
@@ -61,7 +62,11 @@ const HomePage = () => {
         <CustomFormModal
           {...{
             form: setForm(state?.configApp),
-            initialValues: {},
+            initialValues: {
+              backgroundColor: C.COLOR_BASE.YELLOW,
+              color: C.COLOR_BASE.SALMON,
+              randomColor: false,
+            },
             isModalOpen: isModalOpen,
             onClick: createNewBox,
             title: "Budget",

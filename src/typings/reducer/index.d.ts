@@ -40,6 +40,7 @@ export declare namespace NReducer {
     backgroundColor: S;
     title: S;
     budgetValue: N;
+    randomColor: B;
     lastModifiedDate: Date;
     createdDate: Date;
   };

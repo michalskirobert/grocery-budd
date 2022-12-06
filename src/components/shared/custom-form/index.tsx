@@ -3,6 +3,7 @@ import { RenderForm } from "./render-form";
 
 import { NShared } from "@namespace/index";
 import { Col, FormGroup, Label } from "reactstrap";
+import { checkIsValid } from "@helpers/useful-functions";
 
 export const CustomForm = ({
   id,
@@ -19,6 +20,7 @@ export const CustomForm = ({
   row,
   check,
   inline,
+  formula,
 }: NShared.TCustomForm) => {
   const value = initialValue || values[id];
   const error = errors[id];
@@ -43,6 +45,7 @@ export const CustomForm = ({
             internalLabel,
             check,
             error,
+            disabled: checkIsValid({ formula, values }),
           }}
         />
       </Col>

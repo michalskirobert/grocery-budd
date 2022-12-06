@@ -40,7 +40,8 @@ export const BUDGET = "budget";
 export const BACKGROUND_COLOR = "background color";
 export const BACKGROUND_COLOR_PROP = "backgroundColor";
 export const COLOR = "color";
-export const RANDOM_COLOR = "Random color";
+export const RANDOM_COLOR_LABEL = "Random color";
+export const RANDOM_COLOR = "randomColor";
 
 //Reducer
 export const SET_USER = "SET_USER";
@@ -64,4 +65,7 @@ export const COLOR_BASE = {
   ORNAGE: "#FFD670",
   YELLOW: "#E9FF70",
   GREY: "#4B4B4B",
+  ERROR: "#dc3545",
+  BLACK: "#11111",
+  WHITE: "#F1111",
 };

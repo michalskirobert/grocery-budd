@@ -30,11 +30,13 @@ export declare namespace NShared {
     row?: B;
     check?: B;
     inline?: B;
+    formula?: NShared.TForm["validations"]["formula"];
   };
 
   type TCustomFormRenderFormProps = {
     value: any;
     error?: S | S[] | FormikErrors<any> | FormikErrors<any>[];
+    disabled?: B;
   } & TCustomForm;
 
   type TFormKinds =
@@ -52,6 +54,12 @@ export declare namespace NShared {
     | "input-group-fields"
     | "captcha";
 
+  type TValidationFormula = {
+    id: S;
+    targetValue: S | N | B | null;
+    target: S;
+  };
+
   type TFormValidations = {
     isRequired: 10 | 20;
     requiredMessage: S;
@@ -59,6 +67,7 @@ export declare namespace NShared {
     minMessage?: S;
     max?: N;
     maxMessage?: S;
+    formula?: TValidationFormula;
   };
 
   type TForm = readonly {

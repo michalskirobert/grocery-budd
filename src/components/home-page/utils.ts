@@ -1,3 +1,4 @@
+import { checkIsValid } from "@helpers/useful-functions";
 import { NReducer } from "@namespace/reducer";
 import { NShared } from "@namespace/shared";
 
@@ -33,7 +34,7 @@ export const setForm = (
     id: C.RANDOM_COLOR,
     kind: C.INPUT_TYPES.INPUT_SINGLE_CHECKBOX,
     label: "",
-    internalLabel: C.RANDOM_COLOR,
+    internalLabel: C.RANDOM_COLOR_LABEL,
     validations: { isRequired: E.Required.No, requiredMessage: "" },
     check: true,
     inline: true,
@@ -42,13 +43,29 @@ export const setForm = (
     id: C.BACKGROUND_COLOR_PROP,
     kind: C.INPUT_TYPES.INPUT_COLOR,
     label: C.BACKGROUND_COLOR,
-    validations: { isRequired: E.Required.No, requiredMessage: "" },
+    validations: {
+      isRequired: E.Required.No,
+      requiredMessage: "",
+      formula: {
+        id: "1",
+        targetValue: true,
+        target: "randomColor",
+      },
+    },
   },
   {
     id: C.COLOR,
     kind: C.INPUT_TYPES.INPUT_COLOR,
     label: C.COLOR,
-    validations: { isRequired: E.Required.No, requiredMessage: "" },
+    validations: {
+      isRequired: E.Required.No,
+      requiredMessage: "",
+      formula: {
+        id: "1",
+        targetValue: true,
+        target: "randomColor",
+      },
+    },
   },
   {
     id: C.CURRENCY,

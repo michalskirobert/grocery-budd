@@ -49,22 +49,32 @@ export const CustomFormModal = ({
           <CustomBlockLoader {...{ isBlocking: isLoading }}>
             <ModalBody>
               <Form>
-                {form.map(({ id, label, kind, options, internalLabel }) => (
-                  <CustomForm
-                    key={id}
-                    {...{
-                      id,
-                      label,
-                      kind,
-                      values,
-                      options,
-                      handleChange,
-                      setFieldValue,
-                      errors,
-                      internalLabel,
-                    }}
-                  />
-                ))}
+                {form.map(
+                  ({
+                    id,
+                    label,
+                    kind,
+                    options,
+                    internalLabel,
+                    validations,
+                  }) => (
+                    <CustomForm
+                      key={id}
+                      {...{
+                        id,
+                        label,
+                        kind,
+                        values,
+                        options,
+                        handleChange,
+                        setFieldValue,
+                        errors,
+                        internalLabel,
+                        formula: validations.formula,
+                      }}
+                    />
+                  )
+                )}
               </Form>
             </ModalBody>
           </CustomBlockLoader>

@@ -1,8 +1,8 @@
 import { Col, FormGroup, Input, Label } from "reactstrap";
 
-import Select from "react-select";
+import Select, { SingleValue } from "react-select";
 
-import { NShared } from "@namespace/index";
+import { NProvider, NShared } from "@namespace/index";
 import { InputSwitch } from "./../switch";
 
 import * as C from "@utils/constants";
@@ -14,7 +14,7 @@ export const RenderForm = ({
   handleChange,
   setFieldValue,
   value,
-  isDisabled,
+  disabled,
   options,
   internalLabel,
   check,
@@ -31,6 +31,7 @@ export const RenderForm = ({
             value,
             invalid: !!error,
             onChange: handleChange,
+            disabled,
           }}
         />
       );
@@ -44,6 +45,7 @@ export const RenderForm = ({
             value,
             invalid: !!error,
             onChange: handleChange,
+            disabled,
           }}
         />
       );
@@ -54,8 +56,15 @@ export const RenderForm = ({
             id,
             options,
             value: options?.find(({ value }) => value === value[id]),
-            "aria-invalid": !!error,
-            onChange: (e: any) => setFieldValue(id, e),
+            styles: {
+              control: (prov) => ({
+                ...prov,
+                borderColor: !!error ? C.COLOR_BASE.ERROR : prov.borderColor,
+              }),
+            },
+            onChange: (e: SingleValue<NProvider.TOptions>) =>
+              setFieldValue(id, e),
+            disabled,
           }}
         />
       );
@@ -68,6 +77,7 @@ export const RenderForm = ({
             value,
             invalid: !!error,
             onChange: handleChange,
+            disabled,
           }}
         />
       );
@@ -80,6 +90,7 @@ export const RenderForm = ({
             value,
             invalid: !!error,
             onChange: handleChange,
+            disabled,
           }}
         />
       );
@@ -92,18 +103,7 @@ export const RenderForm = ({
             value,
             invalid: !!error,
             onChange: handleChange,
-          }}
-        />
-      );
-    case C.INPUT_TYPES.INPUT_COLOR:
-      return (
-        <Input
-          {...{
-            name: id,
-            type: "color",
-            value,
-            invalid: !!error,
-            onChange: handleChange,
+            disabled,
           }}
         />
       );
@@ -115,7 +115,7 @@ export const RenderForm = ({
             id,
             onChange: (e) => setFieldValue(id, e),
             value,
-            isDisabled,
+            isDisabled: disabled,
           }}
         />
       );
@@ -129,6 +129,7 @@ export const RenderForm = ({
             value,
             check,
             invalid: !!error,
+            disabled,
           }}
         />
       );
