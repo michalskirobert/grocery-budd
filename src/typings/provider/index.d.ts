@@ -18,8 +18,6 @@ export declare namespace NProvider {
   };
 
   type TContextApiProps = {
-    groceries: Record<string, any>[];
-    setGroceries: React.Dispatch<React.SetStateAction<Record<string, any>[]>>;
     logout: () => Promise<void>;
     state: NReducer.TState;
     dispatch: React.Dispatch<NReducer.TAcion>;

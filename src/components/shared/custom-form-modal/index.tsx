@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Formik, FormikValues } from "formik";
 
 import { CustomForm } from "../custom-form";
 
@@ -13,6 +13,7 @@ import {
 import { NShared } from "@namespace/index";
 import { CustomBlockLoader } from "../custom-block-loader";
 import { useCreateValidations } from "@helpers/use-hooks";
+import { CustomFormFeedback } from "../custom-feedback";
 
 export const CustomFormModal = ({
   toggle,
@@ -22,6 +23,7 @@ export const CustomFormModal = ({
   form,
   onClick,
   isLoading = false,
+  checkIsModalValid,
 }: NShared.ICustomFormModal) => {
   const { validationSchema } = useCreateValidations({ form });
 
@@ -79,11 +81,20 @@ export const CustomFormModal = ({
             </ModalBody>
           </CustomBlockLoader>
           <ModalFooter>
+            <CustomFormFeedback
+              {...{
+                error:
+                  checkIsModalValid && checkIsModalValid(values).errorMessage,
+              }}
+            />
             <Button
               {...{
                 color: "primary",
                 onClick: () => handleSubmit(),
-                disabled: isLoading || !isValid,
+                disabled:
+                  isLoading ||
+                  !isValid ||
+                  (checkIsModalValid && checkIsModalValid(values).isBlocked),
               }}
             >
               Save

@@ -48,7 +48,7 @@ export declare namespace NReducer {
   type TUser = {
     uid: S | null;
     boxes: TBox[];
-    groceries: { [x]: TGrocery[] };
+    groceries: { [x: string]: TGrocery[] };
     language: NProvider.TOptions;
     userType: N;
     isFitri: B;

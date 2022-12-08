@@ -9,6 +9,9 @@ import { addDocument, deleteDocument, getCollection } from "src/firebase";
 import { toast } from "react-toastify";
 import { useParams, Params } from "react-router";
 import { addNewGrocery, deleteGrocery, setGroceries } from "@store/actions";
+import { checkCurrency } from "@components/home-page/utils";
+
+import * as C from "@utils/constants";
 
 export const useGroceriesService = () => {
   const { boxId } = useParams<Params>();
@@ -19,6 +22,28 @@ export const useGroceriesService = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const groceryDbPath = `users/${props?.state.user?.uid}/budgets/${boxId}/groceries`;
+
+  const currentBox = props?.state.user.boxes.find(({ id }) => id === boxId);
+
+  const spentMoney = Number(
+    (props?.state?.user?.groceries[String(boxId)] || []).reduce(
+      (acc: number, curr) => {
+        return acc + curr.value;
+      },
+      0
+    )
+  );
+
+  const leftBudget =
+    Number(currentBox?.budget) -
+    Number(
+      (props?.state?.user?.groceries[String(boxId)] || []).reduce(
+        (acc: number, curr) => {
+          return acc + curr.value;
+        },
+        0
+      )
+    );
 
   const toggleFormModal = () => setIsModalOpen(!isModalOpen);
 
@@ -70,6 +95,22 @@ export const useGroceriesService = () => {
     setIsLoading(false);
   };
 
+  const checkIsModalValid = (values: FormikValues) => {
+    const currentBudget = leftBudget - values[C.VALUE];
+
+    if (currentBudget < 0) {
+      return {
+        isBlocked: true,
+        errorMessage: `Price cannot be over the budget, you still need ${checkCurrency(
+          currentBox?.currency.value,
+          values[C.VALUE] - leftBudget
+        )}`,
+      };
+    }
+
+    return { isBlocked: false, errorMessage: "" };
+  };
+
   useEffect(() => {
     getGroceries();
   }, [boxId]);
@@ -82,5 +123,9 @@ export const useGroceriesService = () => {
     isModalOpen,
     isLoading,
     boxId,
+    spentMoney,
+    leftBudget,
+    currentBox,
+    checkIsModalValid,
   };
 };

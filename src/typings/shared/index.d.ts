@@ -1,5 +1,5 @@
 import { FormikErrors, FormikValues } from "formik";
-import { NProvider } from "..";
+import { NProvider, NReducer } from "..";
 
 export declare namespace NShared {
   type S = string;
@@ -85,6 +85,8 @@ export declare namespace NShared {
     inline?: B;
   };
 
+  type TCheckIsModalValidated = { isBlocked: B; errorMessage: S };
+
   type ICustomFormModal = {
     toggle: () => void;
     initialValues: FormikValues;
@@ -93,6 +95,7 @@ export declare namespace NShared {
     onClick: (values: FormikValues) => void;
     form: readonly TForm[];
     isLoading?: B;
+    checkIsModalValid?: (values: FormikValues) => TCheckIsModalValidated;
   };
 
   type ICustomLoader = {

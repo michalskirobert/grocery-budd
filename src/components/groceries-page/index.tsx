@@ -8,6 +8,7 @@ import { Col } from "react-bootstrap";
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
+import { checkCurrency } from "@components/home-page/utils";
 
 const GroceryList = () => {
   const {
@@ -18,6 +19,10 @@ const GroceryList = () => {
     isLoading,
     state,
     boxId,
+    spentMoney,
+    leftBudget,
+    currentBox,
+    checkIsModalValid,
   } = useGroceriesService();
 
   return (
@@ -39,6 +44,12 @@ const GroceryList = () => {
             ],
           }}
         />
+        <p>
+          Left budget: {checkCurrency(currentBox?.currency.value, leftBudget)}
+        </p>
+        <p>
+          Spent money: {checkCurrency(currentBox?.currency.value, spentMoney)}
+        </p>
         {state?.user.groceries[String(boxId)]
           ?.sort((a) => (!a?.isPinned ? 1 : -1))
           .map(({ id, name, category, shopName, value, isPinned }) => (
@@ -50,7 +61,7 @@ const GroceryList = () => {
                   isPinned,
                   name,
                   shopName,
-                  value,
+                  value: checkCurrency(currentBox?.currency.value, value),
                   handleRemove: removeGrocery,
                   handleEdit: window.open,
                 }}
@@ -71,6 +82,7 @@ const GroceryList = () => {
             onClick: addGrocery,
             form: setGroceryForm(state?.configApp),
             isLoading,
+            checkIsModalValid,
           }}
         />
       )}

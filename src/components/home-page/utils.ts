@@ -79,7 +79,7 @@ export const setForm = (
   },
 ];
 
-export const checkCurrency = (currency: string, value: number) => {
+export const checkCurrency = (currency?: string, value?: number) => {
   switch (currency) {
     case "zł":
       return `${value}zł`;

@@ -8,14 +8,11 @@ export const Context = React.createContext<NProvider.TContextApiProps | null>(
 );
 
 export const Provider = ({ Children }: NProvider.TProviderProps) => {
-  const { groceries, setGroceries, logout, dispatch, state } =
-    useProviderService();
+  const { logout, dispatch, state } = useProviderService();
 
   return (
     <Context.Provider
       value={{
-        groceries,
-        setGroceries,
         logout,
         dispatch,
         state,

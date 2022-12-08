@@ -16,8 +16,6 @@ import {
 } from "@store/actions";
 
 export const useProviderService = () => {
-  const [groceries, setGroceries] =
-    useState<Record<string, any>[]>(initialGroceryHelper);
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
 
   const [language, setLanguage] = useState<NProvider.TOptions>({
@@ -76,8 +74,6 @@ export const useProviderService = () => {
   }, [state.user.uid]);
 
   return {
-    groceries,
-    setGroceries,
     language,
     setLanguage,
     logout,

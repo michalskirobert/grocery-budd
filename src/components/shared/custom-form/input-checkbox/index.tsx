@@ -10,7 +10,7 @@ export const InputSingleCheckbox = ({
   invalid,
 }) => (
   <>
-    <Label {...{ check }}>{internalLabel}</Label>
+    <Label {...{ check, style: { marginRight: "5px" } }}>{internalLabel}</Label>
     <Input
       {...{
         name: id,
