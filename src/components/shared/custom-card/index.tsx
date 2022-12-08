@@ -10,6 +10,7 @@ export const CustomCard = ({
   category,
   shopName,
   value,
+  pieces,
   isPinned,
   handleRemove,
   handleEdit,
@@ -47,6 +48,7 @@ export const CustomCard = ({
         <CardTitle tag="h5">{name}</CardTitle>
         <CardText>
           <p>{shopName?.label}</p>
+          <p>{pieces}</p>
           <p>{String(value)}</p>
         </CardText>
       </CardBody>

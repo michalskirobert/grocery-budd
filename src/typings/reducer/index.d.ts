@@ -29,6 +29,7 @@ export declare namespace NReducer {
     category: NProvider.TOptions;
     shopName: NProvider.TOptions;
     value: N;
+    pieces: N;
     isPinned: B;
   };
 

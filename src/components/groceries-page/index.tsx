@@ -52,7 +52,7 @@ const GroceryList = () => {
         </p>
         {state?.user.groceries[String(boxId)]
           ?.sort((a) => (!a?.isPinned ? 1 : -1))
-          .map(({ id, name, category, shopName, value, isPinned }) => (
+          .map(({ id, name, category, shopName, value, isPinned, pieces }) => (
             <Col>
               <CustomCard
                 {...{
@@ -64,6 +64,7 @@ const GroceryList = () => {
                   value: checkCurrency(currentBox?.currency.value, value),
                   handleRemove: removeGrocery,
                   handleEdit: window.open,
+                  pieces,
                 }}
               />
             </Col>

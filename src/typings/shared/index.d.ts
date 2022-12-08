@@ -76,7 +76,7 @@ export declare namespace NShared {
     kind: TFormKinds;
     validations: TFormValidations;
     placeholder?: S;
-    initialValue?: S | { label: S; value: S } | B;
+    initialValue?: S | N | { label: S; value: S } | B;
     options?: NProvider.TOptions[];
     isPositionAddable?: B;
     internalLabel?: S;

@@ -27,6 +27,7 @@ export const initialState: NReducer.TState = {
           name: "",
           shopName: { label: "", value: "" },
           value: 0,
+          pieces: 0,
         },
       ],
     },

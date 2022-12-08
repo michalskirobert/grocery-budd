@@ -25,6 +25,7 @@ export const SHOP_NAME_LABEL = "Shop name";
 export const SHOP_NAME = "shopName";
 export const PRICE = "Price";
 export const VALUE = "value";
+export const PIECES = "pieces";
 export const PIN_UP_LABEL = "Pin";
 export const PIN_UP = "isPinned";
 export const AGE = "age";
