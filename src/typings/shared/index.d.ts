@@ -31,6 +31,8 @@ export declare namespace NShared {
     check?: B;
     inline?: B;
     formula?: NShared.TForm["validations"]["formula"];
+    isCalculatingActive?: TForm["isCalculatingActive"];
+    calculate?: TForm["calculate"];
   };
 
   type TCustomFormRenderFormProps = {
@@ -70,11 +72,19 @@ export declare namespace NShared {
     formula?: TValidationFormula;
   };
 
+  type TCalculate = {
+    mainValue: S;
+    operator: "*" | "+" | "-" | "(" | ")" | "%" | "/";
+    calculateBy: S;
+  };
+
   type TForm = readonly {
     id: string;
     label: string;
     kind: TFormKinds;
     validations: TFormValidations;
+    isCalculatingActive?: B;
+    calculate?: TCalculate;
     placeholder?: S;
     initialValue?: S | N | { label: S; value: S } | B;
     options?: NProvider.TOptions[];

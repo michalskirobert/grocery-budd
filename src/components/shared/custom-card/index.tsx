@@ -40,7 +40,8 @@ export const CustomCard = ({
               </S.RemoveBtn>
             </S.Container>
             <h6 className="category">
-              {category?.label} / {shopName?.label}
+              {category?.label}
+              {shopName?.label && ` / ${shopName?.label}`}
             </h6>
             <h4 className="title">{name}</h4>
             <p className="description">

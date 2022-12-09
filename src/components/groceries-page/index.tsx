@@ -1,14 +1,13 @@
 import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
-import { GROCERY_COLORS, setGroceryForm } from "./utils";
+import { setGroceryForm } from "./utils";
 import { CustomNav } from "@components/shared/custom-nav";
 import { CustomCard } from "@components/shared/custom-card";
 import { Row } from "reactstrap";
-import { Col } from "react-bootstrap";
+import { checkCurrency } from "@components/home-page/utils";
 
 import * as C from "@utils/constants";
 import * as S from "./styles";
-import { checkCurrency } from "@components/home-page/utils";
 
 const GroceryList = () => {
   const {
@@ -46,28 +45,28 @@ const GroceryList = () => {
         />
         <p>
           Left budget:{" "}
-          <span style={{ color: leftBudget < 0 ? "red" : "#1111" }}>
+          <span style={{ color: leftBudget < 0 ? "red" : "black" }}>
             {checkCurrency(currentBox?.currency.value, leftBudget)}
           </span>
         </p>
         <p>
           Spent money: {checkCurrency(currentBox?.currency.value, spentMoney)}
         </p>
-        {state?.user.groceries[String(boxId)]
-          ?.sort((a) => (!a?.isPinned ? 1 : -1))
-          .map(
-            ({
-              id,
-              name,
-              category,
-              shopName,
-              value,
-              isPinned,
-              pieces,
-              color,
-              calculatedValue,
-            }) => (
-              <Col>
+        <S.CardWrapper>
+          {state?.user.groceries[String(boxId)]
+            ?.sort((a) => (!a?.isPinned ? 1 : -1))
+            .map(
+              ({
+                id,
+                name,
+                category,
+                shopName,
+                value,
+                isPinned,
+                pieces,
+                color,
+                calculatedValue,
+              }) => (
                 <CustomCard
                   {...{
                     id,
@@ -84,9 +83,9 @@ const GroceryList = () => {
                     calculatedValue,
                   }}
                 />
-              </Col>
-            )
-          )}
+              )
+            )}
+        </S.CardWrapper>
       </Row>
       <Row>
         <S.Add {...{ onClick: toggleFormModal }}>+</S.Add>

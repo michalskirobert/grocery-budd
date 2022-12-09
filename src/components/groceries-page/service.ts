@@ -29,7 +29,7 @@ export const useGroceriesService = () => {
   const spentMoney = Number(
     (props?.state?.user?.groceries[String(boxId)] || []).reduce(
       (acc: number, curr) => {
-        return acc + curr.calculatedValue;
+        return acc + curr.value * curr.pieces;
       },
       0
     )
@@ -40,7 +40,7 @@ export const useGroceriesService = () => {
     Number(
       (props?.state?.user?.groceries[String(boxId)] || []).reduce(
         (acc: number, curr) => {
-          return acc + curr.calculatedValue;
+          return acc + curr.value * curr.pieces;
         },
         0
       )
@@ -74,7 +74,7 @@ export const useGroceriesService = () => {
       const body: FormikValues = {
         ...values,
         color:
-          GROCERY_COLORS[Math.round(Math.random() * GROCERY_COLORS.length)],
+          GROCERY_COLORS[Math.round(Math.random() * GROCERY_COLORS.length - 1)],
         calculatedValue: values.value * values.pieces,
       };
 
@@ -113,7 +113,7 @@ export const useGroceriesService = () => {
   };
 
   const checkIsModalValid = (values: FormikValues) => {
-    const currentBudget = leftBudget - values[C.VALUE];
+    const currentBudget = leftBudget - values[C.VALUE] * values[C.PIECES];
 
     if (currentBudget < 0) {
       return {

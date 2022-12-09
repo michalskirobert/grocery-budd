@@ -21,6 +21,8 @@ export const CustomForm = ({
   check,
   inline,
   formula,
+  calculate,
+  isCalculatingActive,
 }: NShared.TCustomForm) => {
   const value = initialValue || values[id];
   const error = errors[id];
@@ -46,6 +48,8 @@ export const CustomForm = ({
             check,
             error,
             disabled: checkIsValid({ formula, values }),
+            calculate,
+            isCalculatingActive,
           }}
         />
       </Col>

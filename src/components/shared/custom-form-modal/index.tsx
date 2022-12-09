@@ -59,6 +59,8 @@ export const CustomFormModal = ({
                     options,
                     internalLabel,
                     validations,
+                    calculate,
+                    isCalculatingActive,
                   }) => (
                     <CustomForm
                       key={id}
@@ -73,6 +75,8 @@ export const CustomFormModal = ({
                         errors,
                         internalLabel,
                         formula: validations.formula,
+                        calculate,
+                        isCalculatingActive,
                       }}
                     />
                   )
