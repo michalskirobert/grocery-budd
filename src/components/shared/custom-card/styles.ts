@@ -42,12 +42,9 @@ export const EditBtn = styled.button`
 export const Container = styled.div`
   display: flex;
   justify-content: flex-end;
-`;
-
-export const Title = styled.p`
-  display: flex;
-  align-items: center;
-  height: 100%;
+  position: absolute;
+  top: 10px;
+  margin-left: 115px;
 `;
 
 export const Icon = styled(StarFill)`

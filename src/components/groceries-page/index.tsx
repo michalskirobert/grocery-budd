@@ -1,6 +1,6 @@
 import { CustomFormModal } from "../shared/custom-form-modal";
 import { useGroceriesService } from "./service";
-import { setGroceryForm } from "./utils";
+import { GROCERY_COLORS, setGroceryForm } from "./utils";
 import { CustomNav } from "@components/shared/custom-nav";
 import { CustomCard } from "@components/shared/custom-card";
 import { Row } from "reactstrap";
@@ -45,30 +45,48 @@ const GroceryList = () => {
           }}
         />
         <p>
-          Left budget: {checkCurrency(currentBox?.currency.value, leftBudget)}
+          Left budget:{" "}
+          <span style={{ color: leftBudget < 0 ? "red" : "#1111" }}>
+            {checkCurrency(currentBox?.currency.value, leftBudget)}
+          </span>
         </p>
         <p>
           Spent money: {checkCurrency(currentBox?.currency.value, spentMoney)}
         </p>
         {state?.user.groceries[String(boxId)]
           ?.sort((a) => (!a?.isPinned ? 1 : -1))
-          .map(({ id, name, category, shopName, value, isPinned, pieces }) => (
-            <Col>
-              <CustomCard
-                {...{
-                  id,
-                  category,
-                  isPinned,
-                  name,
-                  shopName,
-                  value: checkCurrency(currentBox?.currency.value, value),
-                  handleRemove: removeGrocery,
-                  handleEdit: window.open,
-                  pieces,
-                }}
-              />
-            </Col>
-          ))}
+          .map(
+            ({
+              id,
+              name,
+              category,
+              shopName,
+              value,
+              isPinned,
+              pieces,
+              color,
+              calculatedValue,
+            }) => (
+              <Col>
+                <CustomCard
+                  {...{
+                    id,
+                    category,
+                    isPinned,
+                    name,
+                    shopName,
+                    currency: currentBox?.currency.value,
+                    value,
+                    handleRemove: removeGrocery,
+                    handleEdit: window.open,
+                    pieces,
+                    color,
+                    calculatedValue,
+                  }}
+                />
+              </Col>
+            )
+          )}
       </Row>
       <Row>
         <S.Add {...{ onClick: toggleFormModal }}>+</S.Add>

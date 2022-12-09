@@ -52,3 +52,12 @@ export const setGroceryForm = (
     validations: { isRequired: E.Required.No, requiredMessage: "" },
   },
 ];
+
+export const GROCERY_COLORS = [
+  "purple",
+  "yellow",
+  "blue",
+  "green",
+  "brown",
+  "orange",
+];

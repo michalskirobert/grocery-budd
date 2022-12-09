@@ -31,6 +31,8 @@ export declare namespace NReducer {
     value: N;
     pieces: N;
     isPinned: B;
+    color: S;
+    calculatedValue: N;
   };
 
   type TBox = {

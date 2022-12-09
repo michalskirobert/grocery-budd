@@ -12,6 +12,7 @@ import { addNewGrocery, deleteGrocery, setGroceries } from "@store/actions";
 import { checkCurrency } from "@components/home-page/utils";
 
 import * as C from "@utils/constants";
+import { GROCERY_COLORS } from "./utils";
 
 export const useGroceriesService = () => {
   const { boxId } = useParams<Params>();
@@ -28,7 +29,7 @@ export const useGroceriesService = () => {
   const spentMoney = Number(
     (props?.state?.user?.groceries[String(boxId)] || []).reduce(
       (acc: number, curr) => {
-        return acc + curr.value;
+        return acc + curr.calculatedValue;
       },
       0
     )
@@ -39,7 +40,7 @@ export const useGroceriesService = () => {
     Number(
       (props?.state?.user?.groceries[String(boxId)] || []).reduce(
         (acc: number, curr) => {
-          return acc + curr.value;
+          return acc + curr.calculatedValue;
         },
         0
       )
@@ -70,9 +71,25 @@ export const useGroceriesService = () => {
     if (!boxId) return;
 
     try {
+      const body: FormikValues = {
+        ...values,
+        color:
+          GROCERY_COLORS[Math.round(Math.random() * GROCERY_COLORS.length)],
+        calculatedValue: values.value * values.pieces,
+      };
+
       setIsLoading(true);
-      const resp = await addDocument(groceryDbPath, values);
-      props?.dispatch(addNewGrocery({ ...values, id: resp.id }, boxId));
+      const resp = await addDocument(groceryDbPath, body);
+
+      props?.dispatch(
+        addNewGrocery(
+          {
+            ...body,
+            id: resp.id,
+          },
+          boxId
+        )
+      );
       toast.success("Added!!");
       toggleFormModal();
     } catch (error) {
