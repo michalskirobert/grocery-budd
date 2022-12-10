@@ -50,7 +50,7 @@ export const useProviderService = () => {
 
       dispatch(setUser(userProperties.data() as NReducer.TUser));
       dispatch(setBoxes(boxes));
-      dispatch(setConfigApp(appConfig.data()));
+      dispatch(setConfigApp(appConfig.data() as NReducer.TConfig));
     } catch (error) {
       toast.error("error");
     }

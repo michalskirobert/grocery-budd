@@ -44,7 +44,7 @@ export const Container = styled.div`
   justify-content: flex-end;
   position: absolute;
   top: 10px;
-  margin-left: 115px;
+  margin-left: 105px;
 `;
 
 export const Icon = styled(StarFill)`

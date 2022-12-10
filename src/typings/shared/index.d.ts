@@ -109,7 +109,7 @@ export declare namespace NShared {
   };
 
   type ICustomLoader = {
-    children: any;
+    children: JSX.Element;
     isBlocking: B;
   };
 
@@ -136,7 +136,7 @@ export declare namespace NShared {
     pieces: N;
     isPinned?: B;
     handleRemove: (id: string) => Promise<void>;
-    handleEdit: any;
+    handleEdit: (id: string) => void;
     color: S;
     currency?: S;
     calculatedValue: N;

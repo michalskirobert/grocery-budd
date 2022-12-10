@@ -22,7 +22,9 @@ export const setInitialState = (): NReducer.TSetInitialState => ({
   type: E.Reducer.SET_INITIAL_STATE,
 });
 
-export const setConfigApp = (payload: any): NReducer.TSetConfig => ({
+export const setConfigApp = (
+  payload: NReducer.TConfig
+): NReducer.TSetConfig => ({
   type: E.Reducer.SET_CONFIG_APP,
   payload,
 });

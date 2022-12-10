@@ -87,6 +87,12 @@ export const checkCurrency = (currency?: string, value?: number) => {
       return `€${value}`;
     case "$":
       return `$${value}`;
+    case "₹":
+      return `₹${value}`;
+    case "₩":
+      return `₩${value}`;
+    case "¥":
+      return `¥${value}`;
     default:
       return String(value);
   }
