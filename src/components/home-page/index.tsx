@@ -41,7 +41,7 @@ const HomePage = () => {
                 <S.Box {...{ color, backgroundColor }}>
                   <S.Title>{title}</S.Title>
                   <S.Line {...{ color }} />
-                  <S.Budget>{checkCurrency(currency.value, budget)}</S.Budget>
+                  <S.Budget>{checkCurrency(currency?.value, budget)}</S.Budget>
                 </S.Box>
               </Link>
               <S.RemoveBtn {...{ color, onClick: () => removeBox(id) }}>

@@ -1,27 +1,15 @@
-import { DocumentData } from "@firebase/firestore";
 import React from "react";
+
+import { DocumentData } from "@firebase/firestore";
 import { NProvider } from "..";
+
+import * as E from "@utils/enums";
 
 export declare namespace NReducer {
   type S = string;
   type N = number;
   type D = Date;
   type B = boolean;
-
-  type TSetUser = {
-    type: S;
-    payload?: any;
-  };
-
-  type TSetLoading = {
-    type: S;
-    payload: B;
-  };
-
-  type TAddGrocery = {
-    type: S;
-    payload: { groceryId: S; grocery: any };
-  };
 
   type TGrocery = {
     id: S;
@@ -38,11 +26,10 @@ export declare namespace NReducer {
   type TBox = {
     id: S;
     budget: N;
-    currency: { label: S; value: S };
+    currency?: { label: S; value: S };
     color: S;
     backgroundColor: S;
     title: S;
-    budgetValue: N;
     randomColor: B;
     lastModifiedDate: Date;
     createdDate: Date;
@@ -60,16 +47,75 @@ export declare namespace NReducer {
     accessToken?: S | null;
   };
 
+  type TConfig = {
+    categories: NProvider.TOptions[];
+    shops: NProvider.TOptions[];
+    currencies: NProvider.TOptions[];
+    languages: NProvider.TOptions[];
+  };
+
   type TState = {
     user: TUser;
     isLoading: B;
-    configApp: {
-      categories: NProvider.TOptions[];
-      shops: NProvider.TOptions[];
-      currencies: NProvider.TOptions[];
-      languages: NProvider.TOptions[];
-    };
+    configApp: TConfig;
   };
 
-  type TAcion = TSetUser | TSetLoading | TAddGrocery;
+  //Actions
+
+  type TSetUser = {
+    type: E.Reducer.SET_USER;
+    payload?: TUser;
+  };
+
+  type TSetLoading = {
+    type: E.Reducer.SET_LOADING;
+    payload: B;
+  };
+
+  type TAddGrocery = {
+    type: E.Reducer.ADD_NEW_GROCERY;
+    payload: { boxId?: S; grocery: NReducer.TGrocery };
+  };
+
+  type TSetBoxes = {
+    type: E.Reducer.SET_BOXES;
+    payload: NReducer.TBox[];
+  };
+
+  type TSetInitialState = {
+    type: E.Reducer.SET_INITIAL_STATE;
+  };
+
+  type TSetConfig = {
+    type: E.Reducer.SET_CONFIG_APP;
+    payload: TConfig;
+  };
+
+  type TDeleteGrocery = {
+    type: E.Reducer.DELETE_GROCERY;
+    payload: { boxId: S; groceryId: S };
+  };
+
+  type TSetGroceries = {
+    type: E.Reducer.SET_GROCERIES;
+    payload: { groceries: TGrocery[]; boxId: S };
+  };
+
+  type TSetLanguage = {
+    type: E.Reducer.CHANGE_LANGUAGE;
+    payload: NProvider.TOptions;
+  };
+
+  type TAcion =
+    | TSetUser
+    | TSetLoading
+    | TAddGrocery
+    | TSetBoxes
+    | TSetLoading
+    | TSetInitialState
+    | TAddGrocery
+    | TSetConfig
+    | TDeleteGrocery
+    | TSetLanguage
+    | TSetGroceries;
 }

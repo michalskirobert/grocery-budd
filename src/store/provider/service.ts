@@ -48,7 +48,7 @@ export const useProviderService = () => {
         boxes.push({ id: doc.id, ...doc.data(), groceries: [] })
       );
 
-      dispatch(setUser(userProperties.data()));
+      dispatch(setUser(userProperties.data() as NReducer.TUser));
       dispatch(setBoxes(boxes));
       dispatch(setConfigApp(appConfig.data()));
     } catch (error) {

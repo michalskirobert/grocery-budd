@@ -42,7 +42,7 @@ export const useHomePageService = () => {
       const body = { ...request, id: resp.id };
 
       contextValues.dispatch(
-        setBoxes([...contextValues.state.user.boxes, body])
+        setBoxes([...contextValues.state.user.boxes, body] as NReducer.TBox[])
       );
 
       toggleModal();
@@ -105,7 +105,7 @@ export const useHomePageService = () => {
         (box) => box.id !== id
       );
       await deleteDocument(`${budgetCollection}/${id}`);
-      contextValues?.dispatch(setBoxes(filteredBoxes));
+      contextValues?.dispatch(setBoxes(filteredBoxes as NReducer.TBox[]));
       toast.success("usunięto");
     } catch (error) {
       toast.error("wystąpił błąd ;)");

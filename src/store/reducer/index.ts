@@ -1,6 +1,6 @@
 import { NReducer } from "@namespace/reducer";
 
-import * as C from "@utils/constants";
+import * as E from "@utils/enums";
 
 export const initialState: NReducer.TState = {
   user: {
@@ -11,7 +11,6 @@ export const initialState: NReducer.TState = {
         currency: { label: "", value: "" },
         color: "",
         backgroundColor: "",
-        budgetValue: 0,
         title: "",
         randomColor: false,
         createdDate: new Date(),
@@ -40,27 +39,30 @@ export const initialState: NReducer.TState = {
     accessToken: null,
     uid: null,
     profilePicture:
-      "https://firebasestorage.googleapis.com/v0/b/grocery-budd.appspot.com/o/users%2Fpublic%2FprofilePicture%2Fanonymous.png?alt=media&token=e52c401a-9d48-45e2-bec3-cd7a209db698",
+      "https://firebasestoragE.Reducer.googleapis.com/v0/b/grocery-budd.appspot.com/o/users%2Fpublic%2FprofilePicture%2Fanonymous.png?alt=media&token=e52c401a-9d48-45e2-bec3-cd7a209db698",
   },
   isLoading: false,
   configApp: { categories: [], currencies: [], shops: [], languages: [] },
 };
 
-export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {
+export const reducer = (
+  state: NReducer.TState,
+  action: NReducer.TAcion
+): NReducer.TState => {
   switch (action.type) {
-    case C.SET_INITIAL_STATE:
+    case E.Reducer.SET_INITIAL_STATE:
       return initialState;
-    case C.SET_CONFIG_APP:
+    case E.Reducer.SET_CONFIG_APP:
       return {
         ...state,
         configApp: action.payload,
       };
-    case C.SET_USER:
+    case E.Reducer.SET_USER:
       return {
         ...state,
         user: { ...state.user, ...action.payload },
       };
-    case C.SET_BOXES:
+    case E.Reducer.SET_BOXES:
       return {
         ...state,
         user: {
@@ -68,32 +70,21 @@ export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {
           boxes: action.payload,
         },
       };
-    case C.SET_LANGUAGE:
-      return {
-        ...state,
-        language: action.payload,
-      };
-    case C.SET_IS_FITRI:
-      return {
-        ...state,
-        isFitri: action.payload,
-      };
-
-    case C.ADD_NEW_GROCERY:
+    case E.Reducer.ADD_NEW_GROCERY:
       return {
         ...state,
         user: {
           ...state.user,
           groceries: {
-            [action?.payload?.boxId]: [
-              ...(state.user.groceries[action?.payload?.boxId] || []),
+            [String(action?.payload?.boxId)]: [
+              ...(state.user.groceries[String(action?.payload?.boxId)] || []),
               action.payload?.grocery,
             ],
           },
         },
       };
 
-    case C.DELETE_GROCERY:
+    case E.Reducer.DELETE_GROCERY:
       return {
         ...state,
         user: {
@@ -106,18 +97,18 @@ export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {
         },
       };
 
-    case C.SET_GROCERIES:
+    case E.Reducer.SET_GROCERIES:
       return {
         ...state,
         user: {
           ...state.user,
           groceries: {
             ...state.user.groceries,
-            [action.payload?.boxId]: action.payload.groceries,
+            [String(action.payload?.boxId)]: action.payload?.groceries,
           },
         },
       };
-    case C.CHANGE_LANGUAGE:
+    case E.Reducer.CHANGE_LANGUAGE:
       return {
         ...state,
         user: {
@@ -126,7 +117,7 @@ export const reducer = (state: NReducer.TState, action: NReducer.TAcion) => {
         },
       };
 
-    case C.SET_LOADING:
+    case E.Reducer.SET_LOADING:
       return {
         ...state,
         isLoading: action.payload,

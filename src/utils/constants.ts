@@ -44,19 +44,6 @@ export const COLOR = "color";
 export const RANDOM_COLOR_LABEL = "Random color";
 export const RANDOM_COLOR = "randomColor";
 
-//Reducer
-export const SET_USER = "SET_USER";
-export const SET_BOXES = "SET_BOXES";
-export const SET_LANGUAGE = "SET_LANGUAGE";
-export const SET_IS_FITRI = "SET_IS_FITRI";
-export const SET_LOADING = "SET_LOADING";
-export const SET_INITIAL_STATE = "SET_INITIAL_STATE";
-export const SET_CONFIG_APP = "SET_CONFIG_APP";
-export const ADD_NEW_GROCERY = "ADD_NEW_GROCERY";
-export const DELETE_GROCERY = "DELETE_GROCERY";
-export const SET_GROCERIES = "SET_GROCERIES";
-export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
-
 //COLORS
 
 export const COLOR_BASE = {

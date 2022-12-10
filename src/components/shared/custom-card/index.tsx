@@ -1,4 +1,5 @@
 import { checkCurrency } from "@components/home-page/utils";
+import { NShared } from "@namespace/shared";
 import { Pencil, StarFill, Trash } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
@@ -18,8 +19,7 @@ export const CustomCard = ({
   color,
   currency,
   calculatedValue,
-}) => {
-  console.log({ currency, value });
+}: NShared.TCustomCard) => {
   return (
     <div className="col-md-4 col-sm-6 content-card">
       <div className="card-big-shadow">
@@ -40,8 +40,8 @@ export const CustomCard = ({
               </S.RemoveBtn>
             </S.Container>
             <h6 className="category">
-              {category?.label}
-              {shopName?.label && ` / ${shopName?.label}`}
+              {category}
+              {shopName && ` / ${shopName}`}
             </h6>
             <h4 className="title">{name}</h4>
             <p className="description">

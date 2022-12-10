@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { FormikValues } from "formik";
 
 import { Context } from "@store/provider";
-import { NProvider } from "@namespace/index";
+import { NProvider, NReducer } from "@namespace/index";
 
 import { addDocument, deleteDocument, getCollection } from "src/firebase";
 import { toast } from "react-toastify";
@@ -56,7 +56,10 @@ export const useGroceriesService = () => {
       const resp = await getCollection(groceryDbPath);
       props?.dispatch(
         setGroceries(
-          resp.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+          resp.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          })) as NReducer.TGrocery[],
           boxId
         )
       );
@@ -71,8 +74,8 @@ export const useGroceriesService = () => {
     if (!boxId) return;
 
     try {
-      const body: FormikValues = {
-        ...values,
+      const body: NReducer.TGrocery = {
+        ...(values as NReducer.TGrocery),
         color:
           GROCERY_COLORS[Math.round(Math.random() * GROCERY_COLORS.length - 1)],
         calculatedValue: values.value * values.pieces,
@@ -119,7 +122,7 @@ export const useGroceriesService = () => {
       return {
         isBlocked: true,
         errorMessage: `Price cannot be over the budget, you still need ${checkCurrency(
-          currentBox?.currency.value,
+          currentBox?.currency?.value,
           values[C.VALUE] - leftBudget
         )}`,
       };

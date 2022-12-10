@@ -7,6 +7,8 @@ import { addDocument, auth } from "src/firebase";
 
 import { toast } from "react-toastify";
 import { setIsLoading, setUser } from "@store/actions";
+import { NReducer } from "@namespace/reducer";
+import { initialState } from "@store/reducer";
 
 interface ISignUpData {
   email: string;
@@ -42,8 +44,10 @@ export const useSignUpService = () => {
       const resp = await createUserWithEmailAndPassword(auth, email, password);
       await createDataBase(resp.user.uid);
 
+      const body: NReducer.TUser = { ...resp.user, ...initialState["user"] };
+
       navigate("/");
-      props?.dispatch(setUser(resp.user));
+      props?.dispatch(setUser(body));
       props?.dispatch(setIsLoading(false));
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {

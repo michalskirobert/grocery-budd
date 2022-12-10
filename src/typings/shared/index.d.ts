@@ -127,7 +127,22 @@ export declare namespace NShared {
     isDisabled?: B;
   };
 
-  export type TCustomFormFeedbackProps = {
+  type TCustomCard = {
+    id: S;
+    name: S;
+    category: S;
+    shopName: S;
+    value: N;
+    pieces: N;
+    isPinned?: B;
+    handleRemove: (id: string) => Promise<void>;
+    handleEdit: any;
+    color: S;
+    currency?: S;
+    calculatedValue: N;
+  };
+
+  type TCustomFormFeedbackProps = {
     error: FormikErrors;
   };
 }

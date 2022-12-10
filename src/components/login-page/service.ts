@@ -7,6 +7,7 @@ import { auth } from "src/firebase";
 
 import { toast } from "react-toastify";
 import { setIsLoading, setUser } from "@store/actions";
+import { initialState } from "@store/reducer";
 
 interface ISignInData {
   email: string;
@@ -22,7 +23,8 @@ export const useLoginService = () => {
     try {
       props?.dispatch(setIsLoading(true));
       const resp = await signInWithEmailAndPassword(auth, email, password);
-      props?.dispatch(setUser(resp.user));
+      const body = { ...resp.user, ...initialState["user"] };
+      props?.dispatch(setUser(body));
       props?.dispatch(setIsLoading(false));
       navigate("/");
       toast.success(`Hello ${resp?.user?.email} :)`);

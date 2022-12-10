@@ -46,11 +46,11 @@ const GroceryList = () => {
         <p>
           Left budget:{" "}
           <span style={{ color: leftBudget < 0 ? "red" : "black" }}>
-            {checkCurrency(currentBox?.currency.value, leftBudget)}
+            {checkCurrency(currentBox?.currency?.value, leftBudget)}
           </span>
         </p>
         <p>
-          Spent money: {checkCurrency(currentBox?.currency.value, spentMoney)}
+          Spent money: {checkCurrency(currentBox?.currency?.value, spentMoney)}
         </p>
         <S.CardWrapper>
           {state?.user.groceries[String(boxId)]
@@ -70,11 +70,11 @@ const GroceryList = () => {
                 <CustomCard
                   {...{
                     id,
-                    category,
+                    category: category.label,
                     isPinned,
                     name,
-                    shopName,
-                    currency: currentBox?.currency.value,
+                    shopName: shopName.label,
+                    currency: currentBox?.currency?.value,
                     value,
                     handleRemove: removeGrocery,
                     handleEdit: window.open,
