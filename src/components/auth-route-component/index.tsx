@@ -8,6 +8,7 @@ import { NProvider } from "@namespace/provider";
 import { useLocation } from "react-router";
 import { setUser } from "@store/actions";
 import { initialState } from "@store/reducer";
+import { NReducer } from "@namespace/reducer";
 
 export const AuthPage = ({ children }) => {
   const [checkingIsLogged, setCheckingIsLogged] = useState<boolean>(true);
@@ -30,9 +31,9 @@ export const AuthPage = ({ children }) => {
         return;
       }
 
-      const body = { ...user, ...initialState["user"] };
+      const body = { ...initialState["user"], ...user };
 
-      props?.dispatch(setUser(body));
+      props?.dispatch(setUser(body as NReducer.TUser));
       setCheckingIsLogged(false);
     });
 

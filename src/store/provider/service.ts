@@ -36,7 +36,7 @@ export const useProviderService = () => {
   const getInitApp = async () => {
     if (!state.user?.uid) return;
 
-    let boxes: any[] = [];
+    let boxes: NReducer.TBox[] = [];
 
     try {
       dispatch(setIsLoading(true));
@@ -45,7 +45,7 @@ export const useProviderService = () => {
       const appConfig = await getDocument(userDataPaths.appConfig);
 
       budgets.docs.forEach(async (doc) =>
-        boxes.push({ id: doc.id, ...doc.data(), groceries: [] })
+        boxes.push({ id: doc.id, ...doc.data() } as NReducer.TBox)
       );
 
       dispatch(setUser(userProperties.data() as NReducer.TUser));

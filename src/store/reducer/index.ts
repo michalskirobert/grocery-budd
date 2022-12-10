@@ -39,7 +39,7 @@ export const initialState: NReducer.TState = {
     accessToken: null,
     uid: null,
     profilePicture:
-      "https://firebasestoragE.Reducer.googleapis.com/v0/b/grocery-budd.appspot.com/o/users%2Fpublic%2FprofilePicture%2Fanonymous.png?alt=media&token=e52c401a-9d48-45e2-bec3-cd7a209db698",
+      "https://firebasestorage.googleapis.com/v0/b/grocery-budd.appspot.com/o/users%2Fpublic%2FprofilePicture%2Fanonymous.png?alt=media&token=e52c401a-9d48-45e2-bec3-cd7a209db698",
   },
   isLoading: false,
   configApp: { categories: [], currencies: [], shops: [], languages: [] },

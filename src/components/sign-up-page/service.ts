@@ -44,10 +44,10 @@ export const useSignUpService = () => {
       const resp = await createUserWithEmailAndPassword(auth, email, password);
       await createDataBase(resp.user.uid);
 
-      const body: NReducer.TUser = { ...resp.user, ...initialState["user"] };
+      const body = { ...initialState["user"], ...resp.user };
 
       navigate("/");
-      props?.dispatch(setUser(body));
+      props?.dispatch(setUser(body as NReducer.TUser));
       props?.dispatch(setIsLoading(false));
       toast.success(`Hello ${resp?.user?.email} :)`);
     } catch (error) {
