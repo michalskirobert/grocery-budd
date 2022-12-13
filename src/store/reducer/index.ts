@@ -29,6 +29,8 @@ export const initialState: NReducer.TState = {
           pieces: 0,
           color: "yellow",
           calculatedValue: 0,
+          createdDate: new Date().toLocaleDateString(),
+          lastModifiedDate: new Date().toLocaleDateString(),
         },
       ],
     },

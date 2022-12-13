@@ -10,9 +10,11 @@ import { toast } from "react-toastify";
 import { useParams, Params } from "react-router";
 import { addNewGrocery, deleteGrocery, setGroceries } from "@store/actions";
 import { checkCurrency } from "@components/home-page/utils";
+import { GROCERY_COLORS } from "./utils";
 
 import * as C from "@utils/constants";
-import { GROCERY_COLORS } from "./utils";
+import { ChartData } from "chart.js";
+import { useConvertArrayToObject } from "@helpers/use-hooks";
 
 export const useGroceriesService = () => {
   const { boxId } = useParams<Params>();
@@ -78,6 +80,8 @@ export const useGroceriesService = () => {
         ...(values as NReducer.TGrocery),
         color:
           GROCERY_COLORS[Math.round(Math.random() * GROCERY_COLORS.length - 1)],
+        lastModifiedDate: new Date().toLocaleDateString(),
+        createdDate: new Date().toLocaleDateString(),
         calculatedValue: values.value * values.pieces,
       };
 
@@ -131,6 +135,42 @@ export const useGroceriesService = () => {
     return { isBlocked: false, errorMessage: "" };
   };
 
+  const parseGroceryData = () => {
+    const groceries = props?.state.user.groceries[String(boxId)];
+
+    const dates = Array.from(
+      new Set(groceries?.map((item) => item.createdDate)).values()
+    );
+
+    let budgets: number[] = [];
+
+    dates?.forEach((el) => {
+      const sources = groceries
+        ?.filter(({ createdDate }) => createdDate === el)
+        .reduce((acc, curr) => acc + curr.calculatedValue, 0) as number;
+
+      budgets.push(sources);
+    });
+
+    const { BLACK, BLUE, GREY, ORNAGE, PINK, SALMON, YELLOW } = C.COLOR_BASE;
+
+    const colors = [BLACK, BLUE, GREY, ORNAGE, PINK, SALMON, YELLOW];
+
+    const data: ChartData<"pie", number[], string> = {
+      labels: dates,
+      datasets: [
+        {
+          label: "Expenses",
+          data: budgets || [],
+          backgroundColor: colors,
+          hoverOffset: 4,
+        },
+      ],
+    };
+
+    return data;
+  };
+
   useEffect(() => {
     getGroceries();
   }, [boxId]);
@@ -147,5 +187,6 @@ export const useGroceriesService = () => {
     leftBudget,
     currentBox,
     checkIsModalValid,
+    parseGroceryData,
   };
 };

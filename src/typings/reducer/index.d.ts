@@ -21,6 +21,8 @@ export declare namespace NReducer {
     isPinned: B;
     color: S;
     calculatedValue: N;
+    lastModifiedDate: S;
+    createdDate: S;
   };
 
   type TBox = {

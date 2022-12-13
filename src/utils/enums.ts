@@ -2,7 +2,7 @@ export const enum UserType {
   Anonymous = 0,
   Logged = 10,
   Vip = 20,
-  Fitri = "inifnity",
+  Fitri = "infinity",
 }
 
 export const enum GroceryStatus {

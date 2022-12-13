@@ -6,6 +6,10 @@ import { CustomCard } from "@components/shared/custom-card";
 import { Row } from "reactstrap";
 import { checkCurrency } from "@components/home-page/utils";
 
+import { Chart, ArcElement, ChartData, Tooltip, Legend } from "chart.js";
+
+import { Pie } from "react-chartjs-2";
+
 import * as C from "@utils/constants";
 import * as S from "./styles";
 
@@ -22,11 +26,25 @@ const GroceryList = () => {
     leftBudget,
     currentBox,
     checkIsModalValid,
+    parseGroceryData,
   } = useGroceriesService();
+
+  Chart.register(ArcElement, Tooltip, Legend);
 
   return (
     <div>
       <Row>
+        <div style={{ maxWidth: "300px", maxHeight: "300px" }}>
+          <h2 style={{ textAlign: "center" }}>Chart shopping</h2>
+          <Pie
+            {...{
+              type: "pie",
+              data: parseGroceryData(),
+              height: 300,
+              width: 300,
+            }}
+          />
+        </div>
         <CustomNav
           {...{
             nav: [
