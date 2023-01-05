@@ -27,7 +27,7 @@ const HomePage = () => {
 
   return (
     <CustomBlockLoader isBlocking={!!state?.isLoading}>
-      <>
+      <div>
         <Row>
           {boxes
             ?.sort((a, b) => {
@@ -89,7 +89,7 @@ const HomePage = () => {
             }}
           />
         )}
-      </>
+      </div>
     </CustomBlockLoader>
   );
 };

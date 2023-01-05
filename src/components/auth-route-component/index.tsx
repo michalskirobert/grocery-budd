@@ -21,7 +21,10 @@ export const AuthPage = ({ children }) => {
   const AuthCheck = () =>
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        if (location.pathname.includes("sign-up")) {
+        if (
+          location.pathname.includes("sign-up") ||
+          location.pathname.includes("forgot-password")
+        ) {
           setCheckingIsLogged(false);
           return;
         }
@@ -41,7 +44,7 @@ export const AuthPage = ({ children }) => {
     AuthCheck(); // eslint-disable-next-line
   }, [auth]);
 
-  if (checkingIsLogged) return <div>Loading....</div>;
+  if (checkingIsLogged) return null;
 
-  return <>{children}</>;
+  return children;
 };

@@ -7,6 +7,7 @@ const Grocery = lazy(() => import("@components/grocery-page"));
 const LoginPage = lazy(() => import("@components/login-page"));
 const PageNotFound = lazy(() => import("@components/page-not-found"));
 const SignUpPage = lazy(() => import("@components/sign-up-page"));
+const ForgotPassword = lazy(() => import("@components/forgot-password-page"));
 
 export const menu = [];
 
@@ -44,6 +45,11 @@ export const routers: NProvider.TRoutes = [
   {
     path: "/sign-up",
     Children: SignUpPage,
+    index: false,
+  },
+  {
+    path: "/forgot-password",
+    Children: ForgotPassword,
     index: false,
   },
   {

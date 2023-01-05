@@ -4,11 +4,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { auth } from "src/firebase";
+import { useCreateValidations } from "@helpers/use-hooks";
 
 import { toast } from "react-toastify";
 import { setIsLoading, setUser } from "@store/actions";
 import { initialState } from "@store/reducer";
 import { NReducer } from "@namespace/reducer";
+import { FORM } from "./utils";
 
 interface ISignInData {
   email: string;
@@ -16,6 +18,10 @@ interface ISignInData {
 }
 
 export const useLoginService = () => {
+  const { validationSchema } = useCreateValidations({
+    form: FORM,
+  });
+
   const navigate = useNavigate();
 
   const props = useContext<NProvider.TContextApiProps | null>(Context);
@@ -39,5 +45,5 @@ export const useLoginService = () => {
     props?.logout(); // eslint-disable-next-line
   }, []);
 
-  return { signIn };
+  return { signIn, validationSchema };
 };

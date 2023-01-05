@@ -11,10 +11,9 @@ import { useParams, Params } from "react-router";
 import { addNewGrocery, deleteGrocery, setGroceries } from "@store/actions";
 import { checkCurrency } from "@components/home-page/utils";
 import { GROCERY_COLORS } from "./utils";
+import { ChartData } from "chart.js";
 
 import * as C from "@utils/constants";
-import { ChartData } from "chart.js";
-import { useConvertArrayToObject } from "@helpers/use-hooks";
 
 export const useGroceriesService = () => {
   const { boxId } = useParams<Params>();
@@ -137,33 +136,61 @@ export const useGroceriesService = () => {
 
   const parseGroceryData = () => {
     const groceries = props?.state.user.groceries[String(boxId)];
+    const shopes = props?.state.configApp.shops.map(
+      ({ label }) => label
+    ) as string[];
 
     const dates = Array.from(
       new Set(groceries?.map((item) => item.createdDate)).values()
     );
 
-    let budgets: number[] = [];
+    let shopesBudget: number[] = [];
+
+    shopes?.forEach((el) => {
+      const sources = groceries
+        ?.filter(({ shopName }) => shopName.label === el)
+        .reduce((acc, curr) => acc + curr.calculatedValue, 0) as number;
+
+      shopesBudget.push(sources);
+    });
+
+    let dateBudgets: number[] = [];
 
     dates?.forEach((el) => {
       const sources = groceries
         ?.filter(({ createdDate }) => createdDate === el)
         .reduce((acc, curr) => acc + curr.calculatedValue, 0) as number;
 
-      budgets.push(sources);
+      dateBudgets.push(sources);
     });
 
     const { BLACK, BLUE, GREY, ORNAGE, PINK, SALMON, YELLOW } = C.COLOR_BASE;
 
-    const colors = [BLACK, BLUE, GREY, ORNAGE, PINK, SALMON, YELLOW];
+    const colors = [YELLOW, BLACK, BLUE, GREY, ORNAGE, PINK, SALMON];
 
     const data: ChartData<"pie", number[], string> = {
       labels: dates,
       datasets: [
         {
-          label: "Expenses",
-          data: budgets || [],
+          type: "pie",
+          label: "Date expenses",
+          data: dateBudgets || [],
           backgroundColor: colors,
           hoverOffset: 4,
+          parsing: {
+            xAxisKey: "key",
+            yAxisKey: "value",
+          },
+        },
+        {
+          type: "pie",
+          label: "xxx",
+          data: shopesBudget || [],
+          backgroundColor: colors,
+          hoverOffset: 4,
+          parsing: {
+            yAxisKey: "gm",
+          },
         },
       ],
     };

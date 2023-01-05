@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 import { setIsLoading, setUser } from "@store/actions";
 import { NReducer } from "@namespace/reducer";
 import { initialState } from "@store/reducer";
+import { FORM } from "./utils";
+import { useCreateValidations } from "@helpers/use-hooks";
 
 interface ISignUpData {
   email: string;
@@ -29,6 +31,9 @@ const createDataBase = async (userId: string) => {
 };
 
 export const useSignUpService = () => {
+  const { validationSchema } = useCreateValidations({
+    form: FORM,
+  });
   const navigate = useNavigate();
 
   const props = useContext<NProvider.TContextApiProps | null>(Context);
@@ -60,5 +65,5 @@ export const useSignUpService = () => {
     props?.logout(); // eslint-disable-next-line
   }, []);
 
-  return { signUp };
+  return { signUp, validationSchema };
 };

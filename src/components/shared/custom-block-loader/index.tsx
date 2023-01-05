@@ -1,6 +1,7 @@
 import BlockUi from "react-block-ui";
 
 import { NShared } from "@namespace/shared";
+import { Spinner } from "react-bootstrap";
 
 export const CustomBlockLoader = ({
   children,
@@ -10,7 +11,7 @@ export const CustomBlockLoader = ({
     {...{
       tag: "div",
       blocking: isBlocking,
-      loader: <div>... Loading</div>,
+      loader: <Spinner animation="border" variant="warning" />,
     }}
   >
     {children}
