@@ -85,12 +85,14 @@ export const CustomFormModal = ({
             </ModalBody>
           </CustomBlockLoader>
           <ModalFooter>
-            <CustomFormFeedback
-              {...{
-                error:
-                  checkIsModalValid && checkIsModalValid(values).errorMessage,
-              }}
-            />
+            {
+              <CustomFormFeedback
+                {...{
+                  error:
+                    checkIsModalValid && checkIsModalValid(values).errorMessage,
+                }}
+              />
+            }
             <Button
               {...{
                 color: "primary",

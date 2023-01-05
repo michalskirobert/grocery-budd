@@ -82,7 +82,7 @@ export const setForm = (
 export const checkCurrency = (currency?: string, value?: number) => {
   const currencyChcker = new Intl.NumberFormat(undefined, {
     style: "currency",
-    currency,
+    currency: currency || "PLN",
     currencyDisplay: "symbol",
   });
 

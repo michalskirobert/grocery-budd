@@ -79,6 +79,11 @@ export declare namespace NReducer {
     payload: { boxId?: S; grocery: NReducer.TGrocery };
   };
 
+  type TEditGrocery = {
+    type: E.Reducer.EDIT_GROCERY;
+    payload: { boxId?: S; grocery: NReducer.TGrocery };
+  };
+
   type TSetBoxes = {
     type: E.Reducer.SET_BOXES;
     payload: NReducer.TBox[];
@@ -119,5 +124,6 @@ export declare namespace NReducer {
     | TSetConfig
     | TDeleteGrocery
     | TSetLanguage
-    | TSetGroceries;
+    | TSetGroceries
+    | TEditGrocery;
 }

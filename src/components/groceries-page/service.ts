@@ -5,10 +5,20 @@ import { FormikValues } from "formik";
 import { Context } from "@store/provider";
 import { NProvider, NReducer } from "@namespace/index";
 
-import { addDocument, deleteDocument, getCollection } from "src/firebase";
+import {
+  addDocument,
+  deleteDocument,
+  getCollection,
+  updateDocument,
+} from "src/firebase";
 import { toast } from "react-toastify";
 import { useParams, Params } from "react-router";
-import { addNewGrocery, deleteGrocery, setGroceries } from "@store/actions";
+import {
+  addNewGrocery,
+  deleteGrocery,
+  editGrocery,
+  setGroceries,
+} from "@store/actions";
 import { checkCurrency } from "@components/home-page/utils";
 import { GROCERY_COLORS } from "./utils";
 import { ChartData } from "chart.js";
@@ -23,6 +33,7 @@ export const useGroceriesService = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [formikValues, setFormikValues] = useState<FormikValues>({});
 
   const groceryDbPath = `users/${props?.state.user?.uid}/budgets/${boxId}/groceries`;
 
@@ -121,7 +132,17 @@ export const useGroceriesService = () => {
   };
 
   const checkIsModalValid = (values: FormikValues) => {
-    const currentBudget = leftBudget - values[C.VALUE] * values[C.PIECES];
+    const leftMoney =
+      Number(currentBox?.budget) -
+      Number(
+        (props?.state?.user?.groceries[String(boxId)] || [])
+          .filter(({ id }) => id !== formikValues?.id)
+          .reduce((acc: number, curr) => {
+            return acc + curr.value * curr.pieces;
+          }, 0)
+      );
+
+    const currentBudget = leftMoney - values[C.VALUE] * values[C.PIECES];
 
     if (currentBudget < 0) {
       return {
@@ -200,6 +221,39 @@ export const useGroceriesService = () => {
     return data;
   };
 
+  const openEditModal = (id: string) => {
+    setFormikValues({});
+
+    const formikValues = props?.state?.user?.groceries[String(boxId)].find(
+      (grocery) => grocery.id === id
+    );
+
+    setFormikValues(formikValues as FormikValues);
+
+    toggleEditModal();
+  };
+
+  const editCurrentGrocery = async (body: FormikValues) => {
+    try {
+      setIsLoading(true);
+      await updateDocument(`${groceryDbPath}/${body.id}`, body);
+      toggleEditModal();
+
+      const request = {
+        ...(body as NReducer.TGrocery),
+        calculatedValue: body.value * body.pieces,
+      };
+
+      props?.dispatch(editGrocery(request, boxId));
+
+      toast.success(`Grocery ${body.name} has been updated`);
+    } catch (error) {
+      toast.error("We can't update this grocery");
+    }
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     getGroceries();
   }, [boxId]);
@@ -219,5 +273,8 @@ export const useGroceriesService = () => {
     parseGroceryData,
     isEditModalOpen,
     toggleEditModal,
+    openEditModal,
+    formikValues,
+    editCurrentGrocery,
   };
 };

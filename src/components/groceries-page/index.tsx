@@ -30,6 +30,9 @@ const GroceryList = () => {
     parseGroceryData,
     isEditModalOpen,
     toggleEditModal,
+    openEditModal,
+    formikValues,
+    editCurrentGrocery,
   } = useGroceriesService();
 
   Chart.register(SubTitle, Title, Tooltip, ArcElement, Legend);
@@ -99,7 +102,7 @@ const GroceryList = () => {
                       currency: currentBox?.currency?.value,
                       value,
                       handleRemove: removeGrocery,
-                      handleEdit: window.open,
+                      handleEdit: openEditModal,
                       pieces,
                       color,
                       calculatedValue,
@@ -129,11 +132,11 @@ const GroceryList = () => {
         {isEditModalOpen && (
           <CustomFormModal
             {...{
-              initialValues: {},
-              isModalOpen,
-              title: C.EDIT_GROCERY,
+              initialValues: formikValues,
+              isModalOpen: isEditModalOpen,
+              title: formikValues.name,
               toggle: toggleEditModal,
-              onClick: addGrocery,
+              onClick: editCurrentGrocery,
               form: setGroceryForm(state?.configApp),
               isLoading,
               checkIsModalValid,

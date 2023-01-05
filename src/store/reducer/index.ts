@@ -86,6 +86,26 @@ export const reducer = (
         },
       };
 
+    case E.Reducer.EDIT_GROCERY:
+      let updatedGrocery = state.user.groceries[
+        String(action?.payload?.boxId)
+      ].map((grocery) => {
+        if (grocery.id === action.payload.grocery.id) {
+          return action.payload.grocery;
+        }
+        return grocery;
+      });
+
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          groceries: {
+            [String(action?.payload?.boxId)]: updatedGrocery,
+          },
+        },
+      };
+
     case E.Reducer.DELETE_GROCERY:
       return {
         ...state,

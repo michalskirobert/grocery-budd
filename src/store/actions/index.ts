@@ -37,6 +37,14 @@ export const addNewGrocery = (
   payload: { boxId, grocery },
 });
 
+export const editGrocery = (
+  grocery: NReducer.TGrocery,
+  boxId?: string
+): NReducer.TEditGrocery => ({
+  type: E.Reducer.EDIT_GROCERY,
+  payload: { boxId, grocery },
+});
+
 export const deleteGrocery = (
   boxId: string,
   groceryId: string
