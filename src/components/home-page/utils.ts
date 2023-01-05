@@ -80,20 +80,11 @@ export const setForm = (
 ];
 
 export const checkCurrency = (currency?: string, value?: number) => {
-  switch (currency) {
-    case "zł":
-      return `${value}zł`;
-    case "€":
-      return `€${value}`;
-    case "$":
-      return `$${value}`;
-    case "₹":
-      return `₹${value}`;
-    case "₩":
-      return `₩${value}`;
-    case "¥":
-      return `¥${value}`;
-    default:
-      return String(value);
-  }
+  const currencyChcker = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency,
+    currencyDisplay: "symbol",
+  });
+
+  return currencyChcker.format(value || 0);
 };

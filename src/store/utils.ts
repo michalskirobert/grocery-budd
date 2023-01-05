@@ -3,7 +3,6 @@ import { NProvider } from "@namespace/index";
 
 const HomePage = lazy(() => import("@components/home-page"));
 const Groceries = lazy(() => import("@components/groceries-page"));
-const Grocery = lazy(() => import("@components/grocery-page"));
 const LoginPage = lazy(() => import("@components/login-page"));
 const PageNotFound = lazy(() => import("@components/page-not-found"));
 const SignUpPage = lazy(() => import("@components/sign-up-page"));
@@ -20,11 +19,6 @@ export const routers: NProvider.TRoutes = [
   {
     path: "/groceries/:boxId",
     Children: Groceries,
-    index: false,
-  },
-  {
-    path: "/groceries/:boxId/:groceryId",
-    Children: Grocery,
     index: false,
   },
   {

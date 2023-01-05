@@ -34,6 +34,7 @@ export const TITLE = "title";
 
 //GROCERY
 export const GROCERY_MODAL_TITLE = "New Grocery";
+export const EDIT_GROCERY = "Edit grocery";
 
 //Homepage
 export const CURRENCY = "currency";

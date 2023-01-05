@@ -22,6 +22,7 @@ export const useGroceriesService = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
 
   const groceryDbPath = `users/${props?.state.user?.uid}/budgets/${boxId}/groceries`;
 
@@ -48,6 +49,7 @@ export const useGroceriesService = () => {
     );
 
   const toggleFormModal = () => setIsModalOpen(!isModalOpen);
+  const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
 
   const getGroceries = async () => {
     if (!boxId) return;
@@ -215,5 +217,7 @@ export const useGroceriesService = () => {
     currentBox,
     checkIsModalValid,
     parseGroceryData,
+    isEditModalOpen,
+    toggleEditModal,
   };
 };

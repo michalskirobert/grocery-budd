@@ -28,6 +28,8 @@ const GroceryList = () => {
     currentBox,
     checkIsModalValid,
     parseGroceryData,
+    isEditModalOpen,
+    toggleEditModal,
   } = useGroceriesService();
 
   Chart.register(SubTitle, Title, Tooltip, ArcElement, Legend);
@@ -117,6 +119,20 @@ const GroceryList = () => {
               isModalOpen,
               title: C.GROCERY_MODAL_TITLE,
               toggle: toggleFormModal,
+              onClick: addGrocery,
+              form: setGroceryForm(state?.configApp),
+              isLoading,
+              checkIsModalValid,
+            }}
+          />
+        )}
+        {isEditModalOpen && (
+          <CustomFormModal
+            {...{
+              initialValues: {},
+              isModalOpen,
+              title: C.EDIT_GROCERY,
+              toggle: toggleEditModal,
               onClick: addGrocery,
               form: setGroceryForm(state?.configApp),
               isLoading,
