@@ -41,7 +41,12 @@ export const setGroceryForm = (
     id: C.VALUE,
     label: C.PRICE,
     kind: C.INPUT_TYPES.INPUT_NUMBER,
-    validations: { isRequired: E.Required.Yes, requiredMessage: "required" },
+    validations: {
+      isRequired: E.Required.Yes,
+      requiredMessage: "required",
+      min: 0,
+      minMessage: "Cannot be less than 0",
+    },
   },
   {
     id: C.PIN_UP,

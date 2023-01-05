@@ -51,7 +51,7 @@ export const useCreateValidations = ({
     let valid = setRequirment(validations, setValidationKind(kind));
 
     if (!!max) valid = valid?.max(Number(max), maxMessage);
-    if (!!min) valid = valid?.min(Number(min), minMessage);
+    if (!!min || min === 0) valid = valid?.min(Number(min), minMessage);
 
     return valid;
   };
