@@ -66,3 +66,12 @@ export const GROCERY_COLORS = [
   "brown",
   "orange",
 ];
+
+export const FILTERS_HELPER = {
+  SEARCH: "search",
+  PIN: "pin",
+  NAME: "name",
+  DATE: "date",
+  PRICE: "price",
+  SHOP: "shop",
+};

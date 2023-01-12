@@ -20,7 +20,7 @@ import {
   setGroceries,
 } from "@store/actions";
 import { checkCurrency } from "@components/home-page/utils";
-import { GROCERY_COLORS } from "./utils";
+import { FILTERS_HELPER, GROCERY_COLORS } from "./utils";
 import { ChartData } from "chart.js";
 
 import * as C from "@utils/constants";
@@ -34,6 +34,10 @@ export const useGroceriesService = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const [formikValues, setFormikValues] = useState<FormikValues>({});
+  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState<boolean>(false);
+  const [groceriesList, setGroceriesList] = useState<
+    NReducer.TGrocery[] | undefined
+  >([]);
 
   const groceryDbPath = `users/${props?.state.user?.uid}/budgets/${boxId}/groceries`;
 
@@ -61,6 +65,39 @@ export const useGroceriesService = () => {
 
   const toggleFormModal = () => setIsModalOpen(!isModalOpen);
   const toggleEditModal = () => setIsEditModalOpen(!isEditModalOpen);
+  const toggleFiltersModal = () => setIsFiltersModalOpen(!isFiltersModalOpen);
+
+  const onFilters = ({ key, search }: { key: string; search: string }) => {
+    const foundItems = props?.state?.user.groceries[String(boxId)]?.filter(
+      (item) =>
+        item[key].toLocaleLowerCase().includes(search.toLocaleLowerCase())
+    );
+
+    setGroceriesList(foundItems);
+
+    toggleFiltersModal();
+  };
+
+  const onSorting = (sorting: string) => {
+    const sortedGroceries = props?.state?.user.groceries[String(boxId)]?.sort(
+      (a, b) => {
+        if (sorting === "date") {
+          return (
+            new Date(b.createdDate).getTime() -
+            new Date(a.createdDate).getTime()
+          );
+        } else if (sorting === "price") {
+          return a.calculatedValue - b.calculatedValue;
+        } else if (sorting === "pin") {
+          return !a?.isPinned ? 1 : -1;
+        } else {
+          return a[sorting].localeCompare(b[sorting]);
+        }
+      }
+    );
+
+    setGroceriesList(sortedGroceries);
+  };
 
   const getGroceries = async () => {
     if (!boxId) return;
@@ -157,25 +194,12 @@ export const useGroceriesService = () => {
     return { isBlocked: false, errorMessage: "" };
   };
 
-  const parseGroceryData = () => {
+  const parseGroceryData = (key?: string) => {
     const groceries = props?.state.user.groceries[String(boxId)];
-    const shopes = props?.state.configApp.shops.map(
-      ({ label }) => label
-    ) as string[];
 
     const dates = Array.from(
       new Set(groceries?.map((item) => item.createdDate)).values()
     );
-
-    let shopesBudget: number[] = [];
-
-    shopes?.forEach((el) => {
-      const sources = groceries
-        ?.filter(({ shopName }) => shopName.label === el)
-        .reduce((acc, curr) => acc + curr.calculatedValue, 0) as number;
-
-      shopesBudget.push(sources);
-    });
 
     let dateBudgets: number[] = [];
 
@@ -203,16 +227,6 @@ export const useGroceriesService = () => {
           parsing: {
             xAxisKey: "key",
             yAxisKey: "value",
-          },
-        },
-        {
-          type: "pie",
-          label: "xxx",
-          data: shopesBudget || [],
-          backgroundColor: colors,
-          hoverOffset: 4,
-          parsing: {
-            yAxisKey: "gm",
           },
         },
       ],
@@ -254,9 +268,26 @@ export const useGroceriesService = () => {
     setIsLoading(false);
   };
 
+  const handleButtons = (action: string) => {
+    switch (action) {
+      case FILTERS_HELPER.SEARCH:
+        toggleFiltersModal();
+        break;
+      default:
+        onSorting(action);
+        break;
+    }
+  };
+
   useEffect(() => {
     getGroceries();
   }, [boxId]);
+
+  console.log({ groceriesList });
+
+  useEffect(() => {
+    setGroceriesList(props?.state?.user.groceries[String(boxId)]);
+  }, [props?.state?.user.groceries[String(boxId)]]);
 
   return {
     ...props,
@@ -265,7 +296,6 @@ export const useGroceriesService = () => {
     toggleFormModal,
     isModalOpen,
     isLoading,
-    boxId,
     spentMoney,
     leftBudget,
     currentBox,
@@ -276,5 +306,11 @@ export const useGroceriesService = () => {
     openEditModal,
     formikValues,
     editCurrentGrocery,
+    toggleFiltersModal,
+    isFiltersModalOpen,
+    groceriesList,
+    setGroceriesList,
+    handleButtons,
+    onFilters,
   };
 };

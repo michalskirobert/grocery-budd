@@ -46,7 +46,7 @@ export const useHomePageService = () => {
       );
 
       toggleModal();
-      toast.success("Zapisano");
+      toast.success("It's been saved");
     } catch (error) {}
   };
 
@@ -68,7 +68,7 @@ export const useHomePageService = () => {
 
       await updateDocument(`${budgetCollection}/${values.id}`, body);
 
-      toast.success("Pomyślnie zedytowana", {
+      toast.success("Successfully edited", {
         style: { color: C.COLOR_BASE.SALMON, background: C.COLOR_BASE.YELLOW },
       });
 
@@ -81,7 +81,7 @@ export const useHomePageService = () => {
       );
       toggleEditModal();
     } catch (error) {
-      toast.error("Nie można z edytować boksu");
+      toast.error("It cannot be edited");
     }
   };
 
@@ -106,9 +106,9 @@ export const useHomePageService = () => {
       );
       await deleteDocument(`${budgetCollection}/${id}`);
       contextValues?.dispatch(setBoxes(filteredBoxes as NReducer.TBox[]));
-      toast.success("usunięto");
+      toast.success("It's been removed");
     } catch (error) {
-      toast.error("wystąpił błąd ;)");
+      toast.error("It cannot be removed");
     }
   };
 

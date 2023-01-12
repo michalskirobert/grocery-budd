@@ -2,9 +2,16 @@ import { Nav } from "react-bootstrap";
 import { Col, Label, Row } from "reactstrap";
 import { RenderChild } from "./render-child";
 
-export const CustomNav = ({ nav }) => {
+export const CustomNav = ({ nav, handleButtons }) => {
   return (
-    <Nav variant="pills" className="justify-content-center" activeKey="1">
+    <Nav
+      {...{
+        variant: "pills",
+        className: "justify-content-center",
+        activeKey: "search",
+        onSelect: (action) => handleButtons(action),
+      }}
+    >
       <Row>
         {nav.map(({ content, type, label, eventKey, options }) => (
           <Col>
